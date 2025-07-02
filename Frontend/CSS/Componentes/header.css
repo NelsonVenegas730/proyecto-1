@@ -1,0 +1,8 @@
+header {
+    padding: 20px;
+    font-size: x-large;
+}
+
+header hr {
+    border-color: rgba(255, 255, 255, 0.591);
+}

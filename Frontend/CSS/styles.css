@@ -43,8 +43,22 @@ h1, h2, h3 {
 
 body {
     background-color: var(--color-bg);
-    margin-left: 370px; /* Espaciado para que el contenido del body no se meta por debajo del sidebar margin left = width del sidebar */
+    padding-left: 70px;
 }
+
+/*---ANIMACIÓN DEL CONTENIDO AL EXPANDIR O CONTRAER SIDEBAR---*/
+main,
+header,
+footer {
+    transition: padding-left 0.3s ease;
+}
+
+.sidebar:hover ~ main,
+.sidebar:hover ~ header,
+.sidebar:hover ~ footer {
+    padding-left: 370px;
+}
+
 
 /*--- INICIALIZACIÓN DE ESTILOS DEFAULT ---*/
 ul, ol {
