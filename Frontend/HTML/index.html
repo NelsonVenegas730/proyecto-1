@@ -2,10 +2,49 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Núcleo Desamparados | Conectando a la comunidad</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> <!-- Importando fuente de letra Inter -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> <!-- Importando Boxicons -->
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="../CSS/Componentes/sidebar.css">
+    <link rel="stylesheet" href="../CSS/Componentes/footer.css">
 </head>
 <body>
-    <h1>Municipalidad de Desamparados</h1>
+    <nav class="sidebar">
+        <header>
+            <div>
+                <div class="logo-container">
+                    <img class="logo" src="../../Public/Images/logo-desamparados.png" alt="Logo cantón desamparados PNG">
+                    <div class="title-container">
+                        <h1>Núcleo Desamparados</h1>
+                        <p>Conectando a la comunidad</p>
+                    </div>
+                </div>
+                <input class="searchbar" type="text" placeholder="Buscar...">
+            </div>
+            <button type="button">Iniciar sesión</button>
+            <button type="button">Registrarse</button>
+        </header>
+        <ul>
+            <li class="sidebar-link">
+                <i class="bx bxs-home"></i>
+                <a href="#">Inicio</a>
+            </li>
+            <li class="sidebar-link">
+                <i class="bx bxs-news"></i>
+                <a href="#">Noticias</a>
+            </li>
+            <li class="sidebar-link">
+                <i class="bx bxs-store"></i>
+                <a href="#">Emprendimientos</a>
+            </li>
+            <li class="sidebar-link">
+                <i class="bx bxs-megaphone"></i>
+                <a href="#">Quejas y sugerencias</a>
+            </li>
+        </ul>
+    </nav>
     <p>
         <button>🎥 VIDEO DEL CANTÓN</button>
     </p>
@@ -13,6 +52,8 @@
     <p><strong>Dirección:</strong> Costado norte del Parque Centenario, San José, Desamparados</p>
     <p><strong>Horario:</strong> 8:00 am a 4:00 pm</p>
     <h2>LAS NOTICIAS</h2>
+
+
     <footer>
         <p> 2025 Municipalidad de Desamparados  </p>
     </footer>

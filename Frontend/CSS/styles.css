@@ -1,0 +1,56 @@
+/*--- ESTILOS DE CONFIGURACION O BASE ---*/
+:root {
+    --color-bg: #191A29;
+    --color-bg-secondary: #1f2247;
+    --color-text: #FFFFFF;
+
+    --color-primary: #1D5A99;
+    --color-secondary: #5CE9FF;
+    --color-accent: #FADA38;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: white;
+ }
+
+/*--- DECLARACIÓN FONT FUTURA POR MEDIO DE ARCHIVO TTF ---*/
+@font-face {
+  font-family: 'Futura Light';
+  src: url('../../Public/Fuentes/Futura light.TTF.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Futura Medium';
+  src: url('../../Public/Fuentes/Futura Md BT Medium.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Futura Bold';
+  src: url('../../Public/Fuentes/Futura Md BT Bold.ttf') format('truetype');
+}
+
+
+/*--- ESTILOS GENERALES ---*/
+h1, h2, h3 {
+    font-family: 'Futura Light', sans-serif;
+}
+
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--color-bg);
+    margin-left: 370px; /* Espaciado para que el contenido del body no se meta por debajo del sidebar margin left = width del sidebar */
+}
+
+/*--- INICIALIZACIÓN DE ESTILOS DEFAULT ---*/
+ul, ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
