@@ -9,6 +9,22 @@
     padding: 20px;
 }
 
+.sidebar button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 5px;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.sidebar button:hover {
+    background-color: var(--color-primary-light);
+}
+
 header {
     display: flex;
     flex-direction: column;
@@ -25,10 +41,69 @@ header {
     gap: 10px;
 }
 
+.sidebar-links-container {
+    padding-top: 10px;
+}
+
 .sidebar-link {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 0;
+    padding: 15px 0;
     font-size: large;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.sidebar-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding-inline: 10px;
+}
+
+.sidebar-link a {
+    width: 100%;
+}
+
+.searchbar {
+    display: flex;
+    align-items: center;
+    background: white;
+    position: relative;
+    border-radius: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.searchbar i {
+    color: rgb(195, 195, 195);
+    font-size: 1.5rem;
+    padding-left: 10px
+}
+
+.searchbar input {
+    color: black;
+    background: transparent;
+    outline: none;
+    border: none;
+    font-size: 15px;
+    padding: 20px;
+    padding-left: 5px
+}
+
+.auth-container {
+    border-top: 1px solid rgba(255, 255, 255, 0.37);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.367);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/*ESTARA ESCONDIDO SI EL USUARIO NO ESTA INICIADO O REGISTRADO*/
+.user-profile {
+    display: none;
+    background-color: var(--color-primary);
+    width: fit-content;
+    padding: 20px;
+    font-size: large;
+    font-weight: bold;   
+    border-radius: 100px;
 }
