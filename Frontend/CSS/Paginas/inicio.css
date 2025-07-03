@@ -1,3 +1,70 @@
 main {
     padding: 20px;
 }
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.hero-content {
+    width: 60%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+}
+
+.hero-text {
+    max-width: 600px;
+}
+
+.cta-container {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+}
+
+.cta-hero-text {
+    font-weight: bold;
+}
+.cta-hero-button {
+    width: fit-content;
+    padding: 10px;
+    margin: 5px 0 5px;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.cta-hero-button:hover {
+    background-color: var(--color-primary-light);
+}
+
+.mapa-interactivo-text {
+    text-align: left;
+    padding-bottom: 2rem;
+}
+
+.content-container {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+
+@media (max-width: 800px) {
+    .hero {
+        flex-direction: column;
+    }
+
+    .hero-content {
+        width: 100%;
+        height: auto;
+    }
+}

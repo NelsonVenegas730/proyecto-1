@@ -57,6 +57,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    padding-bottom: 20px;
 }
 
 .sidebar-links-container {
@@ -96,44 +97,6 @@
 
 .sidebar:hover .sidebar-link span {
     display: inline;
-}
-
-.searchbar {
-    display: flex;
-    align-items: center;
-    background: white;
-    position: relative;
-    border-radius: 50px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-
-    opacity: 0;
-    visibility: hidden;
-    max-height: 0;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.sidebar:hover .searchbar {
-    opacity: 1;
-    visibility: visible;
-    max-height: 100px;
-}
-
-.searchbar i {
-    color: rgb(195, 195, 195);
-    font-size: 1.5rem;
-    padding-left: 10px;
-}
-
-.searchbar input {
-    color: black;
-    background: transparent;
-    outline: none;
-    border: none;
-    font-size: 15px;
-    padding: 20px;
-    padding-left: 5px;
 }
 
 .auth-container {
