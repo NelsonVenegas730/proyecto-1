@@ -7,7 +7,6 @@
     --color-primary: #1D5A99;
     --color-primary-light: #3779bc;
     --color-secondary: #5CE9FF;
-    --color-accent: #FADA38;
 }
 
 * {
@@ -50,7 +49,7 @@ p {
 }
 
 .subtitle {
-    padding-bottom: 20px;
+    padding-bottom: 15px;
 }
 
 * {
@@ -58,8 +57,14 @@ p {
 }
 
 body {
-    background-color: var(--color-bg);
+    background: repeating-linear-gradient(
+        to bottom,
+        #191a29 0px,
+        #1d2744 300px,
+        #191a29 600px
+    );
     padding-left: 70px;
+    overflow-x:hidden
 }
 
 /*---ANIMACIÓN DEL CONTENIDO AL EXPANDIR O CONTRAER SIDEBAR---*/
@@ -84,4 +89,10 @@ ul, ol {
 a {
     text-decoration: none;
     color: inherit;
+}
+
+@media (max-width: 800px) {
+    body {
+        padding-left: 0px;
+    }
 }
