@@ -63,8 +63,11 @@ body {
         #1d2744 300px,
         #191a29 600px
     );
+    background-attachment: fixed;
+    background-repeat: repeat;
+    background-size: 100% 600px;
     padding-left: 70px;
-    overflow-x:hidden
+    overflow-x: hidden;
 }
 
 /*---ANIMACIÓN DEL CONTENIDO AL EXPANDIR O CONTRAER SIDEBAR---*/
@@ -78,6 +81,19 @@ footer {
 .sidebar:hover ~ header,
 .sidebar:hover ~ footer {
     padding-left: 370px;
+}
+
+main {
+    padding: 20px;
+}
+
+input {
+    font-family: 'Futura Light', sans-serif;
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--color-primary);
+    color: black;
 }
 
 

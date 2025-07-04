@@ -37,7 +37,7 @@
                 <button class="auth-btn" type="button">Registrarse</button>
             </div>
         </div>
-        <ul class="sidebar-links-container">
+        <ul class="sidebar-links-container" id="sidebar-links-ciudadano">
             <li class="sidebar-link">
                 <a href="../../HTML/index.html">
                     <i class="bx bxs-home"></i>
@@ -63,6 +63,20 @@
                 </a>
             </li>
         </ul>
+        <ul class="sidebar-links-container" id="sidebar-links-emprendedor">
+            <li class="sidebar-link">
+                <a href="../../HTML/index.html">
+                    <i class="bx bxs-store-alt"></i>
+                    <span>Mi emprendimiento</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Ciudadano/noticias.html">
+                    <i class="bx bxs-dashboard"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+        </ul>
     </nav>
     <header>
         <div class="header-content">
@@ -73,7 +87,42 @@
         </div>
         <hr>
     </header>
-    <main>
+    <main class="emprendimiento-container">
+        <div class="emprendimiento-content">
+            <div class="emprendimiento-info">
+                <div class="emprendimiento-header">
+                    <h2 id="emprendimiento-name">
+                        Joyería Yurusti
+                    </h2>
+                    <button class="edit-emprendimiento-btn" type="button">
+                        <i class="bx bxs-edit"></i>
+                        Editar emprendimiento
+                    </button>
+                </div>
+                <div>
+                    <div class="emprendimiento-details">
+                        <div class="emprendimiento-descripcion">
+                            <i class="bx bxs-info-circle"></i>
+                            <p class="emprendimiento-text">
+                                Joyería artesanal que ofrece una variedad de productos hechos a mano, incluyendo anillos, pulseras y collares. Cada pieza es única y refleja la pasión por el arte de la joyería.
+                            </p>
+                        </div>
+                        <div class="emprendimiento-direccion">
+                            <i class="bx bxs-map"></i>
+                            <p class="emprendimiento-text">
+                                Desamparados, San José, Costa Rica, 100 metros Este de la Plaza de Deportes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="emprendimiento-image-container">
+                <img 
+                    src="https://www.karati.com/cdn/shop/articles/shutterstock_339969596-scaled.jpg?v=1740228325&width=2048" 
+                    alt="nombre del emprendimiento"
+                />
+            </div>
+        </div>
     </main>
     <footer>
         <div class="footer-logo-cta">
