@@ -8,54 +8,155 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> <!-- Importando Boxicons -->
     <link rel="stylesheet" href="../CSS/styles.css">
     <link rel="stylesheet" href="../CSS/Componentes/sidebar.css">
+    <link rel="stylesheet" href="../CSS/Componentes/header.css">
     <link rel="stylesheet" href="../CSS/Componentes/footer.css">
+    <link rel="stylesheet" href="../CSS/Paginas/inicio.css">
 </head>
 <body>
     <nav class="sidebar">
-        <header>
+        <div class="sidebar-header">
             <div>
-                <div class="logo-container">
-                    <img class="logo" src="../../Public/Images/logo-desamparados.png" alt="Logo cantón desamparados PNG">
-                    <div class="title-container">
-                        <h1>Núcleo Desamparados</h1>
-                        <p>Conectando a la comunidad</p>
+                <div class="logo-content-container">
+                    <div class="logo-container">
+                        <img class="logo" src="../../Public/Images/logo-desamparados.png" alt="Logo cantón desamparados PNG">
+                        <div class="title-container">
+                            <h2>Núcleo Desamparados</h2>
+                            <p>Conectando a la comunidad</p>
+                        </div>
                     </div>
+                    <button type="button" class="sidebar-toggle-close">
+                        <i class="bx bx-x-circle"></i>
+                    </button>
                 </div>
-                <input class="searchbar" type="text" placeholder="Buscar...">
             </div>
-            <button type="button">Iniciar sesión</button>
-            <button type="button">Registrarse</button>
-        </header>
-        <ul>
+            <div class="auth-container">
+                <div class="user-profile">
+                    <p>US</p>
+                </div>
+                <button class="auth-btn" type="button">Iniciar sesión</button>
+                <button class="auth-btn" type="button">Registrarse</button>
+            </div>
+        </div>
+        <ul class="sidebar-links-container">
             <li class="sidebar-link">
-                <i class="bx bxs-home"></i>
-                <a href="../HTML/Ciudadano/index.html">Inicio</a>
+                <a href="../HTML/index.html">
+                    <i class="bx bxs-home"></i>
+                    <span>Inicio</span>
+                </a>
             </li>
             <li class="sidebar-link">
-                <i class="bx bxs-news"></i>
-                <a href="../HTML/Ciudadano/noticias.html">Noticias</a>
+                <a href="../HTML/Ciudadano/noticias.html">
+                    <i class="bx bxs-news"></i>
+                    <span>Noticias</span>
+                </a>
             </li>
             <li class="sidebar-link">
-                <i class="bx bxs-store"></i>
-                <a href="../HTML/Ciudadano/emprendimientos.html">Emprendimientos</a>
+                <a href="../HTML/Ciudadano/emprendimientos.html">
+                    <i class="bx bxs-store"></i>
+                    <span>Emprendimientos</span>
+                </a>
             </li>
             <li class="sidebar-link">
-                <i class="bx bxs-megaphone"></i>
-                <a href="../HTML/Ciudadano/sugerencias.html">Quejas y sugerencias</a>
+                <a href="../HTML/Ciudadano/sugerencias.html">
+                    <i class="bx bxs-megaphone"></i>
+                    <span>Quejas y sugerencias</span>
+                </a>
             </li>
         </ul>
     </nav>
-    <p>
-        <button>🎥 VIDEO DEL CANTÓN</button>
-    </p>
-    <p><em>Facilitar el acceso digital a trámites y servicios esenciales, mejorar la comunicación y garantizar la transparencia administrativa.</em></p>
-    <p><strong>Dirección:</strong> Costado norte del Parque Centenario, San José, Desamparados</p>
-    <p><strong>Horario:</strong> 8:00 am a 4:00 pm</p>
-    <h2>LAS NOTICIAS</h2>
-
-
+    <header>
+        <div class="header-content">
+            <button type="button" class="sidebar-toggle-open">
+                <i class="bx bx-menu"></i>
+            </button>
+            <h1>Inicio</h1>
+        </div>
+        <hr>
+    </header>
+    <main>
+        <!--HERO NOTICIAS SECTION-->
+        <div class="hero content-container">
+            <div class="hero-text">
+                <h2 class="subtitle">Desamparados recibe los impactos de las fuertes lluvias</h2>
+                <p>
+                    Desamparados vuelve a ser el epicentro de las inundaciones, donde fuertes lluvias de hoy martes donde el cause de los ríos crecieron 1 metro.
+                </p>
+                <div class="cta-container">
+                    <p class="cta-hero-text">Para noticias como estas y más, si quieres estar al tanto de la información más reciente de la comunidad -></p>
+                    <button class="cta-hero-button" type="button">Iniciar sesión</button>
+                </div>
+            </div>
+            <img
+                class="hero-content" 
+                src="https://alba-cr-repretel.cdn.mediatiquepress.com/wp-content/uploads/2023/06/Imagen-27_6_2023-20_05_10-1-700x385.jpg"
+            />
+        </div>
+        <!--MAPA INTERACTIVO SECTION-->
+        <div class="mapa-interactivo content-container">
+            <div class="mapa-interactivo-text">
+                <h2 class="subtitle">Mapa interactivo</h2>
+                <p>Explora el cantón de Desamparados a través de nuestro mapa interactivo. Encuentra lugares de interés, servicios y más.</p>
+            </div>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3158.1234567890123!2d-84.12345678901234!3d9.876543210987654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0x0000000000000000!2sDesamparados%2C+San+José%2C+Costa+Rica!5e0!3m2!1sen!2scr!4v1616161616161" width="100%" height="700" style="border:5;" allowfullscreen loading="lazy"></iframe>
+            </div>
+        </div>
+        <!--CONOZCA SU CANTÓN SECTION-->
+        <div class="conozca-su-canton content-container">
+            <h2 class="subtitle">Conozca su cantón</h2>
+            <p>Explora el cantón de Desamparados a través de nuestro mapa interactivo. Encuentra lugares de interés, servicios y más.</p>
+            <div class="conozca-su-canton-cards-container">
+                <div class="conozca-su-canton-card">
+                    <i class="bx bxs-bus"></i>
+                    <h3>
+                        Transporte Público
+                    </h3>
+                    <p>Conozca los horarios y rutas de los autobuses que pasan por el cantón</p>
+                    <a href="../HTML/Ciudadano/horario-buses.html" class="go-to-link">Ir a</a>
+                </div>
+                <div class="conozca-su-canton-card">
+                    <i class="bx bxs-store"></i>
+                    <h3>
+                        Emprendimientos
+                    </h3>
+                    <p>Descubra los emprendimientos locales del cantón. Desde tiendas hasta servicios, apoye a los emprendedores locales.</p>
+                    <a href="../HTML/Ciudadano/emprendimientos.html" class="go-to-link">Ir a</a>
+                </div>
+                <div class="conozca-su-canton-card">
+                    <i class="bx bxs-megaphone"></i>
+                    <h3>
+                        Quejas y Sugerencias
+                    </h3>
+                    <p>¿Tienes alguna queja sobre el cantón? ¿O quizá alguna sugerencia para poder mejorarlo? Puedes compartir tu opinión haciendo click en</p>
+                    <a href="../HTML/Ciudadano/sugerencias.html" class="go-to-link">Ir a</a>
+                </div>
+                <div class="conozca-su-canton-card">
+                    <i class="bx bxs-news"></i>
+                    <h3>
+                        Noticias
+                    </h3>
+                    <p>Infórmese de las ultimas noticias de Desamparados</p>
+                    <a href="../HTML/Ciudadano/noticias.html" class="go-to-link">Ir a</a>
+                </div>
+            </div>
+        </div>
+    </main>
     <footer>
-        <p> 2025 Municipalidad de Desamparados  </p>
+        <div class="footer-logo-cta">
+            <div class="logo-container">
+                <img class="logo" src="../../Public/Images/logo-desamparados.png" alt="Logo cantón desamparados PNG">
+                <div class="title-container">
+                    <h2>Núcleo Desamparados</h2>
+                    <p>Conectando a la comunidad</p>
+                </div>
+            </div>
+            <button type="button" class="cta-button">
+                <i class="bx bxs-message"></i>
+                Tienes alguna queja o sugerencia, comunícala aquí.
+            </button>
+        </div>
+        <p class="copyright">&copy 2025 SyntaxIA</p>
     </footer>
+    <script src="../JS/sidebarToggleMobile.js" defer></script>
 </body>
 </html>

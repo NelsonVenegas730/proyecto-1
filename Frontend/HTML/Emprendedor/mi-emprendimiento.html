@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Núcleo Desamparados | Mi Emprendimiento</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> <!-- Importando fuente de letra Inter -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> <!-- Importando Boxicons -->
+    <link rel="stylesheet" href="../../CSS/styles.css">
+    <link rel="stylesheet" href="../../CSS/Paginas/mi-emprendimiento.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/sidebar.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/header.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/footer.css">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div>
+                <div class="logo-content-container">
+                    <div class="logo-container">
+                        <img class="logo" src="../../../Public/Images/logo-desamparados.png" alt="Logo cantón desamparados PNG">
+                        <div class="title-container">
+                            <h2>Núcleo Desamparados</h2>
+                            <p>Conectando a la comunidad</p>
+                        </div>
+                    </div>
+                    <button type="button" class="sidebar-toggle-close">
+                        <i class="bx bx-x-circle"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="auth-container">
+                <div class="user-profile">
+                    <p>US</p>
+                </div>
+                <button class="auth-btn" type="button">Iniciar sesión</button>
+                <button class="auth-btn" type="button">Registrarse</button>
+            </div>
+        </div>
+        <ul class="sidebar-links-container" id="sidebar-links-ciudadano">
+            <li class="sidebar-link">
+                <a href="../../HTML/index.html">
+                    <i class="bx bxs-home"></i>
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Ciudadano/noticias.html">
+                    <i class="bx bxs-news"></i>
+                    <span>Noticias</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Ciudadano/emprendimientos.html">
+                    <i class="bx bxs-store"></i>
+                    <span>Emprendimientos</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Ciudadano/sugerencias.html">
+                    <i class="bx bxs-megaphone"></i>
+                    <span>Quejas y sugerencias</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="sidebar-links-container" id="sidebar-links-emprendedor">
+            <li class="sidebar-link">
+                <a href="../../HTML/index.html">
+                    <i class="bx bxs-store-alt"></i>
+                    <span>Mi emprendimiento</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Ciudadano/noticias.html">
+                    <i class="bx bxs-dashboard"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <header>
+        <div class="header-content">
+            <button type="button" class="sidebar-toggle-open">
+                <i class="bx bx-menu"></i>
+            </button>
+            <h1>Mi emprendimiento</h1>
+        </div>
+        <hr>
+    </header>
+    <main class="emprendimiento-container">
+        <div class="emprendimiento-content">
+            <div class="emprendimiento-info">
+                <div class="emprendimiento-header">
+                    <h2 id="emprendimiento-name">
+                        Joyería Yurusti
+                    </h2>
+                    <button class="edit-emprendimiento-btn" type="button">
+                        <i class="bx bxs-edit"></i>
+                        Editar emprendimiento
+                    </button>
+                </div>
+                <div>
+                    <div class="emprendimiento-details">
+                        <div class="emprendimiento-descripcion">
+                            <i class="bx bxs-info-circle"></i>
+                            <p class="emprendimiento-text">
+                                Joyería artesanal que ofrece una variedad de productos hechos a mano, incluyendo anillos, pulseras y collares. Cada pieza es única y refleja la pasión por el arte de la joyería.
+                            </p>
+                        </div>
+                        <div class="emprendimiento-direccion">
+                            <i class="bx bxs-map"></i>
+                            <p class="emprendimiento-text">
+                                Desamparados, San José, Costa Rica, 100 metros Este de la Plaza de Deportes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="emprendimiento-image-container">
+                <img 
+                    src="https://www.karati.com/cdn/shop/articles/shutterstock_339969596-scaled.jpg?v=1740228325&width=2048" 
+                    alt="nombre del emprendimiento"
+                />
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-logo-cta">
+            <div class="logo-container">
+                <img class="logo" src="../../../Public/Images/logo-desamparados.png" alt="Logo cantón desamparados PNG">
+                <div class="title-container">
+                    <h2>Núcleo Desamparados</h2>
+                    <p>Conectando a la comunidad</p>
+                </div>
+            </div>
+            <button type="button" class="cta-button">
+                <i class="bx bxs-message"></i>
+                Tienes alguna queja o sugerencia, comunícala aquí.
+            </button>
+        </div>
+        <p class="copyright">&copy 2025 SyntaxIA</p>
+    </footer>
+    <script src="../../JS/sidebarToggleMobile.js"></script>
+    <script src="../../JS/fetchEmprendimiento.js"></script>
+</body>
+</html>

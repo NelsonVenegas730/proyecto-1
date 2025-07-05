@@ -5,8 +5,8 @@
     --color-text: #FFFFFF;
 
     --color-primary: #1D5A99;
+    --color-primary-light: #3779bc;
     --color-secondary: #5CE9FF;
-    --color-accent: #FADA38;
 }
 
 * {
@@ -36,14 +36,66 @@ h1, h2, h3 {
     font-family: 'Futura Light', sans-serif;
 }
 
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+p {
+    font-size: 1rem;
+}
+
+.subtitle {
+    padding-bottom: 15px;
+}
+
 * {
     font-family: 'Inter', sans-serif;
 }
 
 body {
-    background-color: var(--color-bg);
-    margin-left: 370px; /* Espaciado para que el contenido del body no se meta por debajo del sidebar margin left = width del sidebar */
+    background: repeating-linear-gradient(
+        to bottom,
+        #191a29 0px,
+        #1d2744 300px,
+        #191a29 600px
+    );
+    background-attachment: fixed;
+    background-repeat: repeat;
+    background-size: 100% 600px;
+    padding-left: 70px;
+    overflow-x: hidden;
 }
+
+/*---ANIMACIÓN DEL CONTENIDO AL EXPANDIR O CONTRAER SIDEBAR---*/
+main,
+header,
+footer {
+    transition: padding-left 0.3s ease;
+}
+
+.sidebar:hover ~ main,
+.sidebar:hover ~ header,
+.sidebar:hover ~ footer {
+    padding-left: 370px;
+}
+
+main {
+    padding: 20px;
+}
+
+input {
+    font-family: 'Futura Light', sans-serif;
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--color-primary);
+    color: black;
+}
+
 
 /*--- INICIALIZACIÓN DE ESTILOS DEFAULT ---*/
 ul, ol {
@@ -53,4 +105,10 @@ ul, ol {
 a {
     text-decoration: none;
     color: inherit;
+}
+
+@media (max-width: 800px) {
+    body {
+        padding-left: 0px;
+    }
 }
