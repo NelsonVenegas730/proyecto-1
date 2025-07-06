@@ -66,7 +66,6 @@ body:not(.auth-page) {
     background-attachment: fixed;
     background-repeat: repeat;
     background-size: 100% 600px;
-    padding-left: 70px;
     overflow-x: hidden;
 }
 
@@ -96,6 +95,12 @@ ul, ol {
 a {
     text-decoration: none;
     color: inherit;
+}
+
+@media (min-width: 801px) {
+    body {
+        padding-left: 70px;
+    }
 }
 
 @media (max-width: 800px) {

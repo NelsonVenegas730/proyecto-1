@@ -31,10 +31,13 @@
             </div>
             <div class="auth-container">
                 <div class="user-profile">
-                    <p>US</p>
+                    <p class="user-avatar" id="avatar">JD</p>
+                    <p class="username" id="username">John Donovan</p>
                 </div>
-                <button class="auth-btn" type="button">Iniciar sesión</button>
-                <button class="auth-btn" type="button">Registrarse</button>
+                <div class="auth-buttons">
+                    <button class="auth-btn" type="button">Iniciar sesión</button>
+                    <button class="auth-btn" type="button">Registrarse</button>
+                </div>
             </div>
         </div>
         <ul class="sidebar-links-container">
@@ -77,13 +80,19 @@
         <!--HERO NOTICIAS SECTION-->
         <div class="hero content-container">
             <div class="hero-text">
-                <h2 class="subtitle">Desamparados recibe los impactos de las fuertes lluvias</h2>
-                <p>
-                    Desamparados vuelve a ser el epicentro de las inundaciones, donde fuertes lluvias de hoy martes donde el cause de los ríos crecieron 1 metro.
-                </p>
+                <div class="noticia-container">
+                    <h2 class="subtitle noticia-title">Desamparados recibe los impactos de las fuertes lluvias</h2>
+                    <hr>
+                    <p class="noticia-description">
+                        Desamparados vuelve a ser el epicentro de las inundaciones, donde fuertes lluvias de hoy martes donde el cause de los ríos crecieron 1 metro.
+                    </p>
+                </div>
                 <div class="cta-container">
-                    <p class="cta-hero-text">Para noticias como estas y más, si quieres estar al tanto de la información más reciente de la comunidad -></p>
-                    <button class="cta-hero-button" type="button">Iniciar sesión</button>
+                    <p class="cta-hero-text">Para noticias como estas y más. Si quieres estar al tanto de la información más reciente de la comunidad -></p>
+                    <div class="cta-hero-buttons">
+                        <a href="../HTML/Autenticacion/inicio-sesion.html" class="cta-hero-button" type="button">Iniciar sesión</a>
+                        <a href="../HTML/Autenticacion/registrarse.html" class="cta-hero-button" type="button">Registrarse</a>
+                    </div>
                 </div>
             </div>
             <img

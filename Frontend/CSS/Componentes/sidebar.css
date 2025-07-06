@@ -13,16 +13,16 @@
 }
 
 .sidebar-toggle-close {
-    font-size: 3rem;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    display: none;
-    transition: color 0.3s ease;
+  font-size: 3rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: none;
+  transition: color 0.3s ease;
 }
 
 .sidebar-toggle-close > i:hover {
-    color: var(--color-primary-light);
+  color: var(--color-primary-light);
 }
 
 .auth-btn {
@@ -119,20 +119,39 @@
   padding-top: 10px;
   padding-bottom: 10px;
   opacity: 0;
-  visibility: hidden;
   max-height: 0;
   overflow: hidden;
   transition: all 0.3s ease;
 }
 
 .user-profile {
-  display: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-avatar {
   background-color: var(--color-primary);
-  width: fit-content;
-  padding: 20px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 50%;
+  color: white;
+  text-transform: uppercase;
+}
+
+.username {
   font-size: large;
   font-weight: bold;
-  border-radius: 100px;
+  color: var(--color-secondary);
+}
+
+.auth-buttons {
+  display: none;
 }
 
 /* HOVER SOLO EN ESCRITORIO */
