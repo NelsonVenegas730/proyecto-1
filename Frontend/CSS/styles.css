@@ -52,7 +52,7 @@ p {
     padding-bottom: 15px;
 }
 
-body, p, a, ul, li, input, button, label {
+body, p, a, ul, li, input, textarea, button, label {
   font-family: 'Inter', sans-serif;
 }
 

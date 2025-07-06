@@ -64,25 +64,68 @@
     max-width: 300px;
 }
 
-.edit-emprendimiento-btn {
+.edit-buttons-container {
     display: flex;
     align-items: center;
-    background-color: var(--color-primary);
-    border-radius: 5px;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    color: white;
-    cursor: pointer;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.edit-cancel-btn,
+.edit-emprendimiento-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--color-primary);
+  border-radius: 5px;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 20px;
+  white-space: nowrap;
+}
+
+.edit-cancel-btn p,
+.edit-emprendimiento-btn p {
+  margin: 0;
+}
+
+
+.edit-cancel-btn:hover,
+.edit-emprendimiento-btn:hover {
+    background-color: var(--color-primary-light);
+}
+
+.edit-form-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid var(--color-primary);
+    background-color: transparent;
+    font-size: 3rem;
+    font-family: "Futura Bold", sans-serif;
     margin-bottom: 20px;
 }
 
-.edit-emprendimiento-btn i {
-    margin-right: 10px;
+.edit-form-textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid var(--color-primary);
+    background-color: transparent;
+    font-size: 1rem;
+    resize: none;
 }
 
-.edit-emprendimiento-btn:hover {
-    background-color: var(--color-primary-light);
+.active {
+    display: block;
+}
+
+.inactive {
+    display: none;
 }
 
 @media (max-width: 1500px) {

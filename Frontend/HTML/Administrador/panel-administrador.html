@@ -31,41 +31,26 @@
             </div>
             <div class="auth-container">
                 <div class="user-profile">
-                    <p>US</p>
+                    <p class="user-avatar" id="avatar">JD</p>
+                    <p class="username" id="username">John Donovan</p>
                 </div>
-                <button class="auth-btn" type="button">Iniciar sesión</button>
-                <button class="auth-btn" type="button">Registrarse</button>
+                <div class="auth-buttons">
+                    <button class="auth-btn" type="button">Iniciar sesión</button>
+                    <button class="auth-btn" type="button">Registrarse</button>
+                </div>
             </div>
         </div>
-        <ul class="sidebar-links-container" id="sidebar-links-admin">
+        <ul class="sidebar-links-container" id="sidebar-links-emprendedor">
             <li class="sidebar-link">
-                <a href="./panel-administrador.html">
+                <a href="../../HTML/index.html">
+                    <i class="bx bxs-store-alt"></i>
+                    <span>Mi emprendimiento</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Ciudadano/noticias.html">
                     <i class="bx bxs-dashboard"></i>
-                    <span>Panel de Admin</span>
-                </a>
-            </li>
-            <li class="sidebar-link">
-                <a href="./admin anuncios.html">
-                    <i class="bx bxs-news"></i>
-                    <span>Gestionar Anuncios</span>
-                </a>
-            </li>
-            <li class="sidebar-link">
-                <a href="./admin usuarios.html">
-                    <i class="bx bxs-user"></i>
-                    <span>Usuarios</span>
-                </a>
-            </li>
-            <li class="sidebar-link">
-                <a href="./admin comentarios.html">
-                    <i class="bx bxs-comment-detail"></i>
-                    <span>Quejas y Sugerencias</span>
-                </a>
-            </li>
-            <li class="sidebar-link">
-                <a href="./admin comentarios.html">
-                    <i class="bx bxs-cog"></i>
-                    <span>Información del sitio</span>
+                    <span>Dashboard</span>
                 </a>
             </li>
         </ul>
@@ -111,6 +96,6 @@
         </div>
         <p class="copyright">&copy 2025 SyntaxIA</p>
     </footer>
-
+    <script src="../../JS/sidebarToggleMobile.js"></script>
 </body>
 </html>

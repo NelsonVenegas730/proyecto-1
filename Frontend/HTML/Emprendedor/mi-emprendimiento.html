@@ -31,10 +31,13 @@
             </div>
             <div class="auth-container">
                 <div class="user-profile">
-                    <p>US</p>
+                    <p class="user-avatar" id="avatar">JD</p>
+                    <p class="username" id="username">John Donovan</p>
                 </div>
-                <button class="auth-btn" type="button">Iniciar sesión</button>
-                <button class="auth-btn" type="button">Registrarse</button>
+                <div class="auth-buttons">
+                    <button class="auth-btn" type="button">Iniciar sesión</button>
+                    <button class="auth-btn" type="button">Registrarse</button>
+                </div>
             </div>
         </div>
         <ul class="sidebar-links-container" id="sidebar-links-emprendedor">
@@ -65,27 +68,51 @@
         <div class="emprendimiento-content">
             <div class="emprendimiento-info">
                 <div class="emprendimiento-header">
-                    <h2 id="emprendimiento-name">
+                    <h2 id="emprendimiento-name" class="active">
                         Joyería Yurusti
                     </h2>
-                    <button class="edit-emprendimiento-btn" type="button">
-                        <i class="bx bxs-edit"></i>
-                        Editar emprendimiento
-                    </button>
+                    <div class="edit-form-container inactive">
+                        <input class="edit-form-input" id="emprendimiento-name-input" type="text">
+                        <small class="error-message">Error, campo no puede estar vacío</small>
+                    </div>
+                    <div class="edit-buttons-container">
+                        <button class="edit-emprendimiento-btn" id="toggle-edition-btn" type="button">
+                            <i class="bx bxs-edit"></i>
+                            <p class="edit-btn-text">Editar emprendimiento</p>
+                        </button>
+                        <button class="edit-cancel-btn inactive" id="cancel-edition" type="button">
+                            <i class="bx bxs-x-square"></i>
+                            <p class="edit-btn-text">Cancelar cambios</p>
+                        </button>
+                    </div>
                 </div>
                 <div>
                     <div class="emprendimiento-details">
                         <div class="emprendimiento-descripcion">
                             <i class="bx bxs-info-circle"></i>
-                            <p class="emprendimiento-text">
+                            <p class="emprendimiento-text active">
                                 Joyería artesanal que ofrece una variedad de productos hechos a mano, incluyendo anillos, pulseras y collares. Cada pieza es única y refleja la pasión por el arte de la joyería.
                             </p>
+                            <div class="edit-form-container inactive">
+                                <textarea 
+                                class="edit-form-textarea" 
+                                name="emprendimiento-descripcion" 
+                                id="emprendimiento-descripcion-textarea"></textarea>
+                                <small class="error-message">Error, campo no puede estar vacío</small>
+                            </div>
                         </div>
                         <div class="emprendimiento-direccion">
                             <i class="bx bxs-map"></i>
-                            <p class="emprendimiento-text">
+                            <p class="emprendimiento-text active">
                                 Desamparados, San José, Costa Rica, 100 metros Este de la Plaza de Deportes.
                             </p>
+                            <div class="edit-form-container inactive">
+                                <textarea 
+                                class="edit-form-textarea"
+                                name="emprendimiento-direccion" 
+                                id="emprendimiento-direccion-textarea"></textarea>
+                                <small class="error-message">Error, campo no puede estar vacío</small>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -116,5 +143,6 @@
     </footer>
     <script src="../../JS/sidebarToggleMobile.js"></script>
     <script src="../../JS/fetchEmprendimiento.js"></script>
+    <script src="../../JS/editEmprendimientoInfo.js"></script>
 </body>
 </html>
