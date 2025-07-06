@@ -3,29 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <title>Panel de Administrador</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> <!-- Importando fuente de letra Inter -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> <!-- Importando Boxicons -->
+    <link rel="stylesheet" href="../../CSS/styles.css">
     <link rel="stylesheet" href="../../CSS/Paginas/admin.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/footer.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/header.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/sidebar.css">
     
 </head>
 <body>
-
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div>
+                <div class="logo-content-container">
+                    <div class="logo-container">
+                        <img class="logo" src="../../../Public/Images/logo-desamparados.png" alt="Logo cantón desamparados PNG">
+                        <div class="title-container">
+                            <h2>Núcleo Desamparados</h2>
+                            <p>Conectando a la comunidad</p>
+                        </div>
+                    </div>
+                    <button type="button" class="sidebar-toggle-close">
+                        <i class="bx bx-x-circle"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="auth-container">
+                <div class="user-profile">
+                    <p>US</p>
+                </div>
+                <button class="auth-btn" type="button">Iniciar sesión</button>
+                <button class="auth-btn" type="button">Registrarse</button>
+            </div>
+        </div>
+        <ul class="sidebar-links-container" id="sidebar-links-admin">
+            <li class="sidebar-link">
+                <a href="./panel-administrador.html">
+                    <i class="bx bxs-dashboard"></i>
+                    <span>Panel de Admin</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="./admin anuncios.html">
+                    <i class="bx bxs-news"></i>
+                    <span>Gestionar Anuncios</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="./admin usuarios.html">
+                    <i class="bx bxs-user"></i>
+                    <span>Usuarios</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="./admin comentarios.html">
+                    <i class="bx bxs-comment-detail"></i>
+                    <span>Quejas y Sugerencias</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="./admin comentarios.html">
+                    <i class="bx bxs-cog"></i>
+                    <span>Información del sitio</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
     <header>
-        <h1>Panel de Administrador</h1>
-        <nav>
-            <a href="#">Inicio</a>
-            <a href="admin anuncios.html">anuncios admin</a>
-            <a href="admin tikets.html">tickets</a>
-            <a href="formulario tiket.html">formulario </a>
-             <a href="anuncios usuario.html">usuario anuncios </a>
-            <a href="#">Cerrar sesión</a>
-        </nav>
+        <div class="header-content">
+            <button type="button" class="sidebar-toggle-open">
+                <i class="bx bx-menu"></i>
+            </button>
+            <h1>Panel de Administrador</h1>
+        </div>
+        <hr>
     </header>
-
     <main>
         <section>
             <h2>Bienvenido, Admin 😎</h2>
             <p>¡Listo para gestionar el sitio! Elegí una acción rápida abajo.</p>
         </section>
-
         <section>
             <h3>Acciones rápidas</h3>
             <ul>
@@ -38,7 +96,20 @@
     </main>
 
     <footer>
-        <p>© 2025 Municipalidad de Desamparados - Panel de Administración</p>
+        <div class="footer-logo-cta">
+            <div class="logo-container">
+                <img class="logo" src="../../../Public/Images/logo-desamparados.png" alt="Logo cantón desamparados PNG">
+                <div class="title-container">
+                    <h2>Núcleo Desamparados</h2>
+                    <p>Conectando a la comunidad</p>
+                </div>
+            </div>
+            <button type="button" class="cta-button">
+                <i class="bx bxs-message"></i>
+                Tienes alguna queja o sugerencia, comunícala aquí.
+            </button>
+        </div>
+        <p class="copyright">&copy 2025 SyntaxIA</p>
     </footer>
 
 </body>

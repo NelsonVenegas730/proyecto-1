@@ -52,11 +52,11 @@ p {
     padding-bottom: 15px;
 }
 
-* {
-    font-family: 'Inter', sans-serif;
+body, p, a, ul, li, input, button, label {
+  font-family: 'Inter', sans-serif;
 }
 
-body {
+body:not(.auth-page) {
     background: repeating-linear-gradient(
         to bottom,
         #191a29 0px,
@@ -85,15 +85,6 @@ footer {
 
 main {
     padding: 20px;
-}
-
-input {
-    font-family: 'Futura Light', sans-serif;
-    font-size: 1rem;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid var(--color-primary);
-    color: black;
 }
 
 
