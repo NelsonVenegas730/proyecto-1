@@ -27,7 +27,7 @@ header hr {
     border-color: rgba(255, 255, 255, 0.591);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
     .sidebar-toggle-open {
         display: block;
     }

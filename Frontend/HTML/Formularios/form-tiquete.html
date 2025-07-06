@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear un nuevo tiquete de soporte</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../../CSS/styles.css">
+    <link rel="stylesheet" href="../../CSS/Paginas/form-tiquete.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/header.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/sidebar.css">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div>
+                <div class="logo-content-container">
+                    <div class="logo-container">
+                        <img class="logo" src="../../../Public/Images/logo-desamparados.png" alt="Logo cantón desamparados PNG" />
+                        <div class="title-container">
+                            <h2>Núcleo Desamparados</h2>
+                            <p>Conectando a la comunidad</p>
+                        </div>
+                    </div>
+                    <button type="button" class="sidebar-toggle-close">
+                        <i class="bx bx-x-circle"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="auth-container">
+                <div class="user-profile">
+                    <p class="user-avatar" id="avatar">JF</p>
+                    <div class="user-info">
+                        <p class="username" id="username" data-fullname="John_F_25022">John_F_25022</p>
+                        <p class="rol">Ciudadano</p>
+                    </div>
+                </div>
+                <div class="auth-buttons">
+                    <button class="auth-btn" type="button">Iniciar sesión</button>
+                    <button class="auth-btn" type="button">Registrarse</button>
+                </div>
+            </div>
+        </div>
+        <ul class="sidebar-links-container" id="sidebar-links-ciudadano">
+            <li class="sidebar-link">
+                <a href="../../HTML/index.html">
+                    <i class="bx bxs-home"></i>
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Ciudadano/noticias-anuncios-eventos.html">
+                    <i class="bx bxs-news"></i>
+                    <span>Noticias</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Ciudadano/emprendimientos.html">
+                    <i class="bx bxs-store"></i>
+                    <span>Emprendimientos</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Ciudadano/sugerencias.html">
+                    <i class="bx bxs-megaphone"></i>
+                    <span>Quejas y sugerencias</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Ciudadano/horario-buses.html">
+                    <i class="bx bxs-bus"></i>
+                    <span>Horario de Buses</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <header>
+        <div class="header-content">
+            <button type="button" class="sidebar-toggle-open">
+                <i class="bx bx-menu"></i>
+            </button>
+            <h1>Crear un nuevo tiquete</h1>
+        </div>
+        <hr>
+    </header>
+    <main>
+        <section class="indication">
+            <p>Aquí puedes crear un nuevo tiquete para reportar una incidencia o solicitud.</p>
+        </section>
+        <form id="formulario-tiquete" enctype="multipart/form-data">
+            <div class="field-container">
+                <label for="asunto">Asunto</label>
+                <input type="text" id="asunto" placeholder="Escribe el asunto del tiquete" required maxlength="100" />
+                <small class="input-requirements" id="asunto-requisitos">Máximo 100 caracteres. Solo texto y números.</small>
+            </div>
+
+            <div class="field-container">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" placeholder="Describe el problema o solicitud" rows="5" required></textarea>
+                <small class="input-requirements" id="descripcion-requisitos">Debe tener al menos 20 caracteres.</small>
+            </div>
+
+            <div class="field-container">
+                <label for="fecha">Fecha</label>
+                <input type="date" id="fecha" required />
+            </div>
+
+            <div class="field-container">
+                <label for="urgencia">Urgencia</label>
+                <select id="urgencia" required>
+                    <option value="" disabled selected>Selecciona la urgencia</option>
+                    <option value="baja">Baja</option>
+                    <option value="media">Media</option>
+                    <option value="alta">Alta</option>
+                </select>
+                <small class="input-requirements" id="urgencia-requisitos">Selecciona el nivel de urgencia.</small>
+            </div>
+
+            <button type="submit">Enviar tiquete</button>
+        </form>
+    </main>
+    <script src="../../JS/sidebarToggleMobile.js"></script>
+</body>
+</html>

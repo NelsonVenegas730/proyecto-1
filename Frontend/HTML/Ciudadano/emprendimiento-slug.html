@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <title>Emprendimientos</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" />
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" />
-    <link rel="stylesheet" href="../../CSS/styles.css" />
-    <link rel="stylesheet" href="../../CSS/Paginas/emprendimientos.css" />
-    <link rel="stylesheet" href="../../CSS/Componentes/header.css" />
-    <link rel="stylesheet" href="../../CSS/Componentes/sidebar.css" />
-    <link rel="stylesheet" href="../../CSS/Componentes/footer.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del emprendimiento</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> <!-- Importando fuente de letra Inter -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> <!-- Importando Boxicons -->
+    <link rel="stylesheet" href="../../CSS/styles.css">
+    <link rel="stylesheet" href="../../CSS/Paginas/mi-emprendimiento.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/sidebar.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/header.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/footer.css">
 </head>
 <body>
     <nav class="sidebar">
@@ -80,51 +81,47 @@
             <button type="button" class="sidebar-toggle-open">
                 <i class="bx bx-menu"></i>
             </button>
-            <h1>Emprendimientos de la comunidad</h1>
+            <h1>Detalles del emprendimiento</h1>
         </div>
         <hr />
     </header>
-    <main>
-        <div class="emprendimientos-container">
-            <a href="../../HTML/Ciudadano/emprendimiento-slug.html" class="emprendimiento-element card">
-                <img 
-                src="https://scontent.fsyq2-1.fna.fbcdn.net/v/t39.30808-6/476914588_923490199963620_5293780757162682007_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=106&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=_YMKHOOBCcEQ7kNvwF_JtMd&_nc_oc=AdkB9wpofMKFgd26k4qmSr0bcRLsMPmjkVPZoX2VNCZYHCYhm4vOEpq6VrauTZvJj2I&_nc_zt=23&_nc_ht=scontent.fsyq2-1.fna&_nc_gid=iqJEYugCp98JKb1D0wmDDQ&oh=00_AfRk5T3XMITkbwL1eYjKxOMoeadu4P4wiTEDlsaoKKwg5g&oe=6870B253" 
-                alt="Emprendimiento 1" 
-                />
-                <div class="emprendimiento-info">
-                    <h3>Panadería "El Buen Pan"</h3>
-                    <p>Panadería artesanal con productos frescos hechos a diario.</p>
-                    <div class="dueño">
-                        <div class="avatar">MG</div>
-                        <span>María González</span>
-                    </div>
-                    <span class="fecha">Fecha de creación: 10 de junio de 2025</span>
+    <main class="emprendimiento-container">
+        <div class="emprendimiento-content">
+            <div class="emprendimiento-info">
+                <div class="emprendimiento-header">
+                    <h2 id="emprendimiento-name" class="active">
+                        Panadería "El Buen Pan"
+                    </h2>
                 </div>
-            </a>
-
-            <a href="../../HTML/Ciudadano/emprendimiento-slug.html" class="emprendimiento-element card">
-                <img 
-                src="https://scontent.fsyq2-1.fna.fbcdn.net/v/t39.30808-6/476914588_923490199963620_5293780757162682007_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=106&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=_YMKHOOBCcEQ7kNvwF_JtMd&_nc_oc=AdkB9wpofMKFgd26k4qmSr0bcRLsMPmjkVPZoX2VNCZYHCYhm4vOEpq6VrauTZvJj2I&_nc_zt=23&_nc_ht=scontent.fsyq2-1.fna&_nc_gid=iqJEYugCp98JKb1D0wmDDQ&oh=00_AfRk5T3XMITkbwL1eYjKxOMoeadu4P4wiTEDlsaoKKwg5g&oe=6870B253" 
-                alt="Emprendimiento 2"
-                />
-                <div class="emprendimiento-info">
-                    <h3>Taller de Reparación "Todo Moto"</h3>
-                    <p>Servicio rápido y confiable para motos de todas las marcas.</p>
-                    <div class="dueño">
-                        <div class="avatar">JL</div>
-                        <span>Juan López</span>
+                <div>
+                    <div class="emprendimiento-details">
+                        <div class="emprendimiento-descripcion">
+                            <i class="bx bxs-info-circle"></i>
+                            <p class="emprendimiento-text active">
+                                Panadería "El Buen Pan" es un negocio familiar que ofrece una variedad de panes artesanales, pasteles y postres. Nos enorgullece utilizar ingredientes frescos y locales para garantizar la mejor calidad en nuestros productos. Nuestro objetivo es brindar a la comunidad de Desamparados un lugar acogedor donde puedan disfrutar de deliciosos productos horneados.
+                            </p>
+                        </div>
+                        <div class="emprendimiento-direccion">
+                            <i class="bx bxs-map"></i>
+                            <p class="emprendimiento-text active">
+                                Desamparados, San José, Costa Rica, 100 metros Este de la Plaza de Deportes.
+                            </p>
+                        </div>
                     </div>
-                    <span class="fecha">Fecha de creación: 5 de julio de 2025</span>
                 </div>
-            </a>
-
-            <!-- Podés duplicar este bloque para más emprendimientos -->
+            </div>
+            <div class="emprendimiento-image-container">
+                <img 
+                    src="https://www.cardenasmarkets.com/wp-content/uploads/fly-images/898/pan-dulce-1464x918-c.jpg" 
+                    alt="nombre del emprendimiento"
+                />
+            </div>
         </div>
     </main>
     <footer>
         <div class="footer-logo-cta">
             <div class="logo-container">
-                <img class="logo" src="../../../Public/Images/logo-desamparados.png" alt="Logo cantón desamparados PNG" />
+                <img class="logo" src="../../../Public/Images/logo-desamparados.png" alt="Logo cantón desamparados PNG">
                 <div class="title-container">
                     <h2>Núcleo Desamparados</h2>
                     <p>Conectando a la comunidad</p>
@@ -138,6 +135,6 @@
         <p class="copyright">&copy 2025 SyntaxIA</p>
     </footer>
     <script src="../../JS/sidebarToggleMobile.js"></script>
-    <script src="../../JS/filterContent.js"></script>
+    <script src="../../JS/fetchEmprendimiento.js"></script>
 </body>
 </html>
