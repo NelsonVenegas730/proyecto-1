@@ -120,6 +120,11 @@
     resize: none;
 }
 
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+}
+
 .active {
     display: block;
 }

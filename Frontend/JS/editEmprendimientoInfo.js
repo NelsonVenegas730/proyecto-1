@@ -9,7 +9,14 @@ const direccionParrafo = document.querySelector(".emprendimiento-direccion .empr
 const direccionTextarea = document.getElementById("emprendimiento-direccion-textarea");
 
 const infoElements = document.querySelectorAll(".emprendimiento-text, #emprendimiento-name");
-const formElements = document.querySelectorAll(".edit-form-container");
+const formContainers = document.querySelectorAll(".edit-form-container");
+const errorMessages = document.querySelectorAll(".error-message");
+
+const inputs = [
+  { input: emprendimientoNameInput, error: errorMessages[0] },
+  { input: descripcionTextarea, error: errorMessages[1] },
+  { input: direccionTextarea, error: errorMessages[2] },
+];
 
 let isEditing = false;
 
@@ -32,8 +39,23 @@ const updateTextContent = () => {
   direccionParrafo.innerText = direccionTextarea.value.trim();
 };
 
+
+const validateField = (input, error) => {
+  if (!input.value.trim()) {
+    error.classList.remove("inactive");
+    error.classList.add("active");
+    return false;
+  } else {
+    error.classList.remove("active");
+    error.classList.add("inactive");
+    return true;
+  }
+};
+
 const toggleEdition = () => {
   if (isEditing) {
+    if (!validateFields()) return;
+
     updateTextContent();
     editBtn.innerHTML = `<i class="bx bxs-edit"></i><p class="edit-btn-text">Editar emprendimiento</p>`;
     cancelBtn.classList.remove("active");
@@ -43,11 +65,16 @@ const toggleEdition = () => {
     editBtn.innerHTML = `<i class="bx bxs-save"></i><p class="edit-btn-text">Guardar cambios</p>`;
     cancelBtn.classList.remove("inactive");
     cancelBtn.classList.add("active");
+
+    errorMessages.forEach(e => {
+      e.classList.remove("active");
+      e.classList.add("inactive");
+    });
   }
 
   isEditing = !isEditing;
   toggleVisibility(infoElements, !isEditing);
-  toggleVisibility(formElements, isEditing);
+  toggleVisibility(formContainers, isEditing);
 };
 
 const cancelEdition = () => {
@@ -56,8 +83,21 @@ const cancelEdition = () => {
   cancelBtn.classList.remove("active");
   cancelBtn.classList.add("inactive");
   toggleVisibility(infoElements, true);
-  toggleVisibility(formElements, false);
+  toggleVisibility(formContainers, false);
+
+  errorMessages.forEach(e => {
+    e.classList.remove("active");
+    e.classList.add("inactive");
+  });
 };
 
 editBtn.addEventListener("click", toggleEdition);
 cancelBtn.addEventListener("click", cancelEdition);
+inputs.forEach(({ input, error }) => {
+  input.addEventListener("keyup", () => validateField(input, error));
+  input.addEventListener("blur", () => validateField(input, error));
+});
+
+const validateFields = () => {
+  return inputs.every(({ input, error }) => validateField(input, error));
+};
