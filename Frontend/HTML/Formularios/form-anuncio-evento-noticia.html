@@ -6,7 +6,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> <!-- Importando fuente de letra Inter -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> <!-- Importando Boxicons -->
     <link rel="stylesheet" href="../../CSS/styles.css">
-    <link rel="stylesheet" href="../../CSS/Paginas/admin-anuncios.css">
+    <link rel="stylesheet" href="../../CSS/Paginas/form-nuevo-anuncio-evento-noticia.css">
     <link rel="stylesheet" href="../../CSS/Componentes/header.css">
     <link rel="stylesheet" href="../../CSS/Componentes/sidebar.css">
 </head>
@@ -117,11 +117,16 @@
                 <label for="imagen">Imagen (opcional)</label>
                 <input type="file" id="imagen" accept="image/*" />
                 <small class="input-requirements" id="imagen-requisitos">Formatos permitidos: JPG, PNG, WEBP.</small>
+                <div class="image-preview-container">
+                    <p class="preview-text">Vista previa de la imagen seleccionada:</p>
+                    <img id="preview-img" src="" alt="Vista previa"/>
+                </div>
             </div>
 
             <button type="submit">Publicar</button>
         </form>
     </main>
     <script src="../../JS/sidebarToggleMobile.js"></script>
+    <script src="../../JS/previewSelectedImage.js"></script>
 </body>
 </html>
