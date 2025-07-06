@@ -2,25 +2,241 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Vista de Usuario - Noticias</title>
-    <link rel="stylesheet" href="../../css/Paginas/admin.css">
+    <title>Noticias, Anuncio y Eventos</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"> <!-- Importando fuente de letra Inter -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"> <!-- Importando Boxicons -->
+    <link rel="stylesheet" href="../../CSS/styles.css">
+    <link rel="stylesheet" href="../../CSS/Paginas/usuario-noticias.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/header.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/sidebar.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/footer.css">
 </head>
 <body>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div>
+                <div class="logo-content-container">
+                    <div class="logo-container">
+                        <img class="logo" src="../../../Public/Images/logo-desamparados.png" alt="Logo cantón desamparados PNG">
+                        <div class="title-container">
+                            <h2>Núcleo Desamparados</h2>
+                            <p>Conectando a la comunidad</p>
+                        </div>
+                    </div>
+                    <button type="button" class="sidebar-toggle-close">
+                        <i class="bx bx-x-circle"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="auth-container">
+                <div class="user-profile">
+                    <p class="user-avatar" id="avatar">JF</p>
+                    <div class="user-info">
+                        <p class="username" id="username" data-fullname="John_F_25022">John_F_25022</p>
+                        <p class="rol">Ciudadano</p>
+                    </div>
+                </div>
+                <div class="auth-buttons">
+                    <button class="auth-btn" type="button">Iniciar sesión</button>
+                    <button class="auth-btn" type="button">Registrarse</button>
+                </div>
+            </div>
+        </div>
+        <ul class="sidebar-links-container" id="sidebar-links-ciudadano">
+            <li class="sidebar-link">
+                <a href="../../HTML/index.html">
+                    <i class="bx bxs-home"></i>
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Ciudadano/noticias-anuncios-eventos.html">
+                    <i class="bx bxs-news"></i>
+                    <span>Noticias</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Ciudadano/emprendimientos.html">
+                    <i class="bx bxs-store"></i>
+                    <span>Emprendimientos</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Ciudadano/sugerencias.html">
+                    <i class="bx bxs-megaphone"></i>
+                    <span>Quejas y sugerencias</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Ciudadano/sugerencias.html">
+                    <i class="bx bxs-bus"></i>
+                    <span>Horario de Buses</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="sidebar-links-container" id="sidebar-links-admin">
+            <li class="sidebar-link">
+                <a href="../../HTML/Administrador/panel-administrador.html">
+                    <i class="bx bxs-dashboard"></i>
+                    <span>Panel de Administrador</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../Formularios/form-anuncio-evento-noticia.html">
+                    <i class="bx bxs-news"></i>
+                    <span>Nueva noticia o anuncio</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Administrador/admin-usuarios.html">
+                    <i class="bx bxs-user"></i>
+                    <span>Usuarios</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Administrador/admin-tiquetes.html">
+                    <i class="bx bx-message-check"></i>
+                    <span>Tiquetes</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Administrador/admin-datos-sitio.html">
+                    <i class="bx bx-cog"></i>
+                    <span>Actualizar datos del sitio</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
     <header>
-        <h1>Anuncios, Eventos y Noticias Publicadas</h1>
-        <nav>
-            <a href="panel-administrador.html">Inicio</a>
-            <a href="anuncios usuario.html">Vista Usuario</a>
-        </nav>
+        <div class="header-content">
+            <button type="button" class="sidebar-toggle-open">
+                <i class="bx bx-menu"></i>
+            </button>
+            <h1>Anuncios, Eventos y Noticias</h1>
+        </div>
+        <hr>
     </header>
     <main>
-        <section>
-            <h2>Lo más reciente</h2>
-            <p>Listado de publicaciones visibles por el público.</p>
-        </section>
+        <div class="options-container">
+            <h2>Controles para filtrar contenido</h2>
+            <div class="filter-controls">
+                <div class="filter-group">
+                    <h4>Filtrar por tipo</h4>
+                    <label><input type="checkbox" value="evento" class="filter-checkbox"> Evento</label>
+                    <label><input type="checkbox" value="noticia" class="filter-checkbox"> Noticia</label>
+                    <label><input type="checkbox" value="anuncio" class="filter-checkbox"> Anuncio</label>
+                </div>
+                <div class="filter-group">
+                    <h4>Filtrar por fecha</h4>
+                    <input type="date" id="filter-date">
+                </div>
+                <button id="apply-filters">Aplicar filtros</button>
+            </div>
+        </div>
+        <div class="noticias-eventos-anuncios-container">
+            <div class="noticias-eventos-anuncios-container">
+                <div class="noticia-evento-anuncio-element">
+                    <img src="https://www.esneca.com/wp-content/uploads/eventos-sociales.jpg" alt="Evento">
+                    <div class="noticia-evento-anuncio-info">
+                        <span class="badge evento">Evento</span>
+                        <h3>Evento Cultural en el Parque Central</h3>
+                        <p>Únete a nosotros para un día lleno de música, arte y cultura en el corazón de Desamparados.</p>
+                        <span class="fecha">Fecha: 15 de marzo de 2025</span>
+                        <div class="autor">
+                            <div class="avatar">AB</div>
+                            <span>Publicado por: Ana Benítez</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="noticia-evento-anuncio-element">
+                    <img src="https://www.esneca.com/wp-content/uploads/eventos-sociales.jpg" alt="Noticia">
+                    <div class="noticia-evento-anuncio-info">
+                        <span class="badge noticia">Noticia</span>
+                        <h3>Nuevo Mercado Municipal Abierto</h3>
+                        <p>Descubre los productos frescos y locales en nuestro nuevo mercado, abierto todos los sábados.</p>
+                        <span class="fecha">Fecha: 20 de marzo de 2025</span>
+                        <div class="autor">
+                            <div class="avatar">AB</div>
+                            <span>Publicado por: Ana Benítez</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="noticia-evento-anuncio-element">
+                    <img src="https://www.esneca.com/wp-content/uploads/eventos-sociales.jpg" alt="Noticia">
+                    <div class="noticia-evento-anuncio-info">
+                        <span class="badge anuncio">Anuncio</span>
+                        <h3>Nuevo Mercado Municipal Abierto</h3>
+                        <p>Descubre los productos frescos y locales en nuestro nuevo mercado, abierto todos los sábados.</p>
+                        <span class="fecha">Fecha: 20 de marzo de 2025</span>
+                        <div class="autor">
+                            <div class="avatar">AB</div>
+                            <span>Publicado por: Ana Benítez</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="noticia-evento-anuncio-element">
+                    <img src="https://www.esneca.com/wp-content/uploads/eventos-sociales.jpg" alt="Noticia">
+                    <div class="noticia-evento-anuncio-info">
+                        <span class="badge evento">Evento</span>
+                        <h3>Nuevo Mercado Municipal Abierto</h3>
+                        <p>Descubre los productos frescos y locales en nuestro nuevo mercado, abierto todos los sábados.</p>
+                        <span class="fecha">Fecha: 20 de marzo de 2025</span>
+                        <div class="autor">
+                            <div class="avatar">AB</div>
+                            <span>Publicado por: Ana Benítez</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="noticia-evento-anuncio-element">
+                    <img src="https://www.esneca.com/wp-content/uploads/eventos-sociales.jpg" alt="Noticia">
+                    <div class="noticia-evento-anuncio-info">
+                        <span class="badge anuncio">Anuncio</span>
+                        <h3>Nuevo Mercado Municipal Abierto</h3>
+                        <p>Descubre los productos frescos y locales en nuestro nuevo mercado, abierto todos los sábados.</p>
+                        <span class="fecha">Fecha: 20 de marzo de 2025</span>
+                        <div class="autor">
+                            <div class="avatar">AB</div>
+                            <span>Publicado por: Ana Benítez</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="noticia-evento-anuncio-element">
+                    <img src="https://www.esneca.com/wp-content/uploads/eventos-sociales.jpg" alt="Noticia">
+                    <div class="noticia-evento-anuncio-info">
+                        <span class="badge anuncio">Anuncio</span>
+                        <h3>Nuevo Mercado Municipal Abierto</h3>
+                        <p>Descubre los productos frescos y locales en nuestro nuevo mercado, abierto todos los sábados.</p>
+                        <span class="fecha">Fecha: 20 de marzo de 2025</span>
+                        <div class="autor">
+                            <div class="avatar">AB</div>
+                            <span>Publicado por: Ana Benítez</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <footer>
-        <p>© 2025 Municipalidad de Desamparados</p>
+        <div class="footer-logo-cta">
+            <div class="logo-container">
+                <img class="logo" src="../../../Public/Images/logo-desamparados.png" alt="Logo cantón desamparados PNG">
+                <div class="title-container">
+                    <h2>Núcleo Desamparados</h2>
+                    <p>Conectando a la comunidad</p>
+                </div>
+            </div>
+            <button type="button" class="cta-button">
+                <i class="bx bxs-message"></i>
+                Tienes alguna queja o sugerencia, comunícala aquí.
+            </button>
+        </div>
+        <p class="copyright">&copy 2025 SyntaxIA</p>
     </footer>
+    <script src="../../JS/sidebarToggleMobile.js"></script>
+    <script src="../../JS/filterContent.js"></script>
 </body>
 </html>

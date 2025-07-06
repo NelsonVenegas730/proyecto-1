@@ -1,0 +1,212 @@
+/* BOTÓN DE FILTRO (SI AÚN SE USA) */
+.filter-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: fit-content;
+  padding: 10px;
+  margin: 5px 0;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 2rem;
+  transition: all 0.3s ease;
+}
+
+.filter-button:hover {
+  background-color: var(--color-primary-light);
+}
+
+/* CONTENEDOR DE FILTROS */
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+/* GRUPO DE CONTROLES DE FILTRO */
+.filter-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: flex-end;
+  justify-content: start;
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* CADA BLOQUE DE FILTRO (tipo, fecha, botón) */
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 160px;
+}
+
+.filter-group h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.filter-group label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #333;
+}
+
+.filter-group input[type="date"] {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 14px;
+  color: black;
+}
+
+
+/* BOTÓN DE APLICAR FILTROS */
+#apply-filters {
+  background-color: #1877f2;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  align-self: flex-end;
+}
+
+#apply-filters:hover {
+  background-color: #0f5ac2;
+}
+
+/* GRILLA DE ELEMENTOS */
+.noticias-eventos-anuncios-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+/* TARJETAS INDIVIDUALES */
+.noticia-evento-anuncio-element {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.noticia-evento-anuncio-element:hover {
+  transform: translateY(-5px);
+}
+
+.noticia-evento-anuncio-element img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.noticia-evento-anuncio-info {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.noticia-evento-anuncio-info h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: black;
+}
+
+.noticia-evento-anuncio-info p {
+  margin: 0;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+.fecha {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* BADGES */
+.badge {
+  align-self: flex-start;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  border-radius: 999px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: white;
+}
+
+.badge.evento {
+  background-color: #007bff;
+}
+
+.badge.anuncio {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.badge.noticia {
+  background-color: #28a745;
+}
+
+/* RESPONSIVE PARA MOBILE */
+@media (max-width: 600px) {
+  .filter-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-group {
+    width: 100%;
+  }
+
+  #apply-filters {
+    width: 100%;
+    align-self: stretch;
+  }
+}
+
+.autor {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.autor span {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+

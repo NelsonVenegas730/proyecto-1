@@ -2,11 +2,11 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Panel de Administrador</title>
+    <title>Anuncios, Eventos y Noticias - Admin</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> <!-- Importando fuente de letra Inter -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> <!-- Importando Boxicons -->
     <link rel="stylesheet" href="../../CSS/styles.css">
-    <link rel="stylesheet" href="../../CSS/Paginas/admin-panel.css">
+    <link rel="stylesheet" href="../../CSS/Paginas/admin-anuncios.css">
     <link rel="stylesheet" href="../../CSS/Componentes/header.css">
     <link rel="stylesheet" href="../../CSS/Componentes/sidebar.css">
 </head>
@@ -38,7 +38,7 @@
                 </div>
             </div>
         </div>
-        <ul class="sidebar-links-container" id="sidebar-links-admin">
+        <ul class="sidebar-links-container" id="sidebar-links-emprendedor">
             <li class="sidebar-link">
                 <a href="../../HTML/Administrador/panel-administrador.html">
                     <i class="bx bxs-dashboard"></i>
@@ -46,7 +46,7 @@
                 </a>
             </li>
             <li class="sidebar-link">
-                <a href="../Formularios/form-anuncio-evento-noticia.html">
+                <a href="../../HTML/Formularios/form-anuncio-evento-noticia.html">
                     <i class="bx bxs-news"></i>
                     <span>Nueva noticia o anuncio</span>
                 </a>
@@ -76,24 +76,51 @@
             <button type="button" class="sidebar-toggle-open">
                 <i class="bx bx-menu"></i>
             </button>
-            <h1>Panel de Administrador</h1>
+            <h1>Crear un nuevo anuncio o evento</h1>
         </div>
         <hr>
     </header>
     <main>
-        <section>
-            <h2>Bienvenido, Admin 🛡️</h2>
-            <p>¡Listo para gestionar el sitio! Elegí una acción rápida abajo. O mira el menú de navegación a la izquierda para comenzar.</p>
+        <section class="indication">
+            <p>Aquí puedes crear un nuevo anuncio, evento o noticia.</p>
         </section>
-        <section>
-            <h3>Acciones rápidas</h3>
-            <ul class="quick-actions">
-                <li><a class="quick-action" href="../Formularios/form-anuncio-evento-noticia.html">📰 Agregar nueva noticia o anuncio</a></li>
-                <li><a class="quick-action" href="./admin-usuarios.html">👥 Ver lista de usuarios</a></li>
-                <li><a class="quick-action" href="./admin-tiquetes.html">💬 Revisar Tiquetes</a></li>
-                <li><a class="quick-action" href="./admin-datos-sitio.html">⚙️ Actualizar datos del sitio</a></li>
-            </ul>
-        </section>
+        <form id="formulario-anuncio" enctype="multipart/form-data">
+            <div class="field-container">
+                <label for="tipo">Tipo de publicación</label>
+                <select id="tipo" required>
+                <option class="option-default" value="" disabled selected>Selecciona una opción</option>
+                <option value="anuncio">📢 Anuncio</option>
+                <option value="evento">📅 Evento</option>
+                <option value="noticia">📰 Noticia</option>
+                </select>
+                <small class="input-requirements" id="tipo-requisitos">Debes seleccionar un tipo.</small>
+            </div>
+
+            <div class="field-container">
+                <label for="titulo">Título</label>
+                <input type="text" id="titulo" placeholder="Escribe el título del anuncio" required />
+                <small class="input-requirements" id="titulo-requisitos">Máximo 100 caracteres. Solo texto y números.</small>
+            </div>
+
+            <div class="field-container">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" placeholder="Escribe aquí la descripción del evento o noticia" rows="5" required></textarea>
+                <small class="input-requirements" id="descripcion-requisitos">Debe tener al menos 20 caracteres.</small>
+            </div>
+
+            <div class="field-container">
+                <label for="fecha">Fecha del evento o publicación</label>
+                <input type="date" id="fecha" required />
+            </div>
+
+            <div class="field-container">
+                <label for="imagen">Imagen (opcional)</label>
+                <input type="file" id="imagen" accept="image/*" />
+                <small class="input-requirements" id="imagen-requisitos">Formatos permitidos: JPG, PNG, WEBP.</small>
+            </div>
+
+            <button type="submit">Publicar</button>
+        </form>
     </main>
     <script src="../../JS/sidebarToggleMobile.js"></script>
 </body>
