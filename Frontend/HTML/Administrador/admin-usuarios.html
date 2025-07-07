@@ -88,7 +88,13 @@
                 <div class="grid-cell avatar-cell" data-label="Avatar"><div class="avatar">CB</div></div>
                 <div class="grid-cell" data-label="Usuario">Carlos_B</div>
                 <div class="grid-cell" data-label="Rol">Emprendedor</div>
-                <div class="grid-cell estado estado-en-proceso" data-label="Estado">En proceso</div>
+                <div class="grid-cell estado editable-estado" data-label="Estado">
+                    <select class="estado-select">
+                        <option value="pendiente">En proceso</option>
+                        <option value="aprobado">Aprobado</option>
+                        <option value="rechazado">Rechazado</option>
+                    </select>
+                </div>
                 <div class="grid-cell action-cell" data-label="Acciones">
                 <button class="ellipsis-btn">⋯</button>
                 <div class="action-popup">
@@ -121,13 +127,37 @@
                 <div class="grid-cell avatar-cell" data-label="Avatar"><div class="avatar">LG</div></div>
                 <div class="grid-cell" data-label="Usuario">Luisa_G</div>
                 <div class="grid-cell" data-label="Rol">Emprendedor</div>
-                <div class="grid-cell estado estado-aprobado" data-label="Estado">Aprobado</div>
+                <div class="grid-cell estado editable-estado" data-label="Estado">
+                    <select class="estado-select">
+                        <option value="pendiente">En proceso</option>
+                        <option value="aprobado">Aprobado</option>
+                        <option value="rechazado">Rechazado</option>
+                    </select>
+                </div>
                 <div class="grid-cell action-cell" data-label="Acciones">
                 <button class="ellipsis-btn">⋯</button>
                 <div class="action-popup">
                     <button class="delete-user-btn">Eliminar usuario</button>
                 </div>
                 </div>
+            </div>
+            <h2 class="emprendimientos-heading">Emprendimientos pendientes de aprobación</h2>
+            <div class="emprendimientos-pendientes">
+                <a href="../../HTML/Ciudadano/emprendimiento-slug.html" class="emprendimiento-card">
+                    <img src="https://s1.significados.com/foto/shutterstock-513513718_bg.jpg?class=article" alt="Imagen emprendimiento" />
+                    <div class="info">
+                        <h4>El Buen Pan</h4>
+                        <p>Dueña: María González</p>
+                    </div>
+                </a>
+
+                <a href="../../HTML/Ciudadano/emprendimiento-slug.html" class="emprendimiento-card">
+                    <img src="https://s1.significados.com/foto/shutterstock-513513718_bg.jpg?class=article" alt="Imagen emprendimiento" />
+                    <div class="info">
+                        <h4>Tienda Verde</h4>
+                        <p>Dueño: Carlos B.</p>
+                    </div>
+                </a>
             </div>
         </section>
     </main>

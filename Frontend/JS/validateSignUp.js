@@ -59,7 +59,13 @@ formulario.addEventListener("submit", (e) => {
   const apellidosValido = validarCampo(apellidos, expresiones.soloTexto, requisitosApellidos);
 
   if (usuarioValido && correoValido && passwordValido && confirmValido && nombreValido && apellidosValido) {
-    formulario.submit();
+    const esEmprendedor = document.getElementById("emprende").checked;
+
+    if (esEmprendedor) {
+      window.location.href = "./info-emprendimiento.html";
+    } else {
+      formulario.submit();
+    }
   } else {
     alert("Por favor completá todos los campos correctamente.");
   }
