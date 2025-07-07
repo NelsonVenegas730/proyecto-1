@@ -306,6 +306,34 @@
   background-color: #005dc1;
 }
 
+.create-anuncio-evento-noticia-cta {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.create-anuncio-evento-noticia-cta a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  gap: 8px;
+  background-color: var(--color-primary);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.create-anuncio-evento-noticia-cta a i {
+  font-size: 2rem;
+}
+
+.create-anuncio-evento-noticia-cta a:hover {
+  background-color: var(--color-primary-light);
+}
 
 /* RESPONSIVE */
 @media (max-width: 600px) {

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horario Buses</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../../CSS/styles.css">
+    <link rel="stylesheet" href="../../CSS/Paginas/horario-buses.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/sidebar.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/header.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/footer.css">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div>
+                <div class="logo-content-container">
+                    <div class="logo-container">
+                        <img class="logo" src="../../../Public/Images/logo-desamparados.png" alt="Logo cantón desamparados PNG">
+                        <div class="title-container">
+                            <h2>Núcleo Desamparados</h2>
+                            <p>Conectando a la comunidad</p>
+                        </div>
+                    </div>
+                    <button type="button" class="sidebar-toggle-close">
+                        <i class="bx bx-x-circle"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="auth-container">
+                <div class="user-profile">
+                    <p class="user-avatar" id="avatar">JF</p>
+                    <div class="user-info">
+                        <p class="username" id="username" data-fullname="John_F_25022">John_F_25022</p>
+                        <p class="rol">Ciudadano</p>
+                    </div>
+                </div>
+                <div class="auth-buttons">
+                    <button class="auth-btn" type="button">Iniciar sesión</button>
+                    <button class="auth-btn" type="button">Registrarse</button>
+                </div>
+            </div>
+        </div>
+        <ul class="sidebar-links-container">
+            <li class="sidebar-link">
+                <a href="../../HTML/index.html">
+                    <i class="bx bxs-home"></i>
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Ciudadano/noticias-anuncios-eventos.html">
+                    <i class="bx bxs-news"></i>
+                    <span>Noticias</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Ciudadano/emprendimientos.html">
+                    <i class="bx bxs-store"></i>
+                    <span>Emprendimientos</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Ciudadano/sugerencias.html">
+                    <i class="bx bxs-megaphone"></i>
+                    <span>Quejas y sugerencias</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Ciudadano/horario-buses.html">
+                    <i class="bx bxs-bus"></i>
+                    <span>Horario de Buses</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <header>
+        <div class="header-content">
+            <button type="button" class="sidebar-toggle-open">
+                <i class="bx bx-menu"></i>
+            </button>
+            <h1>Horario de Buses</h1>
+        </div>
+        <hr>
+    </header>
+    <main>
+
+        <section class="bus-banner">
+            <img src="../../../Public/Images/banner-buses.jpg" alt="Banner Horarios de Buses">
+        </section>
+    
+        <section class="bus-schedule">
+            <h2>Horarios de buses disponibles</h2>
+            <div class="bus-grid">
+                <div class="grid-header">Destino</div>
+                <div class="grid-header">Horario</div>
+                <div class="grid-header">Dirección</div>
+                <div class="grid-header">Precio</div>
+                <div class="grid-header">Espera</div>
+    
+                <div class="grid-item">San José</div>
+                <div class="grid-item">6:00 AM</div>
+                <div class="grid-item">Av. Central</div>
+                <div class="grid-item">₡650</div>
+                <div class="grid-item">10 min</div>
+    
+                <div class="grid-item">Cartago</div>
+                <div class="grid-item">6:30 AM</div>
+                <div class="grid-item">Parada UCR</div>
+                <div class="grid-item">₡850</div>
+                <div class="grid-item">15 min</div>
+    
+                <div class="grid-item">Heredia</div>
+                <div class="grid-item">7:00 AM</div>
+                <div class="grid-item">Terminal Atlántico</div>
+                <div class="grid-item">₡750</div>
+                <div class="grid-item">20 min</div>
+    
+                <div class="grid-item">Desamparados</div>
+                <div class="grid-item">7:15 AM</div>
+                <div class="grid-item">Parque Central</div>
+                <div class="grid-item">₡500</div>
+                <div class="grid-item">5 min</div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-logo-cta">
+            <div class="logo-container">
+                <img class="logo" src="../../../Public/Images/logo-desamparados.png" alt="Logo cantón desamparados PNG">
+                <div class="title-container">
+                    <h2>Núcleo Desamparados</h2>
+                    <p>Conectando a la comunidad</p>
+                </div>
+            </div>
+            <a href="../HTML/Formularios/form-tiquete.html" class="cta-button">
+                <i class="bx bxs-message"></i>
+                Tienes alguna queja o sugerencia, comunícala aquí.
+            </a>
+        </div>
+        <p class="copyright">&copy 2025 SyntaxIA</p>
+    </footer>
+    <script src="../JS/sidebarToggleMobile.js" defer></script>
+</body>
+</html>
