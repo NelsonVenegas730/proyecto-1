@@ -169,7 +169,8 @@
 
 .emprendimiento-card {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     background: #fff;
     padding: 1rem 1.25rem;
     border-radius: 12px;
@@ -185,12 +186,11 @@
 }
 
 .emprendimiento-card img {
-    width: 72px;
-    height: 72px;
+    width: 100%;
+    height: 160px;
     object-fit: cover;
-    border-radius: 8px;
-    margin-right: 1.25rem;
-    flex-shrink: 0;
+    border-radius: 10px;
+    margin-bottom: 1rem;
 }
 
 .emprendimiento-card .info h4 {
@@ -208,6 +208,144 @@
     line-height: 1.3;
 }
 
+.noticias-heading {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.noticias-pendientes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 1.5rem;
+}
+
+.noticia-card {
+    display: flex;
+    align-items: flex-start;
+    background: #fefefe;
+    padding: 1.25rem 1.5rem;
+    border-radius: 14px;
+    text-decoration: none;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.25s ease, transform 0.2s ease;
+    color: #000;
+    min-height: 110px;
+}
+
+.noticia-card:hover {
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+}
+
+.noticia-card img {
+    width: 76px;
+    height: 76px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+}
+
+.noticia-card .info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.noticia-card .noticia-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.noticia-card .info h4 {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1.3;
+}
+
+.noticia-card .info p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.4;
+}
+
+.noticia-card .info p.descripcion {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 0.2rem;
+}
+
+/* BADGE: pastilla de tipo */
+.badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    text-transform: uppercase;
+    background-color: #ccc;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.badge-evento {
+    background-color: #0077b6;
+}
+
+.badge-anuncio {
+    background-color: #f4a100;
+}
+
+.badge-noticia {
+    background-color: #22a900;
+}
+
+.noticia-actions,
+.emprendimiento-actions {
+    margin-top: 0.7rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-rechazar,
+.btn-aprobar {
+    flex: 1;
+    padding: 0.45rem 0.6rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-rechazar {
+    background-color: #e63946;
+    color: white;
+}
+
+.btn-rechazar:hover {
+    background-color: #d62839;
+    transform: scale(1.03);
+}
+
+.btn-aprobar {
+    background-color: #22a900;
+    color: white;
+}
+
+.btn-aprobar:hover {
+    background-color: #1a8c00;
+    transform: scale(1.03);
+}
 
 @media (max-width: 800px) {
   .user-grid {
