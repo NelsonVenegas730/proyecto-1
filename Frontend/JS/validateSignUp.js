@@ -16,6 +16,8 @@ const requisitosUsuario = document.getElementById("usuario-requisitos");
 const requisitosNombre = document.getElementById("nombre-requisitos");
 const requisitosApellidos = document.getElementById("apellidos-requisitos");
 
+const mensajeExito = document.getElementById("mensaje-exito");
+
 const expresiones = {
   correo: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
   password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/,
@@ -62,11 +64,29 @@ formulario.addEventListener("submit", (e) => {
     const esEmprendedor = document.getElementById("emprende").checked;
 
     if (esEmprendedor) {
-      window.location.href = "./info-emprendimiento.html";
+      mostrarMensajeExitoEmprendedor();
     } else {
-      formulario.submit();
+      mostrarMensajeExitoCiudadano();
     }
   } else {
     alert("Por favor completá todos los campos correctamente.");
   }
 });
+
+function mostrarMensajeExitoEmprendedor() {
+  mensajeExito.classList.remove("oculto");
+  setTimeout(() => {
+    mensajeExito.classList.add("oculto");
+    formulario.submit();
+    window.location.href = "../Emprendedor/mi-emprendimiento.html";
+  }, 3500);
+}
+
+function mostrarMensajeExitoCiudadano() {
+  mensajeExito.classList.remove("oculto");
+  setTimeout(() => {
+    mensajeExito.classList.add("oculto");
+    formulario.submit();
+    window.location.href = "../index.html";
+  }, 3500);
+}
