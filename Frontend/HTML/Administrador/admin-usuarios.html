@@ -65,12 +65,6 @@
                     <span>Tiquetes</span>
                 </a>
             </li>
-            <li class="sidebar-link">
-                <a href="../../HTML/Administrador/admin-datos-sitio.html">
-                    <i class="bx bx-cog"></i>
-                    <span>Actualizar datos del sitio</span>
-                </a>
-            </li>
         </ul>
     </nav>
     <header>
@@ -83,7 +77,60 @@
         <hr>
     </header>
     <main>
-        
+        <section class="user-management">
+            <div class="user-grid">
+                <div class="grid-header">Avatar</div>
+                <div class="grid-header">Usuario</div>
+                <div class="grid-header">Rol</div>
+                <div class="grid-header">Estado</div>
+                <div class="grid-header">Acciones</div>
+
+                <div class="grid-cell avatar-cell" data-label="Avatar"><div class="avatar">CB</div></div>
+                <div class="grid-cell" data-label="Usuario">Carlos_B</div>
+                <div class="grid-cell" data-label="Rol">Emprendedor</div>
+                <div class="grid-cell estado estado-en-proceso" data-label="Estado">En proceso</div>
+                <div class="grid-cell action-cell" data-label="Acciones">
+                <button class="ellipsis-btn">⋯</button>
+                <div class="action-popup">
+                    <button class="delete-user-btn">Eliminar usuario</button>
+                </div>
+                </div>
+
+                <div class="grid-cell avatar-cell" data-label="Avatar"><div class="avatar">MA</div></div>
+                <div class="grid-cell" data-label="Usuario">Maria_Admin</div>
+                <div class="grid-cell" data-label="Rol">Administrador</div>
+                <div class="grid-cell" data-label="Estado">—</div>
+                <div class="grid-cell action-cell" data-label="Acciones">
+                <button class="ellipsis-btn">⋯</button>
+                <div class="action-popup">
+                    <button class="delete-user-btn">Eliminar usuario</button>
+                </div>
+                </div>
+
+                <div class="grid-cell avatar-cell" data-label="Avatar"><div class="avatar">JP</div></div>
+                <div class="grid-cell" data-label="Usuario">Juan_Perez</div>
+                <div class="grid-cell" data-label="Rol">Ciudadano</div>
+                <div class="grid-cell" data-label="Estado">—</div>
+                <div class="grid-cell action-cell" data-label="Acciones">
+                <button class="ellipsis-btn">⋯</button>
+                <div class="action-popup">
+                    <button class="delete-user-btn">Eliminar usuario</button>
+                </div>
+                </div>
+
+                <div class="grid-cell avatar-cell" data-label="Avatar"><div class="avatar">LG</div></div>
+                <div class="grid-cell" data-label="Usuario">Luisa_G</div>
+                <div class="grid-cell" data-label="Rol">Emprendedor</div>
+                <div class="grid-cell estado estado-aprobado" data-label="Estado">Aprobado</div>
+                <div class="grid-cell action-cell" data-label="Acciones">
+                <button class="ellipsis-btn">⋯</button>
+                <div class="action-popup">
+                    <button class="delete-user-btn">Eliminar usuario</button>
+                </div>
+                </div>
+            </div>
+        </section>
     </main>
+    <script src="../../JS/userActionsTogglePopUp.js"></script>
 </body>
 </html>

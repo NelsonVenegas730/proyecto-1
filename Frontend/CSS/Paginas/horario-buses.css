@@ -44,3 +44,37 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
+@media (max-width: 800px) {
+  .bus-grid {
+    display: block;
+    padding: 0;
+  }
+
+  .grid-header {
+    display: none;
+  }
+
+  .grid-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-radius: 0;
+    border-bottom: 1px solid #ddd;
+    box-shadow: none;
+  }
+
+  .grid-item::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: var(--color-primary);
+    flex-basis: 40%;
+    text-align: left;
+  }
+
+  /* Separación entre filas (cada 5 items) */
+  .grid-item:nth-child(5n) {
+    margin-bottom: 2rem;
+    border-bottom: none;
+  }
+}
+

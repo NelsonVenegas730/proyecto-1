@@ -1,0 +1,168 @@
+.user-management {
+    padding: 2rem;
+}
+
+.user-management h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.user-grid {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr 1fr 80px;
+    gap: 1rem;
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 12px;
+    color: #000;
+}
+
+.grid-header {
+    font-weight: bold;
+    background-color: var(--color-primary);
+    padding: 2rem 0.2rem 2rem 0.2rem;
+    border-radius: 6px;
+    text-align: center;
+    color: white;
+}
+
+.grid-cell {
+    background-color: #fff;
+    color: black;
+    padding: 0.75rem;
+    border-radius: 6px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.grid-cell i{
+    background-color: var(--color-primary);
+}
+
+.avatar-cell {
+    justify-content: center;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: #fff;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+}
+
+.action-cell {
+  position: relative;
+  background-color: var(--color-primary);
+  border-radius: 6px;
+  padding: 0.75rem;
+}
+
+.ellipsis-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  user-select: none;
+  padding: 0;
+  line-height: 1;
+  color: white;
+}
+
+.action-popup {
+    display: none;
+    position: absolute;
+    top: 28px;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 10;
+    width: 140px;
+}
+
+.action-popup button {
+    width: 100%;
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    color: #e63946;
+    font-weight: 600;
+}
+
+.action-popup button:hover {
+    background-color: #fddede;
+}
+
+
+.estado {
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.estado-en-proceso {
+    color: #f4a100;
+}
+
+.estado-aprobado {
+    color: #22a900;
+}
+
+@media (max-width: 800px) {
+  .user-grid {
+    display: block;
+    padding: 0;
+  }
+
+  .grid-header {
+    display: none;
+  }
+
+  .grid-cell {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-radius: 0;
+    border-bottom: 1px solid #ddd;
+    box-shadow: none;
+    text-align: left;
+  }
+
+  .grid-cell::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: var(--color-primary);
+    flex-basis: 40%;
+    text-align: left;
+  }
+
+  /* Para que la celda de acciones tenga fondo color primario y texto blanco */
+  .action-cell {
+    background-color: var(--color-primary);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+  }
+  
+  .action-cell .ellipsis-btn {
+    color: white;
+  }
+
+  /* Separar filas */
+  .grid-cell:nth-child(5n) {
+    margin-bottom: 1.5rem;
+    border-bottom: none;
+  }
+}
