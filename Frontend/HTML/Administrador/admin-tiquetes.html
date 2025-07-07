@@ -3,21 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <title>Administrar Tickets</title>
-    <link rel="stylesheet" href="../../css/Paginas/admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../../CSS/styles.css">
+    <link rel="stylesheet" href="../../CSS/Paginas/admin-tiquetes.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/header.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/sidebar.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/ticket.css">
 </head>
 <body>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div>
+                <div class="logo-content-container">
+                    <div class="logo-container">
+                        <img class="logo" src="../../../Public/Images/logo-desamparados.png" alt="Logo cantón desamparados PNG">
+                        <div class="title-container">
+                            <h2>Núcleo Desamparados</h2>
+                            <p>Conectando a la comunidad</p>
+                        </div>
+                    </div>
+                    <button type="button" class="sidebar-toggle-close">
+                        <i class="bx bx-x-circle"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="auth-container">
+                <div class="user-profile">
+                    <p class="user-avatar" id="avatar">JD</p>
+                    <p class="username" id="username">John Donovan</p>
+                </div>
+                <div class="auth-buttons">
+                    <button class="auth-btn" type="button">Iniciar sesión</button>
+                    <button class="auth-btn" type="button">Registrarse</button>
+                </div>
+            </div>
+        </div>
+        <ul class="sidebar-links-container" id="sidebar-links-admin">
+            <li class="sidebar-link">
+                <a href="../../HTML/Administrador/panel-administrador.html">
+                    <i class="bx bxs-dashboard"></i>
+                    <span>Panel de Administrador</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../Formularios/form-anuncio-evento-noticia.html">
+                    <i class="bx bxs-news"></i>
+                    <span>Nueva noticia o anuncio</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Administrador/admin-usuarios.html">
+                    <i class="bx bxs-user"></i>
+                    <span>Usuarios</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Administrador/admin-tiquetes.html">
+                    <i class="bx bx-message-check"></i>
+                    <span>Tiquetes</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Administrador/admin-datos-sitio.html">
+                    <i class="bx bx-cog"></i>
+                    <span>Actualizar datos del sitio</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
     <header>
-        <h1>Tickets de Soporte</h1>
-        <nav>
-            <a href="panel-administrador.html">Inicio</a>
-            <a href="admin tikets.html">Tickets</a>
-        </nav>
+        <div class="header-content">
+            <button type="button" class="sidebar-toggle-open">
+                <i class="bx bx-menu"></i>
+            </button>
+            <h1>Gestión de tickets</h1>
+        </div>
+        <hr>
     </header>
     <main>
-        <section>
-            <h2>Listado de Tickets</h2>
-            <p>Revisa, responde o cierra los tickets enviados por usuarios.</p>
-        </section>
+        <div class="tickets-admin-container">
+            <div class="ticket-card" data-id="1">
+                <div class="ticket-header">
+                    <h3>Error en login</h3>
+                    <button class="ellipsis-btn"><i class='bx bx-dots-vertical-rounded'></i></button>
+                    <div class="status-popup">
+                        <button class="abierto" data-status="abierto">🟢 Marcar como Abierto</button>
+                        <button class="en-proceso" data-status="en-proceso">🟡 Marcar como En proceso</button>
+                        <button class="cerrado" data-status="cerrado">🔴 Marcar como Cerrado</button>
+                    </div>
+                </div>
+                <p class="ticket-description">El usuario reporta que no puede iniciar sesión, se queda cargando.</p>
+                <div class="ticket-meta">
+                    <span class="ticket-fecha">Fecha: 7 julio 2025</span>
+                    <span class="status-badge abierto">Abierto</span>
+                </div>
+                <div class="ticket-actions">
+                    <div class="ticket-chat">
+                        <div class="message user">
+                            <span class="message-sender">👤 Ciudadano</span>
+                            <p class="message-text">Hola, intenté enviar una queja y el formulario se quedó en blanco.</p>
+                            <span class="message-time">6 julio, 10:12 am</span>
+                        </div>
+                        <div class="message admin">
+                            <span class="message-sender">🛠️ Admin</span>
+                            <p class="message-text">Gracias por el aviso. ¿Podrías decirnos qué navegador estás usando?</p>
+                            <span class="message-time">6 julio, 10:30 am</span>
+                        </div>
+                        <div class="message user">
+                            <span class="message-sender">👤 Ciudadano</span>
+                            <p class="message-text">Uso Chrome en mi teléfono.</p>
+                            <span class="message-time">6 julio, 10:35 am</span>
+                        </div>
+                    </div>
+                    <button class="reply-toggle-btn">
+                        ✉️ Redactar respuesta
+                    </button>
+                    <div class="reply-box" style="display: none;">
+                        <textarea class="reply-textarea" placeholder="Escribe tu respuesta al ciudadano..."></textarea>
+                        <div class="reply-buttons">
+                            <button class="cancel-reply-btn">Cancelar</button>
+                            <button class="send-reply-btn">Enviar respuesta</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket-card" data-id="2">
+                <div class="ticket-header">
+                    <h3>Formulario no carga</h3>
+                    <button class="ellipsis-btn"><i class='bx bx-dots-vertical-rounded'></i></button>
+                    <div class="status-popup">
+                        <button class="abierto" data-status="abierto">🟢 Marcar como Abierto</button>
+                        <button class="en-proceso" data-status="en-proceso">🟡 Marcar como En proceso</button>
+                        <button class="cerrado" data-status="cerrado">🔴 Marcar como Cerrado</button>
+                    </div>
+                </div>
+                <p class="ticket-description">El formulario de quejas se queda en blanco al hacer click en "Enviar".</p>
+                <div class="ticket-meta">
+                    <span class="ticket-fecha">Fecha: 6 julio 2025</span>
+                    <span class="status-badge en-proceso">En proceso</span>
+                </div>
+
+                <div class="ticket-actions">
+                    <div class="ticket-chat">
+                        <div class="message user">
+                            <span class="message-sender">👤 Ciudadano</span>
+                            <p class="message-text">Hola, intenté enviar una queja y el formulario se quedó en blanco.</p>
+                            <span class="message-time">6 julio, 10:12 am</span>
+                        </div>
+                        <div class="message admin">
+                            <span class="message-sender">🛠️ Admin</span>
+                            <p class="message-text">Gracias por el aviso. ¿Podrías decirnos qué navegador estás usando?</p>
+                            <span class="message-time">6 julio, 10:30 am</span>
+                        </div>
+                        <div class="message user">
+                            <span class="message-sender">👤 Ciudadano</span>
+                            <p class="message-text">Uso Chrome en mi teléfono.</p>
+                            <span class="message-time">6 julio, 10:35 am</span>
+                        </div>
+                    </div>
+
+                    <button class="reply-toggle-btn">
+                        ✉️ Redactar respuesta
+                    </button>
+                    <div class="reply-box" style="display: none;">
+                        <textarea class="reply-textarea" placeholder="Escribe tu respuesta al ciudadano..."></textarea>
+                        <div class="reply-buttons">
+                            <button class="cancel-reply-btn">Cancelar</button>
+                            <button class="send-reply-btn">Enviar respuesta</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket-card" data-id="2">
+                <div class="ticket-header">
+                    <h3>Formulario no carga</h3>
+                    <button class="ellipsis-btn"><i class='bx bx-dots-vertical-rounded'></i></button>
+                    <div class="status-popup">
+                        <button class="abierto" data-status="abierto">🟢 Marcar como Abierto</button>
+                        <button class="en-proceso" data-status="en-proceso">🟡 Marcar como En proceso</button>
+                        <button class="cerrado" data-status="cerrado">🔴 Marcar como Cerrado</button>
+                    </div>
+                </div>
+                <p class="ticket-description">El formulario de quejas se queda en blanco al hacer click en "Enviar".</p>
+                <div class="ticket-meta">
+                    <span class="ticket-fecha">Fecha: 6 julio 2025</span>
+                    <span class="status-badge cerrado">Cerrado</span>
+                </div>
+
+                <div class="ticket-actions">
+                    <div class="ticket-chat">
+                        <div class="message user">
+                            <span class="message-sender">👤 Ciudadano</span>
+                            <p class="message-text">Hola, intenté enviar una queja y el formulario se quedó en blanco.</p>
+                            <span class="message-time">6 julio, 10:12 am</span>
+                        </div>
+                        <div class="message admin">
+                            <span class="message-sender">🛠️ Admin</span>
+                            <p class="message-text">Gracias por el aviso. ¿Podrías decirnos qué navegador estás usando?</p>
+                            <span class="message-time">6 julio, 10:30 am</span>
+                        </div>
+                        <div class="message user">
+                            <span class="message-sender">👤 Ciudadano</span>
+                            <p class="message-text">Uso Chrome en mi teléfono.</p>
+                            <span class="message-time">6 julio, 10:35 am</span>
+                        </div>
+                    </div>
+
+                    <button class="reply-toggle-btn">
+                        ✉️ Redactar respuesta
+                    </button>
+                    <div class="reply-box" style="display: none;">
+                        <textarea class="reply-textarea" placeholder="Escribe tu respuesta al ciudadano..."></textarea>
+                        <div class="reply-buttons">
+                            <button class="cancel-reply-btn">Cancelar</button>
+                            <button class="send-reply-btn">Enviar respuesta</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
+    <script src="../../JS/tiquetePopUpStateToggle.js"></script>
 </body>
 </html>

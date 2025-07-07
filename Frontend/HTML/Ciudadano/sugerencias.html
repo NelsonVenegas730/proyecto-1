@@ -105,7 +105,7 @@
         </div>
 
         <div class="tickets-container card">
-            <div class="ticket-element">
+            <div class="ticket-element card">
                 <div class="ticket-info">
                     <span class="badge abierto">Abierto</span>
                     <h3>Problema con acceso a plataforma</h3>
@@ -115,32 +115,98 @@
                     <div class="avatar">LG</div>
                     <span>Reportado por: Luis Gómez</span>
                     </div>
+
+                    <!-- Aquí empieza el espacio mock de mensajes -->
+                    <div class="message-thread">
+                    <div class="message user-message">
+                        <div class="message-content">No puedo acceder desde ayer, ¿alguna novedad?</div>
+                        <span class="message-meta">Luis Gómez - 6 jul 2025, 21:00</span>
+                    </div>
+                    <div class="message admin-message">
+                        <div class="message-content">Estamos revisando el problema, te avisaremos pronto.</div>
+                        <span class="message-meta">Admin - 7 jul 2025, 08:30</span>
+                    </div>
+                    </div>
+
+                    <button type="button" class="btn-reply-toggle">Responder</button>
+
+                    <form class="reply-form" style="display:none;">
+                        <textarea placeholder="Escribe tu mensaje aquí..." rows="3" required></textarea>
+                        <div class="reply-buttons">
+                            <button type="button" class="btn-cancel">Cancelar</button>
+                            <button type="submit" class="btn-send">Enviar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
             <div class="ticket-element card">
                 <div class="ticket-info">
-                    <span class="badge en-proceso">En proceso</span>
-                    <h3>Error al enviar formulario de sugerencias</h3>
-                    <p>El formulario de quejas no funciona, muestra un mensaje de error al presionar enviar.</p>
-                    <span class="fecha">Fecha de creación: 5 de julio de 2025</span>
+                    <span class="badge en-proceso">En Proceso</span>
+                    <h3>Problema con acceso a plataforma</h3>
+                    <p>No puedo acceder a mi cuenta desde ayer por la noche. La página muestra un error 403.</p>
+                    <span class="fecha">Fecha de creación: 6 de julio de 2025</span>
                     <div class="autor">
-                    <div class="avatar">MP</div>
-                    <span>Reportado por: María Pérez</span>
+                    <div class="avatar">LG</div>
+                    <span>Reportado por: Luis Gómez</span>
                     </div>
+
+                    <!-- Aquí empieza el espacio mock de mensajes -->
+                    <div class="message-thread">
+                    <div class="message user-message">
+                        <div class="message-content">No puedo acceder desde ayer, ¿alguna novedad?</div>
+                        <span class="message-meta">Luis Gómez - 6 jul 2025, 21:00</span>
+                    </div>
+                    <div class="message admin-message">
+                        <div class="message-content">Estamos revisando el problema, te avisaremos pronto.</div>
+                        <span class="message-meta">Admin - 7 jul 2025, 08:30</span>
+                    </div>
+                    </div>
+
+                    <button type="button" class="btn-reply-toggle">Responder</button>
+
+                    <form class="reply-form" style="display:none;">
+                        <textarea placeholder="Escribe tu mensaje aquí..." rows="3" required></textarea>
+                        <div class="reply-buttons">
+                            <button type="button" class="btn-cancel">Cancelar</button>
+                            <button type="submit" class="btn-send">Enviar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
             <div class="ticket-element card">
                 <div class="ticket-info">
                     <span class="badge cerrado">Cerrado</span>
-                    <h3>Solicitud de actualización de perfil</h3>
-                    <p>Solicité un cambio de nombre y ya fue aplicado. Todo perfecto, gracias.</p>
-                    <span class="fecha">Fecha de creación: 3 de julio de 2025</span>
+                    <h3>Problema con acceso a plataforma</h3>
+                    <p>No puedo acceder a mi cuenta desde ayer por la noche. La página muestra un error 403.</p>
+                    <span class="fecha">Fecha de creación: 6 de julio de 2025</span>
                     <div class="autor">
-                    <div class="avatar">AC</div>
-                    <span>Reportado por: Andrés Chavarría</span>
+                    <div class="avatar">LG</div>
+                    <span>Reportado por: Luis Gómez</span>
                     </div>
+
+                    <!-- Aquí empieza el espacio mock de mensajes -->
+                    <div class="message-thread">
+                    <div class="message user-message">
+                        <div class="message-content">No puedo acceder desde ayer, ¿alguna novedad?</div>
+                            <span class="message-meta">Luis Gómez - 6 jul 2025, 21:00</span>
+                        </div>
+                    <div class="message admin-message">
+                        <div class="message-content">Estamos revisando el problema, te avisaremos pronto.</div>
+                            <span class="message-meta">Admin - 7 jul 2025, 08:30</span>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn-reply-toggle">Responder</button>
+
+                    <form class="reply-form" style="display:none;">
+                        <textarea placeholder="Escribe tu mensaje aquí..." rows="3" required></textarea>
+                        <div class="reply-buttons">
+                            <button type="button" class="btn-cancel">Cancelar</button>
+                            <button type="submit" class="btn-send">Enviar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -163,5 +229,6 @@
     </footer>
     <script src="../JS/sidebarToggleMobile.js" defer></script>
     <script src="../../JS/filterContent.js"></script>
+    <script src="../../JS/responderTiqueteCiudadano.js"></script>
 </body>
 </html>

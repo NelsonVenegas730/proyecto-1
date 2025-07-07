@@ -104,6 +104,7 @@
   transition: transform 0.2s ease;
   display: flex;
   flex-direction: column;
+  padding: 15px;
 }
 
 .ticket-element:hover {
@@ -111,7 +112,6 @@
 }
 
 .ticket-info {
-  padding: 15px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -194,6 +194,118 @@
   font-size: 0.8rem;
   flex-shrink: 0;
 }
+
+/* MOCK DE MENSAJES DENTRO DE LA TARJETA */
+.message-thread {
+  margin-top: 1rem;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.message {
+  margin-bottom: 0.75rem;
+}
+
+.message-content {
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  max-width: 70%;
+  font-size: 0.9rem;
+  word-wrap: break-word;
+}
+
+.user-message .message-content {
+  background-color: #d9edf7;
+  color: #31708f;
+  margin-left: auto;
+  text-align: right;
+}
+
+.admin-message .message-content {
+  background-color: #f5f5f5;
+  color: #555;
+  margin-right: auto;
+  text-align: left;
+}
+
+.message-meta {
+  font-size: 0.75rem;
+  color: #777;
+  margin-top: 0.15rem;
+  display: block;
+}
+
+/* FORMULARIO DE RESPUESTA */
+.reply-form {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.reply-form textarea {
+  resize: vertical;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+  font-size: 1rem;
+  color: black;
+  background: white;
+}
+
+.reply-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.btn-cancel,
+.btn-send {
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-cancel {
+  background-color: #ddd;
+  color: #333;
+}
+
+.btn-cancel:hover {
+  background-color: #ccc;
+}
+
+.btn-send {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-send:hover {
+  background-color: #005dc1;
+}
+
+.btn-reply-toggle {
+  margin-top: 10px;
+  padding: 6px 12px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-reply-toggle:hover {
+  background-color: #005dc1;
+}
+
 
 /* RESPONSIVE */
 @media (max-width: 600px) {
