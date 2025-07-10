@@ -25,6 +25,7 @@ textarea {
   margin-top: 5px;
   margin-bottom: 5px;
   box-sizing: border-box;
+  resize: vertical;
 }
 
 form label {
