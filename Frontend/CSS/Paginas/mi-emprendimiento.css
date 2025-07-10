@@ -26,7 +26,7 @@
 }
 
 .emprendimiento-image-container {
-    width: 100%;
+    width: 60%;
     height: 500px;
 }
 
@@ -47,7 +47,11 @@
     gap: 10px;
     border: 2px solid var(--color-primary);
     border-radius: 20px;
-    width: max-content;
+    width: 100%;
+    max-width: 500px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
 }
 
 .emprendimiento-details {
@@ -71,7 +75,6 @@
     margin-top: 20px;
 }
 
-.edit-cancel-btn,
 .edit-emprendimiento-btn {
   display: inline-flex;
   align-items: center;
@@ -87,13 +90,34 @@
   white-space: nowrap;
 }
 
+.edit-cancel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: rgb(226, 226, 226);
+  border-radius: 5px;
+  border: var(--color-primary) 2px solid;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 20px;
+  white-space: nowrap;
+}
+
+
+.edit-cancel-btn p {
+    color: var(--color-primary);
+}
+
 .edit-cancel-btn p,
 .edit-emprendimiento-btn p {
   margin: 0;
 }
 
+.edit-cancel-btn:hover {
+    background-color: rgb(255, 255, 255);
+}
 
-.edit-cancel-btn:hover,
 .edit-emprendimiento-btn:hover {
     background-color: var(--color-primary-light);
 }
@@ -111,7 +135,7 @@
 
 .edit-form-textarea {
     width: 100%;
-    height: 100px;
+    height: 200px;
     padding: 10px;
     border-radius: 10px;
     border: 2px solid var(--color-primary);
@@ -120,27 +144,70 @@
     resize: none;
 }
 
+.edit-form-textarea::-webkit-scrollbar {
+    display: none;
+}
+
+.edit-form-textarea:focus,
+.edit-form-input:focus {
+    outline: none;
+    border-color: var(--color-primary-light);
+}
+
 .error-message {
     color: red;
     font-size: 0.9rem;
 }
 
+.edit-img-btn {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.edit-img-btn:hover {
+  background-color: var(--color-primary-light);
+}
+
+.edit-img-input {
+  display: none;
+}
+
 .active {
-    display: block;
+    display: block !important;
 }
 
 .inactive {
-    display: none;
+    display: none !important;
 }
 
 @media (max-width: 1500px) {
+    .emprendimiento-info {
+        width: 100%;
+    }
     .emprendimiento-content {
         flex-direction: column;
+        width: 100%;
+    }
+    .emprendimiento-image-container {
+        width: 100%;
+        height: 500px;
     }
 }
 
 @media (max-width: 800px) {
     .emprendimiento-details {
         flex-direction: column;
+        width: 100%;
     }
 }

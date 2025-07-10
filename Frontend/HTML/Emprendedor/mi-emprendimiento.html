@@ -78,7 +78,6 @@
                             <p class="edit-btn-text">Editar emprendimiento</p>
                         </button>
                         <button class="edit-cancel-btn inactive" id="cancel-edition" type="button">
-                            <i class="bx bxs-x-square"></i>
                             <p class="edit-btn-text">Cancelar cambios</p>
                         </button>
                     </div>
@@ -115,9 +114,15 @@
                 </div>
             </div>
             <div class="emprendimiento-image-container">
+                <button class="edit-img-btn inactive" id="edit-img-trigger" type="button">
+                    <i class="bx bxs-image"></i>
+                    Cambiar imagen
+                </button>
+                <input type="file" id="edit-img-input" accept="image/*" class="edit-img-input inactive">
                 <img 
                     src="https://www.karati.com/cdn/shop/articles/shutterstock_339969596-scaled.jpg?v=1740228325&width=2048" 
                     alt="nombre del emprendimiento"
+                    id="emprendimiento-img"
                 />
             </div>
         </div>

@@ -1,10 +1,15 @@
 const editBtn = document.getElementById("toggle-edition-btn");
 const cancelBtn = document.getElementById("cancel-edition");
+const editImgBtn = document.getElementById("edit-img-trigger");
+const imgInput = document.getElementById("edit-img-input");
+const imgElement = document.getElementById("emprendimiento-img");
 
 const emprendimientoName = document.getElementById("emprendimiento-name");
 const emprendimientoNameInput = document.getElementById("emprendimiento-name-input");
+
 const descripcionParrafo = document.querySelector(".emprendimiento-descripcion .emprendimiento-text");
 const descripcionTextarea = document.getElementById("emprendimiento-descripcion-textarea");
+
 const direccionParrafo = document.querySelector(".emprendimiento-direccion .emprendimiento-text");
 const direccionTextarea = document.getElementById("emprendimiento-direccion-textarea");
 
@@ -19,12 +24,18 @@ const inputs = [
 ];
 
 let isEditing = false;
+let originalImgSrc = imgElement.src;
 
 const toggleVisibility = (elements, show) => {
   elements.forEach(el => {
     el.classList.toggle("active", show);
     el.classList.toggle("inactive", !show);
   });
+};
+
+const showEditImgControls = (show) => {
+  editImgBtn.classList.toggle("inactive", !show);
+  imgInput.classList.toggle("inactive", !show);
 };
 
 const setEditValues = () => {
@@ -39,33 +50,34 @@ const updateTextContent = () => {
   direccionParrafo.innerText = direccionTextarea.value.trim();
 };
 
-
 const validateField = (input, error) => {
-  if (!input.value.trim()) {
-    error.classList.remove("inactive");
-    error.classList.add("active");
-    return false;
-  } else {
-    error.classList.remove("active");
-    error.classList.add("inactive");
-    return true;
-  }
+  const isValid = input.value.trim() !== "";
+  error.classList.toggle("active", !isValid);
+  error.classList.toggle("inactive", isValid);
+  return isValid;
+};
+
+const validateFields = () => {
+  return inputs.every(({ input, error }) => validateField(input, error));
+};
+
+const restoreOriginalImage = () => {
+  imgElement.src = originalImgSrc;
 };
 
 const toggleEdition = () => {
   if (isEditing) {
     if (!validateFields()) return;
-
     updateTextContent();
     editBtn.innerHTML = `<i class="bx bxs-edit"></i><p class="edit-btn-text">Editar emprendimiento</p>`;
     cancelBtn.classList.remove("active");
     cancelBtn.classList.add("inactive");
   } else {
     setEditValues();
+    originalImgSrc = imgElement.src;
     editBtn.innerHTML = `<i class="bx bxs-save"></i><p class="edit-btn-text">Guardar cambios</p>`;
     cancelBtn.classList.remove("inactive");
     cancelBtn.classList.add("active");
-
     errorMessages.forEach(e => {
       e.classList.remove("active");
       e.classList.add("inactive");
@@ -75,16 +87,18 @@ const toggleEdition = () => {
   isEditing = !isEditing;
   toggleVisibility(infoElements, !isEditing);
   toggleVisibility(formContainers, isEditing);
+  showEditImgControls(isEditing);
 };
 
 const cancelEdition = () => {
   isEditing = false;
+  restoreOriginalImage();
   editBtn.innerHTML = `<i class="bx bxs-edit"></i><p class="edit-btn-text">Editar emprendimiento</p>`;
   cancelBtn.classList.remove("active");
   cancelBtn.classList.add("inactive");
   toggleVisibility(infoElements, true);
   toggleVisibility(formContainers, false);
-
+  showEditImgControls(false);
   errorMessages.forEach(e => {
     e.classList.remove("active");
     e.classList.add("inactive");
@@ -93,11 +107,20 @@ const cancelEdition = () => {
 
 editBtn.addEventListener("click", toggleEdition);
 cancelBtn.addEventListener("click", cancelEdition);
+
 inputs.forEach(({ input, error }) => {
   input.addEventListener("keyup", () => validateField(input, error));
   input.addEventListener("blur", () => validateField(input, error));
 });
 
-const validateFields = () => {
-  return inputs.every(({ input, error }) => validateField(input, error));
-};
+editImgBtn.addEventListener("click", () => imgInput.click());
+
+imgInput.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    imgElement.src = reader.result;
+  };
+  reader.readAsDataURL(file);
+});
