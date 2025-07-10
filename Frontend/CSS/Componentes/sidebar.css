@@ -10,6 +10,19 @@
   transition: width 0.3s ease, padding 0.3s ease;
   overflow-x: hidden;
   z-index: 999;
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE 10+ */
+}
+
+.sidebar ul {
+  overflow-y: auto;
+  max-height: 100%; /* o el alto que necesites */
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE/Edge */
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;              /* Chrome, Safari, and Opera */
 }
 
 .sidebar-toggle-close {
@@ -230,5 +243,12 @@
 
   .sidebar-toggle-close {
     display: block
+  }
+
+  .sidebar {
+    overflow-y: auto;
+    max-height: 100vh; /* o lo que necesités */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 }
