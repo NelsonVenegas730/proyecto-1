@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../../CSS/styles.css">
+    <link rel="stylesheet" href="../../CSS/Paginas/perfil.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/sidebar.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/header.css">
+    <link rel="stylesheet" href="../../CSS/Componentes/footer.css">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div>
+                <div class="logo-content-container">
+                    <div class="logo-container">
+                        <img class="logo" src="../../../Public/Images/logo-desamparados.png" alt="Logo cantón desamparados PNG">
+                        <div class="title-container">
+                            <h2>Núcleo Desamparados</h2>
+                            <p>Conectando a la comunidad</p>
+                        </div>
+                    </div>
+                    <button type="button" class="sidebar-toggle-close">
+                        <i class="bx bx-x-circle"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="auth-container">
+                <div class="user-profile">
+                    <a href="../../HTML/Autenticacion/perfil.html" class="user-avatar" id="avatar">JF</a>
+                    <div class="user-info">
+                        <p class="username" id="username" data-fullname="John_F_25022">John_F_25022</p>
+                        <p class="rol">Ciudadano</p>
+                    </div>
+                </div>
+                <div class="auth-buttons">
+                    <button class="auth-btn" type="button">Iniciar sesión</button>
+                    <button class="auth-btn" type="button">Registrarse</button>
+                </div>
+            </div>
+        </div>
+        <ul class="sidebar-links-container">
+            <li class="sidebar-link">
+                <a href="../../HTML/index.html">
+                    <i class="bx bxs-home"></i>
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Ciudadano/noticias-anuncios-eventos.html">
+                    <i class="bx bxs-news"></i>
+                    <span>Noticias</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Ciudadano/emprendimientos.html">
+                    <i class="bx bxs-store"></i>
+                    <span>Emprendimientos</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Ciudadano/sugerencias.html">
+                    <i class="bx bxs-megaphone"></i>
+                    <span>Quejas y sugerencias</span>
+                </a>
+            </li>
+            <li class="sidebar-link">
+                <a href="../../HTML/Ciudadano/horario-buses.html">
+                    <i class="bx bxs-bus"></i>
+                    <span>Horario de Buses</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <header>
+        <div class="header-content">
+            <button type="button" class="sidebar-toggle-open">
+                <i class="bx bx-menu"></i>
+            </button>
+            <h1>Perfil</h1>
+        </div>
+        <hr>
+    </header>
+    <main>
+        <div class="profile-wrapper">
+            <section class="indication-form">
+                <p>Aquí puedes editar la información acerca de tu perfil</p>
+            </section>
+
+            <form id="formulario-perfil" enctype="multipart/form-data">
+                <div class="field-container profile-image-container">
+                    <label for="imagen" class="profile-image-label">Imagen de perfil</label>
+
+                    <div class="user-avatar-preview" id="avatar-preview-form">
+                        <span class="initials">JF</span>
+                        <img id="preview-img" src="" alt="Preview" />
+                    </div>
+
+                    <input type="file" id="imagen" accept="image/*" />
+                </div>
+
+                <div class="field-container">
+                    <label for="usuario">Nombre de usuario</label>
+                    <input type="text" id="usuario" placeholder="Nombre de usuario" maxlength="50" />
+                    <small class="input-requirements" id="usuario-requisitos">Solo letras, números, guiones y guiones bajos (3-20 caracteres).</small>
+                </div>
+
+                <button type="button" id="btn-editar-cuenta">Editar información sensible de la cuenta</button>
+
+                <div class="account-info-fields disabled" id="account-info">
+                
+                    <div class="field-container">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" placeholder="Tu nombre" maxlength="100" />
+                        <small class="input-requirements" id="nombre-requisitos">Solo letras y espacios, sin números ni símbolos.</small>
+                    </div>
+
+                    <div class="field-container">
+                        <label for="apellidos">Apellidos</label>
+                        <input type="text" id="apellidos" placeholder="Tus apellidos" maxlength="100" />
+                        <small class="input-requirements" id="apellidos-requisitos">Solo letras y espacios, sin números ni símbolos.</small>
+                    </div>
+
+                    <div class="field-container">
+                        <label for="correo">Correo electrónico</label>
+                        <input type="email" id="correo" placeholder="ejemplo@correo.com" disabled />
+                        <small class="input-requirements" id="correo-requisitos">Debe tener formato válido (ej. nombre@dominio.com).</small>
+                    </div>
+
+                    <div class="field-container">
+                        <label for="password">Nueva contraseña</label>
+                        <input type="password" id="password" placeholder="Contraseña nueva" minlength="8" disabled />
+                        <small class="input-requirements" id="password-requisitos">Debe tener minúsculas, mayúsculas y números (12+ caracteres).</small>
+                    </div>
+
+                    <div class="field-container">
+                        <label for="confirm-password">Confirmar contraseña</label>
+                        <input type="password" id="confirm-password" placeholder="Repite la contraseña" minlength="8" disabled />
+                        <small class="input-requirements" id="confirm-password-requisitos">Las contraseñas deben coincidir.</small>
+                    </div>
+                </div>
+
+                <button type="submit">Guardar cambios</button>
+                <button type="button" id="cancel-changes">Cancelar cambios</button>
+            </form>
+        </div>
+    </main>
+    <div id="mensaje-exito" class="mensaje-exito oculto">¡Información enviada con éxito!</div>
+    <footer>
+        <div class="footer-logo-cta">
+            <div class="logo-container">
+                <img class="logo" src="../../../Public/Images/logo-desamparados.png" alt="Logo cantón desamparados PNG">
+                <div class="title-container">
+                    <h2>Núcleo Desamparados</h2>
+                    <p>Conectando a la comunidad</p>
+                </div>
+            </div>
+            <a href="../../HTML/Formularios/form-tiquete.html" class="cta-button">
+                <i class="bx bxs-message"></i>
+                Tienes alguna queja o sugerencia, comunícala aquí.
+            </a>
+        </div>
+        <p class="copyright">&copy 2025 SyntaxIA</p>
+    </footer>
+    <script src="../../JS/sidebarToggleMobile.js" defer></script>
+    <script src="../../JS/previewSelectedImage.js"></script>
+    <script src="../../JS/validateProfile.js"></script>
+</body>
+</html>

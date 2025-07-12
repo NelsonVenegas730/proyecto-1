@@ -224,6 +224,7 @@ hr {
   display: block;
   color: rgb(0, 171, 0);
 }
+
 .mensaje-exito {
   position: fixed;
   top: 20px;
