@@ -93,30 +93,45 @@ app.get('/auth/registrarse', (req, res) => {
 
 // Ciudadano
 app.get('/emprendimiento-slug', (req, res) => {
-    res.render('ciudadano/emprendimiento-slug');
+    res.render('ciudadano/emprendimiento-slug', {
+        title: 'Detalles del Emprendimiento',
+        style: '<link rel="stylesheet" href="/css/page-styles/emprendimiento.css">'
+    });
 });
 
 app.get('/emprendimientos', (req, res) => {
-    res.render('ciudadano/emprendimientos');
+    res.render('ciudadano/emprendimientos', {
+        title: 'Emprendimientos',
+        style: '<link rel="stylesheet" href="/css/page-styles/emprendimientos.css">'
+    });
 });
 
 app.get('/horario-buses', (req, res) => {
-    res.render('ciudadano/horario-buses');
+    res.render('ciudadano/horario-buses', {
+        title: 'Horarios de Buses',
+        style: '<link rel="stylesheet" href="/css/page-styles/horario-buses.css">'
+    });
 });
 
 app.get('/noticias-anuncios-eventos', (req, res) => {
-    res.render('ciudadano/noticias-anuncios-eventos');
+    res.render('ciudadano/noticias-anuncios-eventos', {
+        title: 'Noticias, Anuncios y Eventos',
+        style: '<link rel="stylesheet" href="/css/page-styles/noticias-anuncios-eventos.css">'
+    });
 });
 
 app.get('/sugerencias', (req, res) => {
-    res.render('ciudadano/sugerencias');
+    res.render('ciudadano/sugerencias', {
+        title: 'Quejas y Sugerencias',
+        style: '<link rel="stylesheet" href="/css/page-styles/sugerencias.css">'
+    });
 });
 
 // Emprendedor
 app.get('/emprendedor/mi-emprendimiento', (req, res) => {
     res.render('emprendedor/mi-emprendimiento', {
         title: 'Mi Emprendimiento',
-        style: '<link rel="stylesheet" href="/css/page-styles/mi-emprendimiento.css">'
+        style: '<link rel="stylesheet" href="/css/page-styles/emprendimiento.css">'
     });
 });
 
