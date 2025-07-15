@@ -1,0 +1,39 @@
+<body>
+    <main>
+        <section class="indication">
+            <p>Aquí puedes crear un nuevo tiquete para reportar una incidencia o solicitud.</p>
+        </section>
+        <form id="formulario-tiquete" enctype="multipart/form-data">
+            <div class="field-container">
+                <label for="asunto">Asunto</label>
+                <input type="text" id="asunto" placeholder="Escribe el asunto del tiquete" required maxlength="100" />
+                <small class="input-requirements" id="asunto-requisitos">Máximo 100 caracteres. Solo texto y números.</small>
+            </div>
+
+            <div class="field-container">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" placeholder="Describe el problema o solicitud" rows="5" required></textarea>
+                <small class="input-requirements" id="descripcion-requisitos">Debe tener al menos 20 caracteres.</small>
+            </div>
+
+            <div class="field-container">
+                <label for="fecha">Fecha</label>
+                <input type="date" id="fecha" required />
+            </div>
+
+            <div class="field-container">
+                <label for="urgencia">Urgencia</label>
+                <select id="urgencia" required>
+                    <option value="" disabled selected>Selecciona la urgencia</option>
+                    <option value="baja">Baja</option>
+                    <option value="media">Media</option>
+                    <option value="alta">Alta</option>
+                </select>
+                <small class="input-requirements" id="urgencia-requisitos">Selecciona el nivel de urgencia.</small>
+            </div>
+
+            <button type="submit">Enviar tiquete</button>
+        </form>
+    </main>
+</body>
+</html>

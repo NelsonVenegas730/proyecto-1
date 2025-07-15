@@ -1,0 +1,50 @@
+<body>
+    <main>
+        <section class="indication">
+            <p>Aquí puedes crear un nuevo anuncio, evento o noticia.</p>
+        </section>
+        <form id="formulario-anuncio" enctype="multipart/form-data">
+            <div class="field-container">
+                <label for="tipo">Tipo de publicación</label>
+                <select id="tipo" required>
+                <option class="option-default" value="" disabled selected>Selecciona una opción</option>
+                <option value="anuncio">📢 Anuncio</option>
+                <option value="evento">📅 Evento</option>
+                <option value="noticia">📰 Noticia</option>
+                </select>
+                <small class="input-requirements" id="tipo-requisitos">Debes seleccionar un tipo.</small>
+            </div>
+
+            <div class="field-container">
+                <label for="titulo">Título</label>
+                <input type="text" id="titulo" placeholder="Escribe el título del anuncio" required />
+                <small class="input-requirements" id="titulo-requisitos">Máximo 100 caracteres. Solo texto y números.</small>
+            </div>
+
+            <div class="field-container">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" placeholder="Escribe aquí la descripción del evento o noticia" rows="5" required></textarea>
+                <small class="input-requirements" id="descripcion-requisitos">Debe tener al menos 20 caracteres.</small>
+            </div>
+
+            <div class="field-container">
+                <label for="fecha">Fecha del evento o publicación</label>
+                <input type="date" id="fecha" required />
+            </div>
+
+            <div class="field-container">
+                <label for="imagen">Imagen (opcional)</label>
+                <input type="file" id="imagen" accept="image/*" />
+                <small class="input-requirements" id="imagen-requisitos">Formatos permitidos: JPG, PNG, WEBP.</small>
+                <div class="image-preview-container">
+                    <p class="preview-text">Vista previa de la imagen seleccionada:</p>
+                    <img id="preview-img" src="" alt="Vista previa"/>
+                </div>
+            </div>
+
+            <button type="submit">Publicar</button>
+        </form>
+    </main>
+    <script src="/js/previewSelectedImage.js"></script>
+</body>
+</html>
