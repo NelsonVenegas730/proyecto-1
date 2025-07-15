@@ -98,7 +98,10 @@ app.get('/sugerencias', (req, res) => {
 
 // Emprendedor
 app.get('/emprendedor/mi-emprendimiento', (req, res) => {
-    res.render('emprendedor/mi-emprendimiento');
+    res.render('emprendedor/mi-emprendimiento', {
+        title: 'Mi Emprendimiento',
+        style: '<link rel="stylesheet" href="/css/page-styles/mi-emprendimiento.css">'
+    });
 });
 
 // Formularios
