@@ -1,0 +1,71 @@
+<body>
+    <main>
+        <div class="profile-wrapper">
+            <section class="indication-form">
+                <p>Aquí puedes editar la información acerca de tu perfil</p>
+            </section>
+            <form id="formulario-perfil" enctype="multipart/form-data">
+                <button class="close-session">Cerrar Sesión</button>
+                <div class="field-container profile-image-container">
+                    <label for="imagen" class="profile-image-label">Imagen de perfil</label>
+
+                    <div class="user-avatar-preview" id="avatar-preview-form">
+                        <span class="initials">JF</span>
+                        <img id="preview-img" src="" alt="Preview" />
+                    </div>
+
+                    <input type="file" id="imagen" accept="image/*" />
+                </div>
+
+                <div class="field-container">
+                    <label for="usuario">Nombre de usuario</label>
+                    <input type="text" id="usuario" placeholder="Nombre de usuario" maxlength="50" />
+                    <small class="input-requirements" id="usuario-requisitos">Solo letras, números, guiones y guiones bajos (3-20 caracteres).</small>
+                </div>
+
+                <button type="button" id="btn-editar-cuenta">Editar información sensible de la cuenta</button>
+
+                <div class="account-info-fields disabled" id="account-info">
+                
+                    <div class="field-container">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" placeholder="Tu nombre" maxlength="100" />
+                        <small class="input-requirements" id="nombre-requisitos">Solo letras y espacios, sin números ni símbolos.</small>
+                    </div>
+
+                    <div class="field-container">
+                        <label for="apellidos">Apellidos</label>
+                        <input type="text" id="apellidos" placeholder="Tus apellidos" maxlength="100" />
+                        <small class="input-requirements" id="apellidos-requisitos">Solo letras y espacios, sin números ni símbolos.</small>
+                    </div>
+
+                    <div class="field-container">
+                        <label for="correo">Correo electrónico</label>
+                        <input type="email" id="correo" placeholder="ejemplo@correo.com" disabled />
+                        <small class="input-requirements" id="correo-requisitos">Debe tener formato válido (ej. nombre@dominio.com).</small>
+                    </div>
+
+                    <div class="field-container">
+                        <label for="password">Nueva contraseña</label>
+                        <input type="password" id="password" placeholder="Contraseña nueva" minlength="8" disabled />
+                        <small class="input-requirements" id="password-requisitos">Debe tener minúsculas, mayúsculas y números (12+ caracteres).</small>
+                    </div>
+
+                    <div class="field-container">
+                        <label for="confirm-password">Confirmar contraseña</label>
+                        <input type="password" id="confirm-password" placeholder="Repite la contraseña" minlength="8" disabled />
+                        <small class="input-requirements" id="confirm-password-requisitos">Las contraseñas deben coincidir.</small>
+                    </div>
+                </div>
+
+                <button type="submit">Guardar cambios</button>
+                <button type="button" id="cancel-changes">Cancelar cambios</button>
+            </form>
+        </div>
+    </main>
+    <div id="mensaje-exito" class="mensaje-exito oculto">¡Información enviada con éxito!</div>
+    <div id="mensaje-error" class="mensaje-error oculto">Error, por favor completa todos los campos correctamente.</div>
+    <script src="/js/previewSelectedImage.js"></script>
+    <script src="/js/validateProfile.js"></script>
+</body>
+</html>

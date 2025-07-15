@@ -54,8 +54,11 @@ app.get('/auth/inicio-sesion', (req, res) => {
     })
 })
 
-app.get('/perfil.html', (req, res) => {
-    res.render('Autenticacion/perfil.html');
+app.get('/perfil', (req, res) => {
+    res.render('Autenticacion/perfil', {
+        title: 'Perfil',
+        style: '<link rel="stylesheet" href="/css/page-styles/perfil.css">',
+    });
 });
 
 app.get('/auth/recuperar-password', (req, res) => {
