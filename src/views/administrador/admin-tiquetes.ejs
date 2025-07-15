@@ -1,89 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Administrar Tiquetes de Soporte</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="../../CSS/styles.css">
-    <link rel="stylesheet" href="../../CSS/Paginas/admin-tiquetes.css">
-    <link rel="stylesheet" href="../../CSS/Componentes/header.css">
-    <link rel="stylesheet" href="../../CSS/Componentes/sidebar.css">
-    <link rel="stylesheet" href="../../CSS/Componentes/ticket.css">
-</head>
 <body>
-    <nav class="sidebar">
-        <div class="sidebar-header">
-            <div>
-                <div class="logo-content-container">
-                    <div class="logo-container">
-                        <img class="logo" src="../../../Public/Images/logo-desamparados.png" alt="Logo cantón desamparados PNG">
-                        <div class="title-container">
-                            <h2>Núcleo Desamparados</h2>
-                            <p>Conectando a la comunidad</p>
-                        </div>
-                    </div>
-                    <button type="button" class="sidebar-toggle-close">
-                        <i class="bx bx-x-circle"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="auth-container">
-                <div class="user-profile">
-                    <a href="../Autenticacion/perfil.html" class="user-avatar" id="avatar">JD</a>
-                    <div class="user-info">
-                        <p class="username" id="username" data-fullname="John_F_25022">John_F_25022</p>
-                        <p class="rol">Ciudadano</p>
-                    </div>
-                </div>
-                <div class="auth-buttons">
-                    <button class="auth-btn" type="button">Iniciar sesión</button>
-                    <button class="auth-btn" type="button">Registrarse</button>
-                </div>
-            </div>
-        </div>
-        <ul class="sidebar-links-container" id="sidebar-links-admin">
-            <li class="sidebar-link">
-                <a href="../../HTML/Administrador/panel-administrador.html">
-                    <i class="bx bxs-dashboard"></i>
-                    <span>Panel de Administrador</span>
-                </a>
-            </li>
-            <li class="sidebar-link">
-                <a href="../Formularios/form-anuncio-evento-noticia.html">
-                    <i class="bx bxs-news"></i>
-                    <span>Nueva noticia o anuncio</span>
-                </a>
-            </li>
-            <li class="sidebar-link">
-                <a href="../../HTML/Administrador/admin-usuarios.html">
-                    <i class="bx bxs-user"></i>
-                    <span>Usuarios</span>
-                </a>
-            </li>
-            <li class="sidebar-link">
-                <a href="../../HTML/Administrador/admin-aprobaciones.html">
-                    <i class="bx bx-check-square"></i>
-                    <span>Aprobación y Moderación</span>
-                </a>
-            </li>
-            <li class="sidebar-link">
-                <a href="../../HTML/Administrador/admin-tiquetes.html">
-                    <i class="bx bx-message-check"></i>
-                    <span>Tiquetes</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <header>
-        <div class="header-content">
-            <button type="button" class="sidebar-toggle-open">
-                <i class="bx bx-menu"></i>
-            </button>
-            <h1>Gestión de tiquetes de soporte</h1>
-        </div>
-        <hr>
-    </header>
     <main>
         <div class="tickets-admin-container">
             <div class="ticket-card" data-id="1">
@@ -230,6 +145,5 @@
         </div>
     </main>
     <script src="../../JS/tiquetePopUpStateToggle.js"></script>
-    <script src="../../JS/sidebarToggleMobile.js"></script>
 </body>
 </html>

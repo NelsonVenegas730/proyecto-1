@@ -23,20 +23,36 @@ app.get('/', (req, res) => {
 })
 
 // Administrador
-app.get('/admin/aprobaciones.html', (req, res) => {
-    res.render('administrador/admin-aprobaciones.html');
+app.get('/admin/aprobaciones', (req, res) => {
+    res.render('administrador/admin-aprobaciones', {
+        title: 'Gestionar Contenido',
+        style: '<link rel="stylesheet" href="/css/page-styles/admin-aprobaciones.css">',
+        layout: 'layouts/layout-admin'
+    })
 });
 
-app.get('/admin/tiquetes.html', (req, res) => {
-    res.render('administrador/admin-tiquetes.html');
+app.get('/admin/tiquetes', (req, res) => {
+    res.render('administrador/admin-tiquetes', {
+        title: 'Gestionar Tiquetes de Soporte',
+        style: '<link rel="stylesheet" href="/css/page-styles/admin-tiquetes.css">',
+        layout: 'layouts/layout-admin'
+    });
 });
 
-app.get('/admin/usuarios.html', (req, res) => {
-    res.render('administrador/admin-usuarios.html');
+app.get('/admin/usuarios', (req, res) => {
+    res.render('administrador/admin-usuarios', {
+        title: 'Gestionar Usuarios',
+        style: '<link rel="stylesheet" href="/css/page-styles/admin-usuarios.css">',
+        layout: 'layouts/layout-admin'
+    });
 });
 
-app.get('/admin/panel-administrador.html', (req, res) => {
-    res.render('administrador/panel-administrador.html');
+app.get('/admin/panel-administrador', (req, res) => {
+    res.render('administrador/panel-administrador', {
+        title: 'Panel de Administrador',
+        style: '<link rel="stylesheet" href="/css/page-styles/admin-panel.css">',
+        layout: 'layouts/layout-admin'
+    });
 });
 
 // Autenticacion
