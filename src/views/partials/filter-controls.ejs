@@ -1,0 +1,36 @@
+<div id="card" class="options-container">
+  <h2>Filtrar tiquetes de soporte</h2>
+  <div class="filter-controls">
+
+    <% if (filterType === 'state') { %>
+      <div class="filter-group">
+          <h4>Filtrar por estado</h4>
+          <label><input type="checkbox" value="abierto" class="filter-checkbox"> Abierto</label>
+          <label><input type="checkbox" value="en-proceso" class="filter-checkbox"> En proceso</label>
+          <label><input type="checkbox" value="cerrado" class="filter-checkbox"> Cerrado</label>
+      </div>
+    <% } else if (filterType === 'type') { %>
+      <div class="filter-group">
+          <h4>Filtrar por tipo</h4>
+          <label><input type="checkbox" value="evento" class="filter-checkbox"> Evento</label>
+          <label><input type="checkbox" value="noticia" class="filter-checkbox"> Noticia</label>
+          <label><input type="checkbox" value="anuncio" class="filter-checkbox"> Anuncio</label>
+      </div>
+    <% } else if (filterType === 'content') { %>
+      <div class="filter-group">
+          <h4>Filtrar por tipo de contenido</h4>
+          <label><input type="checkbox" class="filter-content-type" value="emprendimientos"> Emprendimientos</label>
+          <label><input type="checkbox" class="filter-content-type" value="noticias"> Noticias / Eventos / Anuncios</label>
+      </div>
+    <% } %>
+
+    <% if (filterType != 'content') { %>
+      <div class="filter-group">
+        <h4>Filtrar por fecha</h4>
+        <input type="date" id="filter-date">
+      </div>
+    <% } %>
+
+    <button id="revert-filters">Revertir filtros</button>
+  </div>
+</div>

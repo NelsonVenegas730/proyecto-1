@@ -8,7 +8,7 @@ body {
   gap: 1.5rem;
 }
 
-.ticket-card {
+.ticket-element {
   position: relative;
   background: white;
   color: black;
@@ -41,11 +41,11 @@ body {
   align-items: center;
 }
 
-.ticket-fecha {
+.fecha {
   color: #888;
 }
 
-.status-badge {
+.badge {
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
   font-size: 0.8rem;

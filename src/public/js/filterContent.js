@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
   const checkboxes = document.querySelectorAll('.filter-checkbox');
   const dateInput = document.getElementById('filter-date');
-  const applyButton = document.getElementById('apply-filters');
+  const revertButton = document.getElementById('revert-filters');
 
   const tickets = document.querySelectorAll('.ticket-element');
   const noticias = document.querySelectorAll('.noticia-evento-anuncio-element');
 
   const items = tickets.length > 0 ? tickets : noticias;
 
-  applyButton.addEventListener('click', () => {
+  function aplicarFiltros() {
     const selectedTypes = Array.from(checkboxes)
       .filter(cb => cb.checked)
       .map(cb => cb.value);
@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         item.style.display = 'none';
         return;
       }
+
       const tipo = Array.from(badge.classList).find(c => c !== 'badge');
       const fechaEl = item.querySelector('.fecha');
       const fechaText = fechaEl ? fechaEl.textContent : '';
@@ -31,10 +32,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
       item.style.display = matchesType && matchesDate ? 'block' : 'none';
     });
+  }
+
+  checkboxes.forEach(cb => cb.addEventListener('change', aplicarFiltros));
+  dateInput.addEventListener('change', aplicarFiltros);
+
+  revertButton.addEventListener('click', () => {
+    checkboxes.forEach(cb => (cb.checked = false));
+    dateInput.value = '';
+    aplicarFiltros();
   });
 
+  aplicarFiltros();
+
   function extraerFechaISO(textoFecha) {
-    // Trata de sacar la fecha en formato yyyy-mm-dd de un texto como "Fecha de creación: 6 de julio de 2025"
     const partes = textoFecha.match(/(\d{1,2}) de (\w+) de (\d{4})/i);
     if (!partes) return '';
     const [_, dia, mesStr, year] = partes;

@@ -1,9 +1,10 @@
 <body>
     <main>
+        <%- include('../partials/filter-controls', { filterType: 'content' }) %>
         <section class="aprobaciones-management">
             <h2 class="emprendimientos-heading">Emprendimientos pendientes de aprobación</h2>
             <div class="emprendimientos-pendientes">
-                <a href="../../HTML/Ciudadano/emprendimiento-slug.html" class="emprendimiento-card">
+                <a href="/emprendimiento-slug" class="emprendimiento-card">
                     <img src="https://s1.significados.com/foto/shutterstock-513513718_bg.jpg?class=article" alt="Imagen emprendimiento" />
                     <div class="info">
                         <h4>El Buen Pan</h4>
@@ -15,7 +16,7 @@
                     </div>
                 </a>
 
-                <a href="../../HTML/Ciudadano/emprendimiento-slug.html" class="emprendimiento-card">
+                <a href="/emprendimiento-slug" class="emprendimiento-card">
                     <img src="https://s1.significados.com/foto/shutterstock-513513718_bg.jpg?class=article" alt="Imagen emprendimiento" />
                     <div class="info">
                         <h4>Tienda Verde</h4>
@@ -63,5 +64,6 @@
             </div>
         </section>
     </main>
+    <script src="/js/filterContentAlt.js"></script>
 </body>
 </html>

@@ -1,0 +1,88 @@
+/* BOTÓN DE FILTRO */
+.filter-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: fit-content;
+  padding: 10px;
+  margin: 5px 0;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 2rem;
+  transition: all 0.3s ease;
+}
+
+.filter-button:hover {
+  background-color: var(--color-primary-light);
+}
+
+/* CONTENEDOR DE FILTROS */
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+/* GRUPO DE CONTROLES DE FILTRO */
+.filter-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: flex-end;
+  justify-content: start;
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 160px;
+}
+
+.filter-group h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.filter-group label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #333;
+}
+
+.filter-group input[type="date"] {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 14px;
+  color: black;
+}
+
+/* BOTÓN DE APLICAR FILTROS */
+#revert-filters {
+  background-color: #1877f2;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  align-self: flex-end;
+}
+
+#revert-filters:hover {
+  background-color: #0f5ac2;
+}

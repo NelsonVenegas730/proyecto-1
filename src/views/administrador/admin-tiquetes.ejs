@@ -1,7 +1,8 @@
 <body>
     <main>
+        <%- include('../partials/filter-controls', { filterType: 'state' }) %>
         <div class="tickets-admin-container">
-            <div class="ticket-card" data-id="1">
+            <div class="ticket-element" data-id="1">
                 <div class="ticket-header">
                     <h3>Error en login</h3>
                     <button class="ellipsis-btn"><i class='bx bx-dots-vertical-rounded'></i></button>
@@ -13,8 +14,8 @@
                 </div>
                 <p class="ticket-description">El usuario reporta que no puede iniciar sesión, se queda cargando.</p>
                 <div class="ticket-meta">
-                    <span class="ticket-fecha">Fecha: 7 julio 2025</span>
-                    <span class="status-badge abierto">Abierto</span>
+                    <span class="fecha">Fecha: 7 julio 2025</span>
+                    <span class="badge abierto">Abierto</span>
                 </div>
                 <div class="ticket-actions">
                     <div class="ticket-chat">
@@ -47,7 +48,7 @@
                 </div>
             </div>
 
-            <div class="ticket-card" data-id="2">
+            <div class="ticket-element" data-id="2">
                 <div class="ticket-header">
                     <h3>Formulario no carga</h3>
                     <button class="ellipsis-btn"><i class='bx bx-dots-vertical-rounded'></i></button>
@@ -59,8 +60,8 @@
                 </div>
                 <p class="ticket-description">El formulario de quejas se queda en blanco al hacer click en "Enviar".</p>
                 <div class="ticket-meta">
-                    <span class="ticket-fecha">Fecha: 6 julio 2025</span>
-                    <span class="status-badge en-proceso">En proceso</span>
+                    <span class="fecha">Fecha: 6 julio 2025</span>
+                    <span class="badge en-proceso">En proceso</span>
                 </div>
 
                 <div class="ticket-actions">
@@ -95,7 +96,7 @@
                 </div>
             </div>
 
-            <div class="ticket-card" data-id="2">
+            <div class="ticket-element" data-id="2">
                 <div class="ticket-header">
                     <h3>Formulario no carga</h3>
                     <button class="ellipsis-btn"><i class='bx bx-dots-vertical-rounded'></i></button>
@@ -107,8 +108,8 @@
                 </div>
                 <p class="ticket-description">El formulario de quejas se queda en blanco al hacer click en "Enviar".</p>
                 <div class="ticket-meta">
-                    <span class="ticket-fecha">Fecha: 6 julio 2025</span>
-                    <span class="status-badge cerrado">Cerrado</span>
+                    <span class="fecha">Fecha: 6 julio 2025</span>
+                    <span class="badge cerrado">Cerrado</span>
                 </div>
 
                 <div class="ticket-actions">
@@ -144,6 +145,7 @@
             </div>
         </div>
     </main>
-    <script src="../../JS/tiquetePopUpStateToggle.js"></script>
+    <script src="/js/tiquetePopUpStateToggle.js"></script>
+    <script src="/js/filterContent.js"></script>
 </body>
 </html>

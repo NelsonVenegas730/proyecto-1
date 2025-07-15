@@ -1,21 +1,6 @@
 <body>
     <main>
-        <div class="options-container">
-            <h2>Controles para filtrar contenido</h2>
-            <div class="filter-controls">
-                <div class="filter-group">
-                    <h4>Filtrar por tipo</h4>
-                    <label><input type="checkbox" value="evento" class="filter-checkbox"> Evento</label>
-                    <label><input type="checkbox" value="noticia" class="filter-checkbox"> Noticia</label>
-                    <label><input type="checkbox" value="anuncio" class="filter-checkbox"> Anuncio</label>
-                </div>
-                <div class="filter-group">
-                    <h4>Filtrar por fecha</h4>
-                    <input type="date" id="filter-date">
-                </div>
-                <button id="apply-filters">Aplicar filtros</button>
-            </div>
-        </div>
+        <%- include('../partials/filter-controls', { filterType: 'type' }) %>
         <div class="noticias-eventos-anuncios-container">
             <div class="noticias-eventos-anuncios-container">
                 <div class="noticia-evento-anuncio-element card">
