@@ -1,0 +1,34 @@
+<body class="auth-page">
+  <div class="login-box">
+    <h2>Inicio de sesión</h2>
+    <p class="subtitulo">Por favor inicie sesión para entrar al sitio.</p>
+
+    <form id="formulario">
+      <div class="field-container">
+        <label for="correo">Correo Electrónico</label>
+        <input type="email" id="correo" placeholder="Placeholder" required />
+        <small class="input-requirements" id="correo-requisitos">Debe tener minúsculas-mayúsculas y números, debe tener 10 caracteres mínimo.</small>
+      </div>
+
+      <div class="field-container">
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" placeholder="Placeholder" required />
+        <small class="input-requirements" id="password-requisitos">Debe tener minúsculas-mayúsculas y números, debe tener 10 caracteres mínimo.</small>
+      </div>
+
+      <div class="opciones">
+        <label class="checkbox-label">Recordar<input type="checkbox" /></label>
+        <a class="forgot-password" href="/auth/recuperar-password">¿Olvidaste la Contraseña?</a>
+      </div>
+
+      <button type="submit">Iniciar Sesión</button>
+
+      <hr />
+
+      <p class="auth-link">
+        ¿No tienes cuenta? <a href="/auth/registrarse">Regístrate aquí.</a>
+      </p>
+    </form>
+  </div>
+</body>
+</html>

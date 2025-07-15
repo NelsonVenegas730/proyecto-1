@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title><%= title || 'Núcleo Desamparados' %></title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> <!-- Importando fuente de letra Inter -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> <!-- Importando Boxicons -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/page-styles/auth.css">
+    <%- typeof style !== 'undefined' ? style : '' %>
+</head>
+<body>
+    <main>
+        <%- body %>
+    </main>
+    <script src="/js/sidebarToggleMobile.js" defer></script>
+</body>
+</html>

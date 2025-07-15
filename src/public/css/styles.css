@@ -1,0 +1,110 @@
+/*--- ESTILOS DE CONFIGURACION O BASE ---*/
+:root {
+    --color-bg: #191A29;
+    --color-bg-secondary: #1f2247;
+    --color-text: #FFFFFF;
+
+    --color-primary: #1D5A99;
+    --color-primary-light: #3779bc;
+    --color-secondary: #5CE9FF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: white;
+ }
+
+/*--- DECLARACIÓN FONT FUTURA POR MEDIO DE ARCHIVO TTF ---*/
+@font-face {
+  font-family: 'Futura Light';
+  src: url('/fonts/Futura light.TTF.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Futura Medium';
+  src: url('/fonts/Futura Md BT Medium.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Futura Bold';
+  src: url('/fonts/Futura Md BT Bold.ttf') format('truetype');
+}
+
+
+/*--- ESTILOS GENERALES ---*/
+h1, h2, h3 {
+    font-family: 'Futura Light', sans-serif;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+p {
+    font-size: 1rem;
+}
+
+.subtitle {
+    padding-bottom: 15px;
+}
+
+body, p, a, ul, li, input, textarea, button, label {
+  font-family: 'Inter', sans-serif;
+}
+
+body:not(.auth-page) {
+    background: repeating-linear-gradient(
+        to bottom,
+        #191a29 0px,
+        #1d2744 300px,
+        #191a29 600px
+    );
+    background-attachment: fixed;
+    background-repeat: repeat;
+    background-size: 100% 600px;
+    overflow-x: hidden;
+}
+
+/*---ANIMACIÓN DEL CONTENIDO AL EXPANDIR O CONTRAER SIDEBAR---*/
+main,
+header,
+footer {
+    transition: padding-left 0.3s ease;
+}
+
+.sidebar:hover ~ main,
+.sidebar:hover ~ header,
+.sidebar:hover ~ footer {
+    padding-left: 370px;
+}
+
+main {
+    padding: 20px;
+}
+
+
+/*--- INICIALIZACIÓN DE ESTILOS DEFAULT ---*/
+ul, ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+@media (min-width: 801px) {
+    body {
+        padding-left: 70px;
+    }
+}
+
+@media (max-width: 800px) {
+    body {
+        padding-left: 0px;
+    }
+}
