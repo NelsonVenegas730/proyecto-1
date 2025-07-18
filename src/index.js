@@ -19,6 +19,7 @@ app.use(expressLayouts);
 app.set('layout', 'layouts/layout-default'); // layout por defecto
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 // Rutas views de las páginas HTML (views)
 app.get('/', (req, res) => {
@@ -136,10 +137,18 @@ app.get('/sugerencias', (req, res) => {
 
 // Emprendedor
 app.get('/emprendedor/mi-emprendimiento', (req, res) => {
-    res.render('emprendedor/mi-emprendimiento', {
-        title: 'Mi Emprendimiento',
-        style: '<link rel="stylesheet" href="/css/page-styles/emprendimiento.css">'
-    });
+  const emprendimiento = {
+    titulo: 'Joyería Yurusti',
+    imagen: 'default.jpeg',
+    descripcion: 'Joyería artesanal que ofrece una variedad de productos hechos a mano...',
+    direccion: 'Desamparados, San José, Costa Rica, 100 metros Este de la Plaza de Deportes.'
+  };
+
+  res.render('emprendedor/mi-emprendimiento', {
+    title: 'Mi Emprendimiento',
+    style: '<link rel="stylesheet" href="/css/page-styles/emprendimiento.css">',
+    emprendimiento
+  });
 });
 
 // Formularios
@@ -204,4 +213,20 @@ app.post('/registrar-emprendimiento', upload.single('imagen'), (req, res) => {
   console.log(`Título: ${titulo}, Descripción: ${descripcion}, Dirección: ${direccion}, Imagen: ${imagen}`);
 
   res.redirect('/emprendedor/mi-emprendimiento');
+});
+
+app.post('/editar-emprendimiento', upload.single('imagen'), (req, res) => {
+  const titulo = req.body.titulo;
+  const descripcion = req.body.descripcion;
+  const direccion = req.body.direccion;
+  const imagen = req.file ? req.file.filename : null;
+
+  console.log(`Título: ${titulo}, Descripción: ${descripcion}, Dirección: ${direccion}, Imagen: ${imagen}`);
+
+  // Guardá en la DB acá...
+
+  res.json({
+    success: true,
+    nuevaImagenUrl: imagen ? `/uploads/${imagen}` : null
+  });
 });

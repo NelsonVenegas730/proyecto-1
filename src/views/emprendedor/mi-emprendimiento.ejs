@@ -58,8 +58,8 @@
                 </button>
                 <input type="file" id="edit-img-input" accept="image/*" class="edit-img-input inactive">
                 <img 
-                    src="https://www.karati.com/cdn/shop/articles/shutterstock_339969596-scaled.jpg?v=1740228325&width=2048" 
-                    alt="nombre del emprendimiento"
+                    src="<%= emprendimiento.imagen ? '/uploads/' + emprendimiento.imagen : '/uploads/default.jpeg' %>" 
+                    alt="<%= emprendimiento.titulo %>"
                     id="emprendimiento-img"
                 />
             </div>
