@@ -80,8 +80,7 @@ function mostrarMensajeExitoEmprendedor() {
   mensajeExito.classList.remove("oculto");
   setTimeout(() => {
     mensajeExito.classList.add("oculto");
-    formulario.submit();
-    window.location.href = "/emprendedor/mi-emprendimiento";
+    formulario.submit(); // Solo esto
   }, 3500);
 }
 
@@ -89,7 +88,6 @@ function mostrarMensajeExitoCiudadano() {
   mensajeExito.classList.remove("oculto");
   setTimeout(() => {
     mensajeExito.classList.add("oculto");
-    formulario.submit();
-    window.location.href = "/";
+    formulario.submit(); // Solo esto
   }, 3500);
 }

@@ -3,21 +3,21 @@
     <h2>Inicio de sesión</h2>
     <p class="subtitulo">Por favor inicie sesión para entrar al sitio.</p>
 
-    <form id="formulario">
+    <form id="formulario" action="/login" method="POST">
       <div class="field-container">
         <label for="correo">Correo Electrónico</label>
-        <input type="email" id="correo" placeholder="Placeholder" required />
+        <input type="email" id="correo" name="correo" placeholder="Placeholder" required />
         <small class="input-requirements" id="correo-requisitos">Debe tener minúsculas-mayúsculas y números, debe tener 10 caracteres mínimo.</small>
       </div>
 
       <div class="field-container">
         <label for="password">Contraseña</label>
-        <input type="password" id="password" placeholder="Placeholder" required />
+        <input type="password" id="password" name="password" placeholder="Placeholder" required />
         <small class="input-requirements" id="password-requisitos">Debe tener minúsculas-mayúsculas y números, debe tener 10 caracteres mínimo.</small>
       </div>
 
       <div class="opciones">
-        <label class="checkbox-label">Recordar<input type="checkbox" /></label>
+        <label class="checkbox-label">Mantener sesión iniciada<input name="keepSesionActive" type="checkbox" /></label>
         <a class="forgot-password" href="/auth/recuperar-password">¿Olvidaste la Contraseña?</a>
       </div>
 

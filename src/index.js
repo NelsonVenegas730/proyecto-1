@@ -1,8 +1,14 @@
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' }); // Carpeta temporal para guardar las imágenes
 const app = express();
 const path = require('path');
 const port = 3000;
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.set('views', path.join(__dirname, 'views'));
 
@@ -21,39 +27,6 @@ app.get('/', (req, res) => {
     style: '<link rel="stylesheet" href="/css/page-styles/inicio.css">'
   })
 })
-
-// Administrador
-app.get('/admin/aprobaciones', (req, res) => {
-    res.render('administrador/admin-aprobaciones', {
-        title: 'Gestionar Contenido',
-        style: '<link rel="stylesheet" href="/css/page-styles/admin-aprobaciones.css">',
-        layout: 'layouts/layout-admin'
-    })
-});
-
-app.get('/admin/tiquetes', (req, res) => {
-    res.render('administrador/admin-tiquetes', {
-        title: 'Gestionar Tiquetes de Soporte',
-        style: '<link rel="stylesheet" href="/css/page-styles/admin-tiquetes.css">',
-        layout: 'layouts/layout-admin'
-    });
-});
-
-app.get('/admin/usuarios', (req, res) => {
-    res.render('administrador/admin-usuarios', {
-        title: 'Gestionar Usuarios',
-        style: '<link rel="stylesheet" href="/css/page-styles/admin-usuarios.css">',
-        layout: 'layouts/layout-admin'
-    });
-});
-
-app.get('/admin/panel-administrador', (req, res) => {
-    res.render('administrador/panel-administrador', {
-        title: 'Panel de Administrador',
-        style: '<link rel="stylesheet" href="/css/page-styles/admin-panel.css">',
-        layout: 'layouts/layout-admin'
-    });
-});
 
 // Autenticacion
 app.get('/auth/registrar-emprendimiento', (req, res) => {
@@ -90,6 +63,40 @@ app.get('/auth/registrarse', (req, res) => {
         layout: 'layouts/layout-auth'
     })
 })
+
+// Administrador
+app.get('/admin/aprobaciones', (req, res) => {
+    res.render('administrador/admin-aprobaciones', {
+        title: 'Gestionar Contenido',
+        style: '<link rel="stylesheet" href="/css/page-styles/admin-aprobaciones.css">',
+        layout: 'layouts/layout-admin'
+    })
+});
+
+app.get('/admin/tiquetes', (req, res) => {
+    res.render('administrador/admin-tiquetes', {
+        title: 'Gestionar Tiquetes de Soporte',
+        style: '<link rel="stylesheet" href="/css/page-styles/admin-tiquetes.css">',
+        layout: 'layouts/layout-admin'
+    });
+});
+
+app.get('/admin/usuarios', (req, res) => {
+    res.render('administrador/admin-usuarios', {
+        title: 'Gestionar Usuarios',
+        style: '<link rel="stylesheet" href="/css/page-styles/admin-usuarios.css">',
+        layout: 'layouts/layout-admin'
+    });
+});
+
+app.get('/admin/panel-administrador', (req, res) => {
+    res.render('administrador/panel-administrador', {
+        title: 'Panel de Administrador',
+        style: '<link rel="stylesheet" href="/css/page-styles/admin-panel.css">',
+        layout: 'layouts/layout-admin'
+    });
+});
+
 
 // Ciudadano
 app.get('/emprendimiento-slug', (req, res) => {
@@ -152,4 +159,49 @@ app.get('/form/form-tiquete', (req, res) => {
 
 app.listen(port, () => {
     console.log(`Servidor encendido en http://localhost:${port}`);
+});
+
+// Metodos POST para manejar los formularios
+
+// Autenticación
+app.post('/login', (req, res) => {
+  const correo = req.body.correo;
+  const password = req.body.password;
+  const keepSesionActive = req.body.keepSesionActive === 'on';
+  console.log(`Correo: ${correo}, Password: ${password}, Mantener sesión activa: ${keepSesionActive}`);
+  res.redirect('/'); // Redirigir al inicio después del login
+});
+
+app.post('/sign-up', (req, res) => {
+    const username = req.body.username;
+    const nombre = req.body.nombre;
+    const apellidos = req.body.apellidos;
+    const correo = req.body.correo;
+    const password = req.body.password;
+    const isEmprendedor = req.body.isEmprendedor === 'on';
+    console.log(`Usuario: ${username}, Nombre: ${nombre}, Apellidos: ${apellidos}, Correo: ${correo}, Contraseña: ${password}, Emprendedor: ${isEmprendedor}`);
+    
+    if (isEmprendedor) {
+        res.redirect('/auth/registrar-emprendimiento'); // Redirigir al registro de emprendimiento
+    }
+    else {
+        res.redirect('/'); // Redirigir al inicio después del registro
+    }
+});
+
+app.post('/recover-password', (req, res) => {
+    const correo = req.body.correo;
+    console.log(`Correo para recuperar contraseña: ${correo}`);
+    res.redirect('/auth/inicio-sesion'); // Redirigir al inicio de sesión después de la recuperación
+})
+
+app.post('/registrar-emprendimiento', upload.single('imagen'), (req, res) => {
+  const titulo = req.body.titulo;
+  const descripcion = req.body.descripcion;
+  const direccion = req.body.direccion;
+  const imagen = req.file ? req.file.filename : null;
+
+  console.log(`Título: ${titulo}, Descripción: ${descripcion}, Dirección: ${direccion}, Imagen: ${imagen}`);
+
+  res.redirect('/emprendedor/mi-emprendimiento');
 });

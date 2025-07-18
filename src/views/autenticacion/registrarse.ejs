@@ -3,35 +3,35 @@
     <h2>Registrate</h2>
     <p class="subtitulo">*Algunos usuarios deberán pasar por revisión y aprobación*</p>
 
-    <form id="formulario">
+    <form id="formulario" action="/sign-up" method="POST">
       <div class="field-container">
         <label for="usuario">Nombre de Usuario</label>
-        <input type="text" id="usuario" placeholder="Introduce tu nombre de usuario" required />
+        <input type="text" id="usuario" name="username" placeholder="Introduce tu nombre de usuario" required />
         <small class="input-requirements" id="usuario-requisitos">Solo letras, números, guiones y guiones bajos, sin espacios.</small>
       </div>
 
       <div class="input-row">
         <div class="field-container">
           <label for="nombre">Nombre</label>
-          <input type="text" id="nombre" placeholder="Placeholder" required />
+          <input type="text" id="nombre" name="nombre" placeholder="Placeholder" required />
           <small class="input-requirements" id="nombre-requisitos">Solo letras, sin números ni caracteres especiales.</small>
         </div>
         <div class="field-container">
           <label for="apellidos">Apellidos</label>
-          <input type="text" id="apellidos" placeholder="Placeholder" required />
+          <input type="text" id="apellidos" name="apellidos" placeholder="Placeholder" required />
           <small class="input-requirements" id="apellidos-requisitos">Solo letras, sin números ni caracteres especiales.</small>
         </div>
       </div>
 
       <div class="field-container">
         <label for="correo">Correo Electrónico</label>
-        <input type="email" id="correo" placeholder="Placeholder" required />
+        <input type="email" id="correo" name="correo" placeholder="Placeholder" required />
         <small class="input-requirements" id="correo-requisitos">Debe tener formato válido (ej. nombre@dominio.com).</small>
       </div>
 
       <div class="field-container">
         <label for="password">Contraseña</label>
-        <input type="password" id="password" placeholder="Introduzca una contraseña" required />
+        <input type="password" id="password" name="password" placeholder="Introduzca una contraseña" required />
         <small class="input-requirements" id="password-requisitos">Debe tener minúsculas, mayúsculas y números (8-10 caracteres).</small>
       </div>
 
@@ -42,7 +42,7 @@
       </div>
 
       <label class="checkbox-label" for="emprende">
-        <input type="checkbox" id="emprende" />
+        <input type="checkbox" id="emprende" name="isEmprendedor"/>
         Mi perfil va a ser para emprendimientos.
       </label>
 

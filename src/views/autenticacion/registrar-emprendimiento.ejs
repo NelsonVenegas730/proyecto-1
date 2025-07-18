@@ -3,28 +3,28 @@
     <h2>Registrar de emprendimiento</h2>
     <p class="subtitulo">Cuentanos acerca de tu emprendimiento</p>
 
-    <form id="formulario">
+    <form id="formulario" action="/registrar-emprendimiento" method="POST" enctype="multipart/form-data">
         <div class="field-container">
             <label for="titulo">Título del emprendimiento</label>
-            <input type="text" id="titulo" placeholder="Nombre del emprendimiento" required />
+            <input type="text" id="titulo" name="titulo" placeholder="Nombre del emprendimiento" required />
             <small class="input-requirements" id="descripcion-requisitos">Obligatorio rellenar, no puede esta vacío</small>
         </div>
 
         <div class="field-container">
             <label for="descripcion">Descripción</label>
-            <textarea id="descripcion" placeholder="Describe tu emprendimiento" rows="4" required></textarea>
+            <textarea id="descripcion" name="descripcion" placeholder="Describe tu emprendimiento" rows="4" required></textarea>
             <small class="input-requirements" id="descripcion-requisitos">Obligatorio rellenar, no puede esta vacío</small>
         </div>
 
         <div class="field-container">
             <label for="direccion">Dirección</label>
-            <input type="text" id="direccion" placeholder="Ubicación y dirección del local" required />
+            <input type="text" id="direccion" name="direccion" placeholder="Ubicación y dirección del local" required />
             <small class="input-requirements" id="descripcion-requisitos">Obligatorio rellenar, no puede esta vacío</small>
         </div>
 
         <div class="field-container">
             <label for="imagen">Imagen (opcional)</label>
-            <input class="image-input" type="file" id="imagen" accept="image/*" />
+            <input class="image-input" name="imagen" type="file" id="imagen" accept="image/*" />
             <small class="input-requirements">Puedes subir una imagen para tu emprendimiento</small>
             <div id="preview-container"></div>
         </div>

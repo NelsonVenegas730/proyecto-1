@@ -59,25 +59,23 @@ direccion.addEventListener("keyup", () => validateNotEmpty(direccion, requisitos
 imagen.addEventListener("change", mostrarPreviewImagen);
 
 formulario.addEventListener("submit", e => {
-  e.preventDefault();
-
   const tituloValido = validateNotEmpty(titulo, requisitosTitulo);
   const descripcionValido = validateNotEmpty(descripcion, requisitosDescripcion);
   const direccionValido = validateNotEmpty(direccion, requisitosDireccion);
 
-  if (tituloValido && descripcionValido && direccionValido) {
-    mostrarMensajeExito();
-  } else {
+  if (!(tituloValido && descripcionValido && direccionValido)) {
+    e.preventDefault();
     alert("Por favor completá todos los campos obligatorios.");
+  } else {
+    e.preventDefault();
+    mostrarMensajeExito(() => formulario.submit());
   }
 });
 
-function mostrarMensajeExito() {
+function mostrarMensajeExito(callback) {
   mensajeExito.classList.remove("oculto");
   setTimeout(() => {
     mensajeExito.classList.add("oculto");
-    window.location.href = "../Emprendedor/mi-emprendimiento.html";
+    if (typeof callback === "function") callback();
   }, 3500);
 }
-
-
