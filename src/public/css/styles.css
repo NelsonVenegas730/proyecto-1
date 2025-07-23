@@ -14,26 +14,6 @@
     padding: 0;
     box-sizing: border-box;
     color: white;
- }
-
-/*--- DECLARACIÓN FONT FUTURA POR MEDIO DE ARCHIVO TTF ---*/
-@font-face {
-  font-family: 'Futura Light';
-  src: url('/fonts/Futura light.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Futura Medium';
-  src: url('/fonts/Futura Md BT Medium.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Futura Bold';
-  src: url('/fonts/Futura Md BT Bold.ttf') format('truetype');
-}
-
-
-/*--- ESTILOS GENERALES ---*/
-h1, h2, h3 {
-    font-family: 'Futura Light', sans-serif;
 }
 
 h1 {

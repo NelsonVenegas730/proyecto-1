@@ -1,3 +1,4 @@
+require('dotenv').config() // esto siempre primero
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const multer = require('multer');
@@ -5,6 +6,11 @@ const upload = multer({ dest: 'uploads/' }); // Carpeta temporal para guardar la
 const app = express();
 const path = require('path');
 const port = 3000;
+
+const connectDB = require('./db/mongoose')
+connectDB()
+  .then(() => console.log('BD CONECTADA'))
+  .catch(err => console.error(err))
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));

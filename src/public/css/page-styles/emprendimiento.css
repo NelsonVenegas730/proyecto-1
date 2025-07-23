@@ -4,7 +4,7 @@
 
 #emprendimiento-name {
     font-size: 3rem;
-    font-family: "Futura Bold", sans-serif;
+    font-weight: 700;
     margin-bottom: 20px;
 }
 
@@ -129,7 +129,7 @@
     border: 2px solid var(--color-primary);
     background-color: transparent;
     font-size: 3rem;
-    font-family: "Futura Bold", sans-serif;
+    font-weight: 700;
     margin-bottom: 20px;
 }
 
