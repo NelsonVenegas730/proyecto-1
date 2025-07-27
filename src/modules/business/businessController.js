@@ -11,7 +11,8 @@ async function getAllBusinesses(req, res) {
       address: b.address || 'Sin dirección',
       image: b.image || '/images/default.jpeg',
       user_id: b.user_id && b.user_id.nombre ? b.user_id : { nombre: 'Sin', apellidos: 'Dueño' },
-      date: b.date || new Date()
+      date: b.date || new Date(),
+      status: b.status || 'sin status'
     }));
     res.render('ciudadano/emprendimientos', {
       title: 'Emprendimientos',
@@ -61,7 +62,8 @@ async function getBusinessById(req, res) {
       user_id: business.user_id && business.user_id.nombre
         ? business.user_id
         : { nombre: 'Sin', apellidos: 'Dueño' },
-      date: business.date || new Date()
+      date: business.date || new Date(),
+      status: b.status || 'sin status'
     };
 
     res.render('ciudadano/emprendimiento-id', {
