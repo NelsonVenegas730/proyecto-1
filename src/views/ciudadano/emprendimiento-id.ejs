@@ -1,38 +1,35 @@
-</head>
 <body>
-    <main class="emprendimiento-container">
-        <div class="emprendimiento-content">
-            <div class="emprendimiento-info">
-                <div class="emprendimiento-header">
-                    <h2 id="emprendimiento-name" class="active">
-                        Panadería "El Buen Pan"
-                    </h2>
-                </div>
-                <div>
-                    <div class="emprendimiento-details">
-                        <div class="emprendimiento-descripcion">
-                            <i class="bx bxs-info-circle"></i>
-                            <p class="emprendimiento-text active">
-                                Panadería "El Buen Pan" es un negocio familiar que ofrece una variedad de panes artesanales, pasteles y postres. Nos enorgullece utilizar ingredientes frescos y locales para garantizar la mejor calidad en nuestros productos. Nuestro objetivo es brindar a la comunidad de Desamparados un lugar acogedor donde puedan disfrutar de deliciosos productos horneados.
-                            </p>
-                        </div>
-                        <div class="emprendimiento-direccion">
-                            <i class="bx bxs-map"></i>
-                            <p class="emprendimiento-text active">
-                                Desamparados, San José, Costa Rica, 100 metros Este de la Plaza de Deportes.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="emprendimiento-image-container">
-                <img 
-                    src="https://www.cardenasmarkets.com/wp-content/uploads/fly-images/898/pan-dulce-1464x918-c.jpg" 
-                    alt="nombre del emprendimiento"
-                />
-            </div>
+  <main class="emprendimiento-container">
+    <div class="emprendimiento-content">
+      <div class="emprendimiento-info">
+        <div class="emprendimiento-header">
+          <h2 id="emprendimiento-name" class="active">
+            <%= emprendimiento.name %>
+          </h2>
         </div>
-    </main>
-    <script src="/js/fetchEmprendimiento.js"></script>
+        <div>
+          <div class="emprendimiento-details">
+            <div class="emprendimiento-descripcion">
+              <i class="bx bxs-info-circle"></i>
+              <p class="emprendimiento-text active">
+                <%= emprendimiento.description %>
+              </p>
+            </div>
+            <div class="emprendimiento-direccion">
+              <i class="bx bxs-map"></i>
+              <p class="emprendimiento-text active">
+                <%= emprendimiento.address %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="emprendimiento-image-container">
+        <img 
+          src="<%= emprendimiento.image %>" 
+          alt="Imagen de <%= emprendimiento.name %>"
+        />
+      </div>
+    </div>
+  </main>
 </body>
-</html>

@@ -51,7 +51,24 @@ async function getBusinessById(req, res) {
   try {
     const business = await Business.findById(req.params.id).populate('user_id', 'nombre apellidos');
     if (!business) return res.status(404).send('Emprendimiento no encontrado');
-    res.render('ciudadano/emprendimiento-id', { emprendimiento: business });
+
+    const safeBusiness = {
+      ...business._doc,
+      name: business.name || 'Sin nombre',
+      description: business.description || 'Sin descripción',
+      address: business.address || 'Sin dirección',
+      image: business.image || '/images/default.jpeg',
+      user_id: business.user_id && business.user_id.nombre
+        ? business.user_id
+        : { nombre: 'Sin', apellidos: 'Dueño' },
+      date: business.date || new Date()
+    };
+
+    res.render('ciudadano/emprendimiento-id', {
+      title: safeBusiness.name || 'Emprendimiento',
+      style: '<link rel="stylesheet" href="/css/page-styles/emprendimiento.css">',
+      emprendimiento: safeBusiness
+    });
   } catch (error) {
     console.error(error);
     res.status(500).send('Error al obtener el emprendimiento');
