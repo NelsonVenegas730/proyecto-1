@@ -9,7 +9,7 @@ async function getAllBusinesses(req, res) {
       name: b.name || 'Sin nombre',
       description: b.description || 'Sin descripción',
       address: b.address || 'Sin dirección',
-      image: b.image || '/default-image.jpg',
+      image: b.image || '/images/default.jpeg',
       user_id: b.user_id && b.user_id.nombre ? b.user_id : { nombre: 'Sin', apellidos: 'Dueño' },
       date: b.date || new Date()
     }));
