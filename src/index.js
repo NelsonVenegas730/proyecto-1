@@ -6,6 +6,9 @@ const upload = multer({ dest: 'uploads/' }); // Carpeta temporal para guardar la
 const app = express();
 const path = require('path');
 const port = 3000;
+const businessRoutes = require('./modules/business/businessRoute');
+const businessController = require('./modules/business/businessController');
+
 
 const connectDB = require('./db/mongoose')
 connectDB()
@@ -26,6 +29,9 @@ app.set('layout', 'layouts/layout-default'); // layout por defecto
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
+
+// Rutas de la API
+app.use('/api/businesses', businessRoutes);
 
 // Rutas views de las páginas HTML (views)
 app.get('/', (req, res) => {
@@ -106,19 +112,9 @@ app.get('/admin/panel-administrador', (req, res) => {
 
 
 // Ciudadano
-app.get('/emprendimiento-slug', (req, res) => {
-    res.render('ciudadano/emprendimiento-slug', {
-        title: 'Detalles del Emprendimiento',
-        style: '<link rel="stylesheet" href="/css/page-styles/emprendimiento.css">'
-    });
-});
+app.get('/emprendimiento/:id', businessController.getBusinessById);
 
-app.get('/emprendimientos', (req, res) => {
-    res.render('ciudadano/emprendimientos', {
-        title: 'Emprendimientos',
-        style: '<link rel="stylesheet" href="/css/page-styles/emprendimientos.css">'
-    });
-});
+app.get('/emprendimientos', businessController.getAllBusinesses);
 
 app.get('/horario-buses', (req, res) => {
     res.render('ciudadano/horario-buses', {

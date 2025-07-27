@@ -1,37 +1,20 @@
 <body>
     <main>
         <div class="emprendimientos-container">
-            <a href="/emprendimiento-slug" class="emprendimiento-element card">
-                <img 
-                src="https://cdn.unotv.com/images/2025/03/artesanias-mexicanas-jpg-135935.jpg"
-                alt="Emprendimiento 1" 
-                />
+            <% emprendimientos.forEach(e => { %>
+                <a href="/emprendimiento/<%= e._id %>" class="emprendimiento-element card">
+                <img src="<%= e.image || '/default-image.jpg' %>" alt="Imagen de <%= e.name %>" />
                 <div class="emprendimiento-info">
-                    <h3>Panadería "El Buen Pan"</h3>
-                    <p>Panadería artesanal con productos frescos hechos a diario.</p>
+                    <h3><%= e.name %></h3>
+                    <p><%= e.description %></p>
                     <div class="dueño">
-                        <div class="avatar">MG</div>
-                        <span>María González</span>
+                    <div class="avatar"><%= e.user_id ? e.user_id.nombre.charAt(0) + e.user_id.apellidos.charAt(0) : '??' %></div>
+                    <span><%= e.user_id ? e.user_id.nombre + ' ' + e.user_id.apellidos : 'Sin dueño' %></span>
                     </div>
-                    <span class="fecha">Fecha de creación: 10 de junio de 2025</span>
+                    <span class="fecha">Fecha de creación: <%= new Date(e.date).toLocaleDateString('es-CR', { day: 'numeric', month: 'long', year: 'numeric' }) %></span>
                 </div>
-            </a>
-
-            <a href="/emprendimiento-slug" class="emprendimiento-element card">
-                <img 
-                src="https://cdn.unotv.com/images/2025/03/artesanias-mexicanas-jpg-135935.jpg" 
-                alt="Emprendimiento 2"
-                />
-                <div class="emprendimiento-info">
-                    <h3>Taller de Reparación "Todo Moto"</h3>
-                    <p>Servicio rápido y confiable para motos de todas las marcas.</p>
-                    <div class="dueño">
-                        <div class="avatar">JL</div>
-                        <span>Juan López</span>
-                    </div>
-                    <span class="fecha">Fecha de creación: 5 de julio de 2025</span>
-                </div>
-            </a>
+                </a>
+            <% }) %>
         </div>
     </main>
 </body>
