@@ -1,0 +1,28 @@
+<body>
+    <main class="error-container">
+        <h1 class="error-code">403</h1>
+        <h2 class="error-title">Acceso Denegado</h2>
+        <p class="error-description">Lo sentimos, no tienes permiso para acceder a esta página.</p>
+        <hr>
+        <p class="error-description">
+        <% if (roles) { %>
+            Estás intentando acceder a una página de <strong class="restriction"><%= roles %></strong>.
+        <% } else { %>
+            <strong class="restriction"><%= mensaje %></strong>
+        <% } %>
+        </p>
+        <hr>
+        <p class="error-help">
+            Si estas intentando acceder con un perfil de rol inválido, por favor inicia con un perfil alternativo en la barra de navegación. O crea un nuevo perfil si no tienes uno en <a class="go-back-link" href="/auth/registrarse">registro</a>.
+        </p>
+        <p class="error-help">
+            Si crees que esto es un error, por favor contacta al administrador o regresa a la <a class="go-back-link" href="/">página principal</a>.
+        </p>
+        <p class="error-help">
+            Si no has iniciado sesión, por favor <a class="go-back-link" href="/auth/inicio-sesion">inicia sesión</a>.
+        </p>
+        <p class="error-help">
+            Si necesitas crear una cuenta, por favor <a class="go-back-link" href="/auth/registrarse">regístrate aquí</a>.
+        </p>
+    </main>
+</body>

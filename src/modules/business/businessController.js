@@ -27,14 +27,28 @@ async function getAllBusinesses(req, res) {
 
 async function createBusiness(req, res) {
   try {
-    const data = req.body;
-    if (!data.user_id || !data.date) {
-      return res.status(400).json({ error: 'user_id and date are required' });
+    const { titulo, descripcion, direccion } = req.body;
+    const imagen = req.file ? req.file.filename : null;
+    const user_id = req.session.user_id;
+
+    if (!user_id) {
+      return res.status(401).send('No autorizado');
     }
+
+    const data = {
+      titulo,
+      descripcion,
+      direccion,
+      imagen,
+      user_id,
+      date: new Date()
+    };
+
     const business = await businessService.createBusiness(data);
-    res.status(201).json(business);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+
+    res.redirect(`/emprendedor/mi-emprendimiento/${user_id}`);
+  } catch (error) {
+    res.status(500).send('Error al registrar emprendimiento');
   }
 }
 
@@ -44,7 +58,7 @@ async function getBusinessByUser(req, res) {
     const businesses = await businessService.getBusinessByUser(user_id);
     res.json(businesses);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(404);
   }
 }
 
