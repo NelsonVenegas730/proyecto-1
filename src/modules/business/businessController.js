@@ -119,8 +119,7 @@ async function updateBusiness(req, res) {
     };
 
     if (req.file) {
-      updateData.image = req.file.buffer;
-      updateData.image_mimetype = req.file.mimetype;
+      updateData.image = req.file.filename;  // Guardar el nombre, no el buffer
     }
 
     const updated = await businessService.updateBusinessByUser(user_id, updateData);

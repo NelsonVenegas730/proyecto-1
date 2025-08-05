@@ -3,7 +3,10 @@
         <div class="emprendimiento-content">
             <div class="emprendimiento-info">
                 <div class="emprendimiento-header">
-                    <div class="emprendimiento-status"><%= emprendimiento.status %></div>
+                    <div class="emprendimiento-status
+                        <% if (emprendimiento.status === 'pendiente') { %> estado-pendiente <% } else if (emprendimiento.status === 'aprobado') { %> estado-aprobado <% } else if (emprendimiento.status === 'rechazado') { %> estado-rechazado <% } %>">
+                        <%= emprendimiento.status %>
+                    </div>
                     <h2 id="emprendimiento-name" class="active">
                         <%= emprendimiento.name %>
                     </h2>
@@ -58,10 +61,11 @@
                     Cambiar imagen
                 </button>
                 <input type="file" id="edit-img-input" accept="image/*" class="edit-img-input inactive" name="image">
+                <% console.log('imagen:', emprendimiento.image) %>
                 <img 
-                    src="<%= emprendimiento.image ? '/uploads/' + emprendimiento.image : '/images/default.jpeg' %>"
-                    alt="<%= emprendimiento.name %>"
-                    id="emprendimiento-img"
+                    src="<%= emprendimiento.image ? '/uploads/' + emprendimiento.image : '/images/default.jpeg' %>" 
+                    alt="<%= emprendimiento.name %>" 
+                    id="emprendimiento-img" 
                 />
             </div>
         </div>

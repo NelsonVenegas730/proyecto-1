@@ -2,6 +2,33 @@
     padding: 5rem;
 }
 
+.emprendimiento-status {
+  width: fit-content;
+  padding: 10px;
+  border-radius: 100px;
+  border: 2px solid transparent;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.estado-pendiente {
+  border-color: #e0b96f;
+  background-color: #f5c66d;
+  color: #4b3900;
+}
+
+.estado-aprobado {
+  border-color: #4caf50;
+  background-color: #d9f1dc;
+  color: #2e7d32;
+}
+
+.estado-rechazado {
+  border-color: #e57373;
+  background-color: #f9d6d5;
+  color: #c62828;
+}
+
 #emprendimiento-name {
     font-size: 3rem;
     font-weight: 700;
