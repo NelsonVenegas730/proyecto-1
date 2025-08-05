@@ -6,14 +6,20 @@ async function register(data) {
 
   const encryptedPassword = await bcrypt.hash(password, 10);
 
+  const iniciales = (
+    (name?.[0] || '') + 
+    (last_names?.split(' ')[0]?.[0] || '')
+  ).toUpperCase();
+
   const nuevoUsuario = new User({
+    avatar: iniciales,
     username,
     name,
     last_names,
     email,
     password: encryptedPassword,
     role: isEmprendedor === 'on' ? 'emprendedor' : 'ciudadano',
-    status: 'activo'
+    status: isEmprendedor === 'on' ? 'pendiente' : 'activo'
   });
 
   return await nuevoUsuario.save();
@@ -25,6 +31,16 @@ async function verifyCredentials(correo, password) {
   return { user, match };
 }
 
+async function destroySession(req) {
+  if (!req.session) throw new Error('No hay sesión para destruir');
+  return new Promise((resolve, reject) => {
+    req.session.destroy(err => {
+      if (err) return reject(err);
+      resolve();
+    });
+  });
+}
+
 async function recoverPassword(email) {
   const user = await User.findOne({ email });
   return user; // acá luego se puede agregar lógica para enviar token, email, etc.
@@ -33,5 +49,6 @@ async function recoverPassword(email) {
 module.exports = {
   register,
   verifyCredentials,
+  destroySession,
   recoverPassword
 };

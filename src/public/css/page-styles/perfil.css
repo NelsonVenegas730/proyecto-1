@@ -154,7 +154,8 @@
   color: #777;
   opacity: 0.3;
   cursor: not-allowed;
-  pointer-events: auto; /* para permitir click */
+  pointer-events: none; /* para permitir click */
+  user-select: none; /* para evitar selección de texto */
 }
 
 #btn-editar-cuenta {

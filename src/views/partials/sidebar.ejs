@@ -1,103 +1,128 @@
 <nav class="sidebar">
-    <div class="sidebar-header">
-        <div>
-            <div class="logo-content-container">
-                <div class="logo-container">
-                    <img class="logo" src="/images/logo-desamparados.png" alt="Logo cantón desamparados PNG">
-                    <div class="title-container">
-                        <h2>Núcleo Desamparados</h2>
-                        <p>Conectando a la comunidad</p>
-                    </div>
-                </div>
-                <button type="button" class="sidebar-toggle-close">
-                    <i class="bx bx-x-circle"></i>
-                </button>
-            </div>
+  <div class="sidebar-header">
+    <div>
+      <div class="logo-content-container">
+        <div class="logo-container">
+          <img class="logo" src="/images/logo-desamparados.png" alt="Logo cantón desamparados PNG">
+          <div class="title-container">
+            <h2>Núcleo Desamparados</h2>
+            <p>Conectando a la comunidad</p>
+          </div>
         </div>
-        <div class="auth-container">
+        <button type="button" class="sidebar-toggle-close">
+          <i class="bx bx-x-circle"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="auth-container">
+        <% if (user) { %>
             <div class="user-profile">
-                <a href="/perfil" class="user-avatar" id="avatar">JF</a>
-                <div class="user-info">
-                    <p class="username" id="username" data-fullname="John_F_25022">John_F_25022</p>
-                    <p class="rol">Ciudadano</p>
-                </div>
+                <a href="/auth/perfil" class="user-avatar" id="avatar">
+                    <% if (user.avatarUrl && user.avatarUrl.length > 2) { %>
+                        <img src="<%= user.avatarUrl %>" alt="Avatar usuario" />
+                    <% } else { %>
+                        <%= user.avatarUrl || user.initials %>
+                    <% } %>
+                </a>
+            <div class="user-info">
+                <p class="username" id="username" data-fullname="<%= user.username %>"><%= user.username %></p>
+                <p class="rol"><%= user.role.charAt(0).toUpperCase() + user.role.slice(1) %></p>
             </div>
+            </div>
+        <% } else { %>
             <div class="auth-buttons">
-                <a href="/auth/inicio-sesion" class="auth-btn" type="button">Iniciar sesión</a>
-                <a href="/auth/registrarse" class="auth-btn" type="button">Registrarse</a>
+            <a href="/auth/inicio-sesion" class="auth-btn" type="button">Iniciar sesión</a>
+            <a href="/auth/registrarse" class="auth-btn" type="button">Registrarse</a>
             </div>
+        <% } %>
         </div>
     </div>
-    <ul class="sidebar-links-container" id="sidebar-links-admin">
+
+    <% if (user && user.role === 'administrador') { %>
+        <ul class="sidebar-links-container" id="sidebar-links-admin">
         <li class="sidebar-link">
-            <a href="/admin/panel-administrador">
-                <i class="bx bxs-dashboard"></i>
-                <span>Panel de Administrador</span>
-            </a>
+        <a href="/admin/panel-administrador">
+            <i class="bx bxs-dashboard"></i>
+            <span>Panel de Administrador</span>
+        </a>
         </li>
         <li class="sidebar-link">
-            <a href="/form/form-anuncio-evento-noticia">
-                <i class="bx bxs-news"></i>
-                <span>Nueva noticia o anuncio</span>
-            </a>
+        <a href="/form/form-anuncio-evento-noticia">
+            <i class="bx bxs-news"></i>
+            <span>Nueva noticia o anuncio</span>
+        </a>
         </li>
         <li class="sidebar-link">
-            <a href="/admin/usuarios">
-                <i class="bx bxs-user"></i>
-                <span>Usuarios</span>
-            </a>
+        <a href="/admin/usuarios">
+            <i class="bx bxs-user"></i>
+            <span>Usuarios</span>
+        </a>
         </li>
         <li class="sidebar-link">
-            <a href="/admin/aprobaciones">
-                <i class="bx bx-check-square"></i>
-                <span>Aprobación y Moderación</span>
-            </a>
+        <a href="/admin/aprobaciones">
+            <i class="bx bx-check-square"></i>
+            <span>Aprobación y Moderación</span>
+        </a>
         </li>
         <li class="sidebar-link">
-            <a href="/admin/tiquetes">
-                <i class="bx bx-message-check"></i>
-                <span>Tiquetes</span>
-            </a>
+        <a href="/admin/tiquetes">
+            <i class="bx bx-message-check"></i>
+            <span>Tiquetes</span>
+        </a>
         </li>
     </ul>
+    <% } %>
+
+  <% if (user && user.role === 'emprendedor') { %>
     <ul class="sidebar-links-container" id="sidebar-links-emprendedor">
-        <li class="sidebar-link">
-            <a href="/emprendedor/mi-emprendimiento">
-                <i class="bx bxs-store-alt"></i>
-                <span>Mi emprendimiento</span>
-            </a>
-        </li>
+      <li class="sidebar-link">
+        <a href="/emprendedor/mi-emprendimiento">
+          <i class="bx bxs-store-alt"></i>
+          <span>Mi emprendimiento</span>
+        </a>
+      </li>
     </ul>
+  <% } %>
+
+  <% if (user && user.role != 'emprendedor' && user.role != 'administrador') { %>
+    <ul class="sidebar-links-container" id="sidebar-links-general">
+      <li class="sidebar-link">
+        <a href="/">
+          <i class="bx bxs-home"></i>
+          <span>Inicio</span>
+        </a>
+      </li>
+    </ul>
+  <% } %>
+
+
+  <% if (user && user.role === 'ciudadano') { %>
     <ul class="sidebar-links-container" id="sidebar-links-ciudadano">
-        <li class="sidebar-link">
-            <a href="/">
-                <i class="bx bxs-home"></i>
-                <span>Inicio</span>
-            </a>
-        </li>
-        <li class="sidebar-link">
-            <a href="/noticias-anuncios-eventos">
-                <i class="bx bxs-news"></i>
-                <span>Noticias</span>
-            </a>
-        </li>
-        <li class="sidebar-link">
-            <a href="/emprendimientos">
-                <i class="bx bxs-store"></i>
-                <span>Emprendimientos</span>
-            </a>
-        </li>
-        <li class="sidebar-link">
-            <a href="/sugerencias">
-                <i class="bx bxs-megaphone"></i>
-                <span>Quejas y sugerencias</span>
-            </a>
-        </li>
-        <li class="sidebar-link">
-            <a href="/horario-buses">
-                <i class="bx bxs-bus"></i>
-                <span>Horario de Buses</span>
-            </a>
-        </li>
+      <li class="sidebar-link">
+        <a href="/noticias-anuncios-eventos">
+          <i class="bx bxs-news"></i>
+          <span>Noticias</span>
+        </a>
+      </li>
+      <li class="sidebar-link">
+        <a href="/emprendimientos">
+          <i class="bx bxs-store"></i>
+          <span>Emprendimientos</span>
+        </a>
+      </li>
+      <li class="sidebar-link">
+        <a href="/sugerencias">
+          <i class="bx bxs-megaphone"></i>
+          <span>Quejas y sugerencias</span>
+        </a>
+      </li>
+      <li class="sidebar-link">
+        <a href="/horario-buses">
+          <i class="bx bxs-bus"></i>
+          <span>Horario de Buses</span>
+        </a>
+      </li>
     </ul>
+<% } %>
 </nav>

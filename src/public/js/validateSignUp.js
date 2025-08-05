@@ -16,6 +16,7 @@ const requisitosUsuario = document.getElementById("usuario-requisitos");
 const requisitosNombre = document.getElementById("nombre-requisitos");
 const requisitosApellidos = document.getElementById("apellidos-requisitos");
 
+const mensajeError = document.getElementById("mensaje-error");
 const mensajeExito = document.getElementById("mensaje-exito");
 
 const expresiones = {
@@ -50,7 +51,7 @@ confirmPassword.addEventListener("input", validarPasswordMatch);
 nombre.addEventListener("input", () => validarCampo(nombre, expresiones.soloTexto, requisitosNombre));
 apellidos.addEventListener("input", () => validarCampo(apellidos, expresiones.soloTexto, requisitosApellidos));
 
-formulario.addEventListener("submit", (e) => {
+formulario.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const usuarioValido = validarCampo(usuario, expresiones.usuario, requisitosUsuario);
@@ -60,34 +61,53 @@ formulario.addEventListener("submit", (e) => {
   const nombreValido = validarCampo(nombre, expresiones.soloTexto, requisitosNombre);
   const apellidosValido = validarCampo(apellidos, expresiones.soloTexto, requisitosApellidos);
 
-  if (usuarioValido && correoValido && passwordValido && confirmValido && nombreValido && apellidosValido) {
-    const esEmprendedor = document.getElementById("emprende").checked;
+  if (!(usuarioValido && correoValido && passwordValido && confirmValido && nombreValido && apellidosValido)) {
+    mensajeError.textContent = 'Corrige los campos con error';
+    mensajeError.classList.remove('oculto');
+    setTimeout(() => mensajeError.classList.add('oculto'), 3000);
+    return;
+  }
 
-    if (esEmprendedor) {
-      mostrarMensajeExitoEmprendedor();
+  const data = {
+    username: usuario.value,
+    name: nombre.value,
+    last_names: apellidos.value,
+    email: correo.value, // que sea 'correo' si el backend espera ese nombre
+    password: password.value,
+    isEmprendedor: document.getElementById("emprende").checked ? 'on' : 'off',
+  };
+
+  try {
+    const response = await fetch('/auth/sign-up', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+
+    if (!result.success) {
+      mensajeError.textContent = result.message || 'Error desconocido';
+      mensajeError.classList.remove('oculto');
+      setTimeout(() => mensajeError.classList.add('oculto'), 3000);
     } else {
-      mostrarMensajeExitoCiudadano();
+      mensajeError.classList.add('oculto');
+      mensajeExito.textContent = result.message;
+      mensajeExito.classList.remove('oculto');
+      setTimeout(() => {
+        mensajeExito.classList.add('oculto');
+          if (result.success) {
+            if (result.role === 'emprendedor') {
+              window.location.href = '/auth/registrar-emprendimiento';
+            } else {
+              window.location.href = '/';
+            }
+          }
+      }, 3500);
     }
-  } else {
-    mensajeError.classList.remove("oculto");
-    setTimeout(() => {
-      mensajeError.classList.add("oculto");
-    }, 3000);
+  } catch (err) {
+    mensajeError.textContent = 'Error al procesar la solicitud.';
+    mensajeError.classList.remove('oculto');
+    setTimeout(() => mensajeError.classList.add('oculto'), 3000);
   }
 });
-
-function mostrarMensajeExitoEmprendedor() {
-  mensajeExito.classList.remove("oculto");
-  setTimeout(() => {
-    mensajeExito.classList.add("oculto");
-    formulario.submit(); // Solo esto
-  }, 3500);
-}
-
-function mostrarMensajeExitoCiudadano() {
-  mensajeExito.classList.remove("oculto");
-  setTimeout(() => {
-    mensajeExito.classList.add("oculto");
-    formulario.submit(); // Solo esto
-  }, 3500);
-}

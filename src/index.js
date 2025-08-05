@@ -7,6 +7,7 @@ const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const multer = require('multer');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const bodyParser = require('body-parser');
 const path = require('path');
 
@@ -22,13 +23,19 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   rolling: true,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URI, // o la conexión que uses
+    collectionName: 'sessions',
+    ttl: 60 * 60 * 24 * 7 // 7 días de duración
+  }),
   cookie: {
-    maxAge: 1000 * 60 * 60 * 2,
+    maxAge: 1000 * 60 * 60 * 24 * 7, // 7 días
     secure: false,
     httpOnly: true,
     sameSite: 'lax'
   }
 }));
+
 
 // 🌐 Conexión a la base de datos
 const connectDB = require('./db/mongoose');
@@ -40,6 +47,10 @@ connectDB()
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 const authMiddleware = require('./middleware/authMiddleware');
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
+  next();
+});
 
 // 🎨 Configuración de vistas
 app.set('views', path.join(__dirname, 'views'));
@@ -69,6 +80,42 @@ app.get('/', (req, res) => {
 // 🔐 Autenticación
 const userRoutes = require('./modules/user/userRoute');
 app.use('/auth', userRoutes);
+
+app.get('/auth/inicio-sesion', (req, res) => {
+  res.render('autenticacion/inicio-sesion', {
+    title: 'Iniciar Sesión',
+    layout: 'layouts/layout-auth'
+  });
+});
+
+app.get('/auth/registrarse', (req, res) => {
+  res.render('autenticacion/registrarse', {
+    title: 'Registrarse',
+    layout: 'layouts/layout-auth'
+  });
+});
+
+app.get('/auth/recuperar-password', (req, res) => {
+  res.render('autenticacion/recuperar-password', {
+    title: 'Recuperar Contraseña',
+    layout: 'layouts/layout-auth'
+  });
+});
+
+app.get('/auth/registrar-emprendimiento', (req, res) => {
+  res.render('autenticacion/registrar-emprendimiento', {
+    title: 'Registrar Emprendimiento',
+    layout: 'layouts/layout-auth'
+  });
+});
+
+app.get('/auth/perfil', authMiddleware.authorizeRoleAccess(['ciudadano', 'emprendedor', 'administrador']), (req, res) => {
+  res.render('autenticacion/perfil', {
+    title: 'Perfil',
+    style: '<link rel="stylesheet" href="/css/page-styles/perfil.css">',
+    user: req.session.user || null
+  });
+});
 
 // 🛠️ Administrador
 app.get('/admin/aprobaciones', authMiddleware.authorizeRoleAccess(['administrador']), (req, res) => {

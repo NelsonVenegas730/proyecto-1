@@ -3,12 +3,12 @@
         <div class="emprendimiento-content">
             <div class="emprendimiento-info">
                 <div class="emprendimiento-header">
-                    <div class="emprendimiento-status"><% emprendimiento.status %></div>
+                    <div class="emprendimiento-status"><%= emprendimiento.status %></div>
                     <h2 id="emprendimiento-name" class="active">
-                        Joyería Yurusti
+                        <%= emprendimiento.titulo %>
                     </h2>
                     <div class="edit-form-container inactive">
-                        <input class="edit-form-input" id="emprendimiento-name-input" type="text">
+                        <input class="edit-form-input" id="emprendimiento-name-input" type="text" value="<%= emprendimiento.titulo %>">
                         <small class="error-message inactive">Error, campo no puede estar vacío</small>
                     </div>
                     <div class="edit-buttons-container">
@@ -26,26 +26,26 @@
                         <div class="emprendimiento-descripcion">
                             <i class="bx bxs-info-circle"></i>
                             <p class="emprendimiento-text active">
-                                Joyería artesanal que ofrece una variedad de productos hechos a mano, incluyendo anillos, pulseras y collares. Cada pieza es única y refleja la pasión por el arte de la joyería.
+                                <%= emprendimiento.descripcion %>
                             </p>
                             <div class="edit-form-container inactive">
                                 <textarea 
-                                class="edit-form-textarea" 
-                                name="emprendimiento-descripcion" 
-                                id="emprendimiento-descripcion-textarea"></textarea>
+                                    class="edit-form-textarea" 
+                                    name="emprendimiento-descripcion" 
+                                    id="emprendimiento-descripcion-textarea"><%= emprendimiento.descripcion %></textarea>
                                 <small class="error-message inactive">Error, campo no puede estar vacío</small>
                             </div>
                         </div>
                         <div class="emprendimiento-direccion">
                             <i class="bx bxs-map"></i>
                             <p class="emprendimiento-text active">
-                                Desamparados, San José, Costa Rica, 100 metros Este de la Plaza de Deportes.
+                                <%= emprendimiento.direccion %>
                             </p>
                             <div class="edit-form-container inactive">
                                 <textarea 
-                                class="edit-form-textarea"
-                                name="emprendimiento-direccion" 
-                                id="emprendimiento-direccion-textarea"></textarea>
+                                    class="edit-form-textarea"
+                                    name="emprendimiento-direccion" 
+                                    id="emprendimiento-direccion-textarea"><%= emprendimiento.direccion %></textarea>
                                 <small class="error-message inactive">Error, campo no puede estar vacío</small>
                             </div>
                         </div>

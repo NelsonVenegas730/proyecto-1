@@ -1,25 +1,12 @@
-function AuthenticateSession() {
-  return (req, res, next) => {
-    const user = req.session.user
-    if (!user) {
-      return res.status(403).render('error/403-access-denied', {
-        title: '403 Acceso Denegado',
-        layout: 'layouts/layout-error'
-      });
-    }
-    next();
-  }
-}
-
 function redirectIfAuthenticated() {
   return (req, res, next) => {
-    const user = req.session.user
+    const user = req.session.user;
     if (user) {
-      return res.redirect('/')
+      return res.redirect('/');
     } else {
-      next()
+      next();
     }
-  }
+  };
 }
 
 function authorizeRoleAccess(rolesValidos = []) {
@@ -32,12 +19,11 @@ function authorizeRoleAccess(rolesValidos = []) {
   }
 
   return (req, res, next) => {
-    const userId = req.session.user_id;
-    const rolUsuario = req.session.role;
+    const user = req.session.user;
 
-    if (!userId) {
-      const soloCiudadano = rolesValidos.length === 1 && rolesValidos.includes('ciudadano');
-      if (soloCiudadano) {
+    if (!user) {
+      const includesCiudadano = rolesValidos.includes('ciudadano');
+      if (includesCiudadano) {
         return res.redirect('/auth/inicio-sesion');
       }
       return res.status(403).render('error/403-access-denied', {
@@ -48,7 +34,7 @@ function authorizeRoleAccess(rolesValidos = []) {
       });
     }
 
-    if (!rolUsuario || !rolesValidos.includes(rolUsuario)) {
+    if (!rolesValidos.includes(user.role)) {
       return res.status(403).render('error/403-access-denied', {
         title: 'Acceso Denegado',
         layout: 'layouts/layout-error',
@@ -61,4 +47,4 @@ function authorizeRoleAccess(rolesValidos = []) {
   };
 }
 
-module.exports = { AuthenticateSession, redirectIfAuthenticated, authorizeRoleAccess };
+module.exports = { redirectIfAuthenticated, authorizeRoleAccess };

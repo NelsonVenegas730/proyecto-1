@@ -45,7 +45,7 @@ body::after {
   transform: translate(-50%, -50%);
   width: 1000px; /* o más grande si querés */
   height: 1000px;
-  background-image: url("../../../Public/Images/logo-desamparados.png");
+  background-image: url("/images/logo-desamparados.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;

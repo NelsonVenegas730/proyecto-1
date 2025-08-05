@@ -3,7 +3,7 @@
     <h2>Inicio de sesión</h2>
     <p class="subtitulo">Por favor inicie sesión para entrar al sitio.</p>
 
-    <form id="formulario" action="/login" method="POST">
+    <form id="formulario">
       <div class="field-container">
         <label for="correo">Correo Electrónico</label>
         <input type="email" id="correo" name="correo" placeholder="Placeholder" required />
@@ -23,11 +23,15 @@
 
       <button type="submit">Iniciar Sesión</button>
 
+      
       <hr />
-
+      
       <p class="auth-link">
         ¿No tienes cuenta? <a href="/auth/registrarse">Regístrate aquí.</a>
       </p>
     </form>
   </div>
+  <div id="mensaje-exito" class="mensaje-exito oculto">¡Información enviada con éxito!</div>
+  <div id="mensaje-error" class="mensaje-error oculto">Error, por favor completa todos los campos correctamente.</div>
+  <script src="/js/validateLogin.js"></script>
 </body>
