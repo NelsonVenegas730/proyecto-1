@@ -5,9 +5,14 @@ const businessSchema = new Schema({
   description: { type: String, default: '' },
   address: { type: String, default: '' },
   image: { type: String, default: '' }, // ruta o filename de la imagen
-  user_id: { type: Schema.Types.ObjectId, required: true, ref: 'user' },
+  user_id: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
   date: { type: Date, required: true },
-  status: { type: String, default: 'pendiente' }
+  status: {
+    type: String,
+    enum: ['pendiente', 'aprobado', 'rechazado'],
+    default: 'pendiente',
+    required: true
+  }
 });
 
 module.exports = model('business', businessSchema);

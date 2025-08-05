@@ -26,8 +26,9 @@
       </div>
       <div class="emprendimiento-image-container">
         <img 
-          src="<%= emprendimiento.image %>" 
-          alt="Imagen de <%= emprendimiento.name %>"
+          src="<%= emprendimiento.image ? '/uploads/' + emprendimiento.image : '/images/default.jpeg' %>" 
+          alt="<%= emprendimiento.name %>" 
+          id="emprendimiento-img" 
         />
       </div>
     </div>

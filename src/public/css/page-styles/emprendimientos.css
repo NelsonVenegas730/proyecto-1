@@ -84,3 +84,18 @@
   margin-top: 0.5rem;
   font-style: italic;
 }
+
+.avatar-fallback {
+  background-color: #2f80ed;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  text-transform: uppercase;
+}

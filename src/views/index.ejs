@@ -12,13 +12,15 @@
                         Desamparados vuelve a ser el epicentro de las inundaciones, donde fuertes lluvias de hoy martes donde el cause de los ríos crecieron 1 metro.
                     </p>
                 </div>
-                <div class="cta-container">
-                    <p class="cta-hero-text">Para noticias como estas y más. Si quieres estar al tanto de la información más reciente de la comunidad -></p>
-                    <div class="cta-hero-buttons">
+                <% if (!user) { %>
+                    <div class="cta-container">
+                        <p class="cta-hero-text">Para noticias como estas y más. Si quieres estar al tanto de la información más reciente de la comunidad -></p>
+                        <div class="cta-hero-buttons">
                         <a href="/auth/inicio-sesion" class="cta-hero-button" type="button">Iniciar sesión</a>
                         <a href="/auth/registrarse" class="cta-hero-button" type="button">Registrarse</a>
+                        </div>
                     </div>
-                </div>
+                <% } %>
             </div>
             <img
                 class="hero-content" 

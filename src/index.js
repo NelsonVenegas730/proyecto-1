@@ -73,7 +73,8 @@ app.use('/api/businesses', businessRoutes);
 app.get('/', authMiddleware.redirectFromLanding(), (req, res) => {
   res.render('index', {
     title: 'Inicio',
-    style: '<link rel="stylesheet" href="/css/page-styles/inicio.css">'
+    style: '<link rel="stylesheet" href="/css/page-styles/inicio.css">',
+    user: req.session.user || null
   });
 });
 

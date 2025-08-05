@@ -1,17 +1,18 @@
 const Business = require('./businessModel');
 const businessService = require('./businessService');
+const User = require('../user/userModel');
 
 async function getAllBusinesses(req, res) {
   try {
-    const businesses = await Business.find().populate('user_id', 'nombre apellidos');
+    const businesses = await Business.find().populate('user_id', 'name last_names');
     const safeBusinesses = businesses.map(b => ({
       ...b._doc,
       name: b.name || 'Sin nombre',
       description: b.description || 'Sin descripción',
       address: b.address || 'Sin dirección',
-      image: b.image || '/images/default.jpeg',
-      user_id: b.user_id && b.user_id.nombre ? b.user_id : { nombre: 'Sin', apellidos: 'Dueño' },
-      date: b.date || new Date(),
+      image: (b.image && typeof b.image === 'string' && b.image.trim() !== '') ? '/uploads/' + b.image : '/images/default.jpeg',
+      user_id: b.user_id && b.user_id.name ? b.user_id : { name: 'Sin', last_names: 'Dueño' },
+      date: b.date ? b.date.toISOString() : new Date().toISOString(),
       status: b.status || 'sin status'
     }));
     res.render('ciudadano/emprendimientos', {
@@ -81,7 +82,7 @@ async function getBusinessByUser(req, res) {
 
 async function getBusinessById(req, res) {
   try {
-    const business = await Business.findById(req.params.id).populate('user_id', 'nombre apellidos');
+    const business = await Business.findById(req.params.id).populate('user_id', 'name last_names');
     if (!business) return res.status(404).send('Emprendimiento no encontrado');
 
     const safeBusiness = {
@@ -90,11 +91,11 @@ async function getBusinessById(req, res) {
       description: business.description || 'Sin descripción',
       address: business.address || 'Sin dirección',
       image: business.image || '/images/default.jpeg',
-      user_id: business.user_id && business.user_id.nombre
+      user_id: business.user_id && business.user_id.name
         ? business.user_id
-        : { nombre: 'Sin', apellidos: 'Dueño' },
+        : { name: 'Sin', last_names: 'Dueño' },
       date: business.date || new Date(),
-      status: b.status || 'sin status'
+      status: business.status || 'sin status'
     };
 
     res.render('ciudadano/emprendimiento-id', {
