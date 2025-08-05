@@ -27,38 +27,55 @@ async function getAllBusinesses(req, res) {
 
 async function createBusiness(req, res) {
   try {
-    const { titulo, descripcion, direccion } = req.body;
-    const imagen = req.file ? req.file.filename : null;
-    const user_id = req.session.user_id;
+    const { name, description, address } = req.body;
+    const image = req.file ? req.file.filename : null;
+    const user_id = req.session.user?._id;
 
-    if (!user_id) {
-      return res.status(401).send('No autorizado');
+    if (!user_id) return res.status(401).send('No autorizado');
+
+    if (!name || !description || !address || !user_id) {
+      return res.status(400).json({ message: 'Faltan datos obligatorios' });
     }
 
     const data = {
-      titulo,
-      descripcion,
-      direccion,
-      imagen,
+      name,
+      description,
+      address,
+      image,
       user_id,
-      date: new Date()
+      date: new Date(),
+      status: 'pendiente' // por si quieres setear status inicial
     };
 
     const business = await businessService.createBusiness(data);
 
-    res.redirect(`/emprendedor/mi-emprendimiento/${user_id}`);
+    res.status(201).json({ success: true, business });
   } catch (error) {
-    res.status(500).send('Error al registrar emprendimiento');
+    console.error(error);
+    res.status(500).json({ message: 'Error al registrar emprendimiento' });
   }
 }
 
 async function getBusinessByUser(req, res) {
   try {
-    const { user_id } = req.params;
-    const businesses = await businessService.getBusinessByUser(user_id);
-    res.json(businesses);
+    const { id: user_id } = req.params;
+
+    const emprendimiento = await businessService.getSingleBusinessByUser(user_id);
+
+    if (!emprendimiento) {
+      return res.status(404).render('404', { mensaje: 'Emprendimiento no encontrado' });
+    }
+
+    res.render('emprendedor/mi-emprendimiento', {
+      emprendimiento,
+      user: req.session.user,
+      title: 'Mi emprendimiento',
+      style: '<link rel="stylesheet" href="/css/page-styles/emprendimiento.css">',
+      layout: 'layouts/layout-default'
+    });
   } catch (err) {
-    res.status(404);
+    console.error(err);
+    res.status(404).render('error/404-not-found', { title: 'Error', mensaje: 'No se pudo obtener el emprendimiento' });
   }
 }
 
@@ -93,11 +110,23 @@ async function getBusinessById(req, res) {
 
 async function updateBusiness(req, res) {
   try {
-    const { id } = req.params;
-    const data = req.body;
-    const updated = await businessService.updateBusiness(id, data);
-    if (!updated) return res.status(404).json({ error: 'Business not found' });
-    res.json(updated);
+    const user_id = req.session.user._id;
+    const { name, description, address } = req.body;
+    const updateData = {
+      name,
+      description,
+      address,
+    };
+
+    if (req.file) {
+      updateData.image = req.file.buffer;
+      updateData.image_mimetype = req.file.mimetype;
+    }
+
+    const updated = await businessService.updateBusinessByUser(user_id, updateData);
+    if (!updated) return res.status(404).json({ error: 'Emprendimiento no encontrado' });
+
+    res.json({ success: true });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

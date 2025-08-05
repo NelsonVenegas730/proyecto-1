@@ -70,7 +70,7 @@ const businessController = require('./modules/business/businessController');
 app.use('/api/businesses', businessRoutes);
 
 // 🏠 Página principal
-app.get('/', (req, res) => {
+app.get('/', authMiddleware.redirectFromLanding(), (req, res) => {
   res.render('index', {
     title: 'Inicio',
     style: '<link rel="stylesheet" href="/css/page-styles/inicio.css">'
@@ -206,14 +206,6 @@ app.listen(port, () => {
 });
 
 // 🔽 POSTs (formularios)
-
-// Registrar emprendimiento
-app.post('/registrar-emprendimiento', upload.single('imagen'), (req, res) => {
-  const { titulo, descripcion, direccion } = req.body;
-  const imagen = req.file ? req.file.filename : null;
-  console.log(`Título: ${titulo}, Descripción: ${descripcion}, Dirección: ${direccion}, Imagen: ${imagen}`);
-  res.redirect('/emprendedor/mi-emprendimiento');
-});
 
 // Editar emprendimiento
 app.post('/editar-emprendimiento', upload.single('imagen'), (req, res) => {

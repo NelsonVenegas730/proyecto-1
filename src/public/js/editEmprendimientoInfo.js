@@ -1,3 +1,4 @@
+
 const editBtn = document.getElementById("toggle-edition-btn");
 const cancelBtn = document.getElementById("cancel-edition");
 const editImgBtn = document.getElementById("edit-img-trigger");
@@ -67,37 +68,44 @@ const restoreOriginalImage = () => {
 
 const enviarCambiosAlServidor = async () => {
   const formData = new FormData();
-  formData.append('titulo', emprendimientoNameInput.value.trim());
-  formData.append('descripcion', descripcionTextarea.value.trim());
-  formData.append('direccion', direccionTextarea.value.trim());
+  formData.append('name', emprendimientoNameInput.value.trim());
+  formData.append('description', descripcionTextarea.value.trim());
+  formData.append('address', direccionTextarea.value.trim());
 
   if (imgInput.files.length > 0) {
-    formData.append('imagen', imgInput.files[0]);
+    formData.append('image', imgInput.files[0]);
   }
 
   try {
-    const res = await fetch('/editar-emprendimiento', {
-      method: 'POST',
+    const res = await fetch('/api/businesses/update', {
+      method: 'PUT',
       body: formData
     });
 
     if (!res.ok) throw new Error('Error al guardar');
 
     const data = await res.json();
+
     if (data.nuevaImagenUrl) {
       imgElement.src = data.nuevaImagenUrl;
       originalImgSrc = data.nuevaImagenUrl;
     }
+
+    return true;
   } catch (error) {
     alert('No se pudo guardar el emprendimiento');
     console.error(error);
+    return false;
   }
 };
 
 const toggleEdition = async () => {
   if (isEditing) {
     if (!validateFields()) return;
-    await enviarCambiosAlServidor();
+
+    const success = await enviarCambiosAlServidor();
+    if (!success) return;
+
     updateTextContent();
     editBtn.innerHTML = `<i class="bx bxs-edit"></i><p class="edit-btn-text">Editar emprendimiento</p>`;
     cancelBtn.classList.remove("active");

@@ -15,6 +15,7 @@ async function signUp(req, res) {
     req.session.user = {
       _id: user._id,
       username: user.username,
+      email: user.email,
       name: user.name,
       last_names: user.last_names,
       role: user.role,
@@ -54,6 +55,7 @@ async function login(req, res) {
     req.session.user = {
       _id: user._id,
       username: user.username,
+      email: user.email,
       name: user.name,
       last_names: user.last_names,
       role: user.role,

@@ -5,10 +5,10 @@
                 <div class="emprendimiento-header">
                     <div class="emprendimiento-status"><%= emprendimiento.status %></div>
                     <h2 id="emprendimiento-name" class="active">
-                        <%= emprendimiento.titulo %>
+                        <%= emprendimiento.name %>
                     </h2>
                     <div class="edit-form-container inactive">
-                        <input class="edit-form-input" id="emprendimiento-name-input" type="text" value="<%= emprendimiento.titulo %>">
+                        <input class="edit-form-input" id="emprendimiento-name-input" type="text" name="name" value="<%= emprendimiento.name %>">
                         <small class="error-message inactive">Error, campo no puede estar vacío</small>
                     </div>
                     <div class="edit-buttons-container">
@@ -26,26 +26,26 @@
                         <div class="emprendimiento-descripcion">
                             <i class="bx bxs-info-circle"></i>
                             <p class="emprendimiento-text active">
-                                <%= emprendimiento.descripcion %>
+                                <%= emprendimiento.description %>
                             </p>
                             <div class="edit-form-container inactive">
                                 <textarea 
                                     class="edit-form-textarea" 
-                                    name="emprendimiento-descripcion" 
-                                    id="emprendimiento-descripcion-textarea"><%= emprendimiento.descripcion %></textarea>
+                                    name="description"
+                                    id="emprendimiento-descripcion-textarea"><%= emprendimiento.description %></textarea>
                                 <small class="error-message inactive">Error, campo no puede estar vacío</small>
                             </div>
                         </div>
                         <div class="emprendimiento-direccion">
                             <i class="bx bxs-map"></i>
                             <p class="emprendimiento-text active">
-                                <%= emprendimiento.direccion %>
+                                <%= emprendimiento.address %>
                             </p>
                             <div class="edit-form-container inactive">
                                 <textarea 
                                     class="edit-form-textarea"
-                                    name="emprendimiento-direccion" 
-                                    id="emprendimiento-direccion-textarea"><%= emprendimiento.direccion %></textarea>
+                                    name="address"
+                                    id="emprendimiento-direccion-textarea"><%= emprendimiento.address %></textarea>
                                 <small class="error-message inactive">Error, campo no puede estar vacío</small>
                             </div>
                         </div>
@@ -57,16 +57,15 @@
                     <i class="bx bxs-image"></i>
                     Cambiar imagen
                 </button>
-                <input type="file" id="edit-img-input" accept="image/*" class="edit-img-input inactive">
+                <input type="file" id="edit-img-input" accept="image/*" class="edit-img-input inactive" name="image">
                 <img 
-                    src="<%= emprendimiento.imagen ? '/uploads/' + emprendimiento.imagen : '/images/default.jpeg' %>"
-                    alt="<%= emprendimiento.titulo %>"
+                    src="<%= emprendimiento.image ? '/uploads/' + emprendimiento.image : '/images/default.jpeg' %>"
+                    alt="<%= emprendimiento.name %>"
                     id="emprendimiento-img"
                 />
             </div>
         </div>
     </main>
-    <script src="/js/fetchEmprendimiento.js"></script>
     <script src="/js/editEmprendimientoInfo.js"></script>
 </body>
 </html>

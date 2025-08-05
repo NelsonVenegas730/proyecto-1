@@ -9,6 +9,18 @@ function redirectIfAuthenticated() {
   };
 }
 
+function redirectFromLanding() {
+  return (req, res, next) => {
+    const user = req.session.user;
+    if (user && user.role === 'administrador') {
+      return res.redirect('/admin/panel-administrador');
+    } else if (user && user.role === 'emprendedor') {
+      return res.redirect('/emprendedor/mi-emprendimiento/' + user._id);
+    }
+    next();
+  };
+}
+
 function authorizeRoleAccess(rolesValidos = []) {
   const todosRoles = ['administrador', 'ciudadano', 'emprendedor'];
 
@@ -47,4 +59,4 @@ function authorizeRoleAccess(rolesValidos = []) {
   };
 }
 
-module.exports = { redirectIfAuthenticated, authorizeRoleAccess };
+module.exports = { redirectIfAuthenticated, redirectFromLanding, authorizeRoleAccess };

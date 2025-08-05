@@ -77,7 +77,7 @@
   <% if (user && user.role === 'emprendedor') { %>
     <ul class="sidebar-links-container" id="sidebar-links-emprendedor">
       <li class="sidebar-link">
-        <a href="/emprendedor/mi-emprendimiento">
+        <a href="/emprendedor/mi-emprendimiento/<%= user._id %>">
           <i class="bx bxs-store-alt"></i>
           <span>Mi emprendimiento</span>
         </a>

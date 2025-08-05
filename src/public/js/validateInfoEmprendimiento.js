@@ -1,9 +1,9 @@
-const imagenInput = document.getElementById("imagen");
+const imageInput = document.getElementById("image");
 const previewContainer = document.getElementById("preview-container");
 
-imagenInput.addEventListener("change", () => {
+imageInput.addEventListener("change", () => {
   previewContainer.innerHTML = "";
-  const file = imagenInput.files[0];
+  const file = imageInput.files[0];
   if (!file) return;
 
   const img = document.createElement("img");
@@ -14,31 +14,29 @@ imagenInput.addEventListener("change", () => {
   previewContainer.appendChild(img);
 });
 
-const formulario = document.getElementById("formulario");
-const titulo = document.getElementById("titulo");
-const descripcion = document.getElementById("descripcion");
-const direccion = document.getElementById("direccion");
-const imagen = document.getElementById("imagen");
+const form = document.getElementById("formulario");
+const nameInput = document.getElementById("name");
+const descriptionInput = document.getElementById("description");
+const addressInput = document.getElementById("address");
+const successMessage = document.getElementById("mensaje-exito");
 
-const requisitosTitulo = titulo.nextElementSibling;
-const requisitosDescripcion = descripcion.nextElementSibling;
-const requisitosDireccion = direccion.nextElementSibling;
+const reqName = nameInput.nextElementSibling;
+const reqDescription = descriptionInput.nextElementSibling;
+const reqAddress = addressInput.nextElementSibling;
 
-const mensajeExito = document.getElementById("mensaje-exito");
-
-const validateNotEmpty = (input, requisitoElem) => {
+const validateNotEmpty = (input, reqElem) => {
   const isValid = input.value.trim() !== "";
   input.classList.toggle("input-correcto", isValid);
   input.classList.toggle("input-incorrecto", !isValid);
-  requisitoElem.classList.toggle("ok", isValid);
-  requisitoElem.classList.toggle("error", !isValid);
+  reqElem.classList.toggle("ok", isValid);
+  reqElem.classList.toggle("error", !isValid);
   return isValid;
 };
 
-const mostrarPreviewImagen = () => {
+const showImagePreview = () => {
   previewContainer.innerHTML = "";
-  if (imagen.files && imagen.files[0]) {
-    const file = imagen.files[0];
+  if (imageInput.files && imageInput.files[0]) {
+    const file = imageInput.files[0];
     const reader = new FileReader();
     reader.onload = e => {
       const img = document.createElement("img");
@@ -50,32 +48,52 @@ const mostrarPreviewImagen = () => {
   }
 };
 
-titulo.addEventListener("blur", () => validateNotEmpty(titulo, requisitosTitulo));
-titulo.addEventListener("keyup", () => validateNotEmpty(titulo, requisitosTitulo));
-descripcion.addEventListener("blur", () => validateNotEmpty(descripcion, requisitosDescripcion));
-descripcion.addEventListener("keyup", () => validateNotEmpty(descripcion, requisitosDescripcion));
-direccion.addEventListener("blur", () => validateNotEmpty(direccion, requisitosDireccion));
-direccion.addEventListener("keyup", () => validateNotEmpty(direccion, requisitosDireccion));
-imagen.addEventListener("change", mostrarPreviewImagen);
+nameInput.addEventListener("blur", () => validateNotEmpty(nameInput, reqName));
+nameInput.addEventListener("keyup", () => validateNotEmpty(nameInput, reqName));
+descriptionInput.addEventListener("blur", () => validateNotEmpty(descriptionInput, reqDescription));
+descriptionInput.addEventListener("keyup", () => validateNotEmpty(descriptionInput, reqDescription));
+addressInput.addEventListener("blur", () => validateNotEmpty(addressInput, reqAddress));
+addressInput.addEventListener("keyup", () => validateNotEmpty(addressInput, reqAddress));
+imageInput.addEventListener("change", showImagePreview);
 
-formulario.addEventListener("submit", e => {
-  const tituloValido = validateNotEmpty(titulo, requisitosTitulo);
-  const descripcionValido = validateNotEmpty(descripcion, requisitosDescripcion);
-  const direccionValido = validateNotEmpty(direccion, requisitosDireccion);
+form.addEventListener("submit", async e => {
+  e.preventDefault();
 
-  if (!(tituloValido && descripcionValido && direccionValido)) {
-    e.preventDefault();
+  const nameValid = validateNotEmpty(nameInput, reqName);
+  const descriptionValid = validateNotEmpty(descriptionInput, reqDescription);
+  const addressValid = validateNotEmpty(addressInput, reqAddress);
+
+  if (!(nameValid && descriptionValid && addressValid)) {
     alert("Por favor completá todos los campos obligatorios.");
-  } else {
-    e.preventDefault();
-    mostrarMensajeExito(() => formulario.submit());
+    return;
+  }
+
+  const formData = new FormData(form);
+
+  try {
+    const response = await fetch('/api/businesses', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      showSuccessMessage(() => {
+        window.location.href = '/emprendedor/mi-emprendimiento/' + data.business.user_id;
+      });
+    } else {
+      alert("Error al registrar el emprendimiento");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Error en la conexión");
   }
 });
 
-function mostrarMensajeExito(callback) {
-  mensajeExito.classList.remove("oculto");
-  setTimeout(() => {
-    mensajeExito.classList.add("oculto");
-    if (typeof callback === "function") callback();
+function showSuccessMessage(callback) {
+  successMessage.classList.remove("oculto");
+  setTimeout(async () => {
+    successMessage.classList.add("oculto");
+    if (typeof callback === "function") await callback();
   }, 3500);
 }
