@@ -1,5 +1,17 @@
 const SupportTicket = require('./ticketModel');
 
+async function getAllTickets() {
+  const tickets = await SupportTicket.find().populate('user_id', 'name email');
+  return tickets.map(ticket => ({
+    ...ticket._doc,
+    date: ticket.date ? ticket.date.toISOString() : new Date().toISOString(),
+    messages: ticket.messages.map(msg => ({
+      ...msg,
+      timestamp: msg.timestamp ? msg.timestamp.toISOString() : new Date().toISOString()
+    }))
+  }));
+}
+
 async function createTicket(data) {
   const ticket = new SupportTicket(data);
   return await ticket.save();
@@ -21,6 +33,7 @@ async function addMessage(ticketId, message) {
 }
 
 module.exports = {
+  getAllTickets,
   createTicket,
   getTicketsByUser,
   getTicketById,

@@ -5,7 +5,7 @@ const businessSchema = new Schema({
   description: { type: String, default: '' },
   address: { type: String, default: '' },
   image: { type: String, default: '' }, // ruta o filename de la imagen
-  user_id: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
+  user_id: { type: Schema.Types.ObjectId, required: true, ref: 'user' },
   date: { type: Date, required: true },
   status: {
     type: String,

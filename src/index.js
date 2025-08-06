@@ -64,10 +64,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 // 📂 Rutas
-
 const businessRoutes = require('./modules/business/businessRoute');
 const businessController = require('./modules/business/businessController');
 app.use('/api/businesses', businessRoutes);
+
+const announcementRoutes = require('./modules/announcement/announcementRoute');
+const announcementController = require('./modules/announcement/announcementController');
+app.use('/api/announcement', announcementRoutes);
 
 // 🏠 Página principal
 app.get('/', authMiddleware.redirectFromLanding(), (req, res) => {
@@ -162,12 +165,7 @@ app.get('/horario-buses', authMiddleware.authorizeRoleAccess(['ciudadano']), (re
   });
 });
 
-app.get('/noticias-anuncios-eventos', authMiddleware.authorizeRoleAccess(['ciudadano']), (req, res) => {
-  res.render('ciudadano/noticias-anuncios-eventos', {
-    title: 'Noticias, Anuncios y Eventos',
-    style: '<link rel="stylesheet" href="/css/page-styles/noticias-anuncios-eventos.css">'
-  });
-});
+app.get('/noticias-anuncios-eventos', authMiddleware.authorizeRoleAccess(['ciudadano']), announcementController.getAllAnnouncements);
 
 app.get('/sugerencias', authMiddleware.authorizeRoleAccess(['ciudadano']), (req, res) => {
   res.render('ciudadano/sugerencias', {

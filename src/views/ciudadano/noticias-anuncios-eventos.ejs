@@ -1,99 +1,53 @@
 <body>
-    <main>
-        <%- include('../partials/filter-controls', { filterType: 'type' }) %>
-        <div class="noticias-eventos-anuncios-container">
-            <div class="noticias-eventos-anuncios-container">
-                <div class="noticia-evento-anuncio-element card">
-                    <img src="https://www.esneca.com/wp-content/uploads/eventos-sociales.jpg" alt="Evento">
-                    <div class="noticia-evento-anuncio-info">
-                        <span class="badge evento">Evento</span>
-                        <h3>Evento Cultural en el Parque Central</h3>
-                        <p>Únete a nosotros para un día lleno de música, arte y cultura en el corazón de Desamparados.</p>
-                        <span class="fecha">Fecha de creación: 15 de marzo de 2025</span>
-                        <div class="autor">
-                            <div class="avatar">AB</div>
-                            <span>Publicado por: Ana Benítez</span>
-                        </div>
-                    </div>
-                </div>
+  <main>
+    <%- include('../partials/filter-controls', { filterType: 'type' }) %>
+    <div class="noticias-eventos-anuncios-container">
+      <%
+        const aprobados = anuncios.filter(a => a.status === 'aprobado');
+      %>
 
-                <div class="noticia-evento-anuncio-element card">
-                    <img src="https://www.esneca.com/wp-content/uploads/eventos-sociales.jpg" alt="Noticia">
-                    <div class="noticia-evento-anuncio-info">
-                        <span class="badge noticia">Noticia</span>
-                        <h3>Nuevo Mercado Municipal Abierto</h3>
-                        <p>Descubre los productos frescos y locales en nuestro nuevo mercado, abierto todos los sábados.</p>
-                        <span class="fecha">Fecha de creación: 20 de marzo de 2025</span>
-                        <div class="autor">
-                            <div class="avatar">AB</div>
-                            <span>Publicado por: Ana Benítez</span>
-                        </div>
-                    </div>
+      <% if (aprobados.length === 0) { %>
+        <p>No hay anuncios disponibles aún.</p>
+      <% } else { %>
+        <% aprobados.forEach(a => { %>
+          <div class="noticia-evento-anuncio-element card" data-user-id="<%= a.user_id?._id || '' %>">
+            <img src="<%= a.image %>" alt="Imagen de <%= a.title %>">
+            <div class="noticia-evento-anuncio-info">
+              <span class="badge <%= a.type %>"><%= a.type %></span>
+              <h3><%= a.title %></h3>
+              <p><%= a.description %></p>
+              <span class="fecha">
+                Fecha de creación: <%= new Date(a.date).toLocaleDateString('es-CR', { day: 'numeric', month: 'long', year: 'numeric' }) %>
+              </span>
+              <div class="autor">
+                <div class="avatar">
+                  <%= a.user_id
+                    ? ((a.user_id.name?.charAt(0) || '') + (a.user_id.last_names?.charAt(0) || '')).toUpperCase()
+                    : '??' %>
                 </div>
-
-                <div class="noticia-evento-anuncio-element card">
-                    <img src="https://www.esneca.com/wp-content/uploads/eventos-sociales.jpg" alt="Noticia">
-                    <div class="noticia-evento-anuncio-info">
-                        <span class="badge anuncio">Anuncio</span>
-                        <h3>Nuevo Mercado Municipal Abierto</h3>
-                        <p>Descubre los productos frescos y locales en nuestro nuevo mercado, abierto todos los sábados.</p>
-                        <span class="fecha">Fecha de creación: 20 de marzo de 2025</span>
-                        <div class="autor">
-                            <div class="avatar">AB</div>
-                            <span>Publicado por: Ana Benítez</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="noticia-evento-anuncio-element card">
-                    <img src="https://www.esneca.com/wp-content/uploads/eventos-sociales.jpg" alt="Noticia">
-                    <div class="noticia-evento-anuncio-info">
-                        <span class="badge evento">Evento</span>
-                        <h3>Nuevo Mercado Municipal Abierto</h3>
-                        <p>Descubre los productos frescos y locales en nuestro nuevo mercado, abierto todos los sábados.</p>
-                        <span class="fecha">Fecha de creación: 20 de marzo de 2025</span>
-                        <div class="autor">
-                            <div class="avatar">AB</div>
-                            <span>Publicado por: Ana Benítez</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="noticia-evento-anuncio-element card">
-                    <img src="https://www.esneca.com/wp-content/uploads/eventos-sociales.jpg" alt="Noticia">
-                    <div class="noticia-evento-anuncio-info">
-                        <span class="badge anuncio">Anuncio</span>
-                        <h3>Nuevo Mercado Municipal Abierto</h3>
-                        <p>Descubre los productos frescos y locales en nuestro nuevo mercado, abierto todos los sábados.</p>
-                        <span class="fecha">Fecha de creación: 20 de marzo de 2025</span>
-                        <div class="autor">
-                            <div class="avatar">AB</div>
-                            <span>Publicado por: Ana Benítez</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="noticia-evento-anuncio-element card">
-                    <img src="https://www.esneca.com/wp-content/uploads/eventos-sociales.jpg" alt="Noticia">
-                    <div class="noticia-evento-anuncio-info">
-                        <span class="badge anuncio">Anuncio</span>
-                        <h3>Nuevo Mercado Municipal Abierto</h3>
-                        <p>Descubre los productos frescos y locales en nuestro nuevo mercado, abierto todos los sábados.</p>
-                        <span class="fecha">Fecha de creación: 20 de marzo de 2025</span>
-                        <div class="autor">
-                            <div class="avatar">AB</div>
-                            <span>Publicado por: Ana Benítez</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="create-anuncio-evento-noticia-cta">
-                    <a href="/form/form-anuncio-evento-noticia" class="cta-button">
-                        <i class="bx bxs-plus-circle"></i>
-                        Crear nuevo anuncio, evento o noticia
-                    </a>
-                </div>
+                <span>
+                  Publicado por:
+                  <%= a.user_id
+                    ? ((a.user_id.name || '') + ' ' + (a.user_id.last_names || '')).trim()
+                    : 'Desconocido' %>
+                </span>
+              </div>
             </div>
-        </div>
-    </main>
-    <script src="/js/filterContent.js"></script>
+          </div>
+        <% }) %>
+      <% } %>
+
+      <div class="create-anuncio-evento-noticia-cta">
+        <a href="/form/form-anuncio-evento-noticia" class="cta-button">
+          <i class="bx bxs-plus-circle"></i>
+          Crear nuevo anuncio, evento o noticia
+        </a>
+      </div>
+      
+    </div>
+  </main>
+  <script>
+    window.currentUserId = "<%= userId %>";
+  </script>
+  <script src="/js/filterContent.js"></script>
 </body>
-</html>

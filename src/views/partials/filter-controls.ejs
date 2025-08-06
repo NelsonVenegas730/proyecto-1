@@ -9,6 +9,12 @@
           <label><input type="checkbox" value="en-proceso" class="filter-checkbox"> En proceso</label>
           <label><input type="checkbox" value="cerrado" class="filter-checkbox"> Cerrado</label>
       </div>
+
+      <div class="filter-group">
+        <h4>Filtrar por autor</h4>
+        <label><input type="checkbox" id="only-my-posts"> Solo mis publicaciones</label>
+      </div>
+
     <% } else if (filterType === 'type') { %>
       <div class="filter-group">
           <h4>Filtrar por tipo</h4>
@@ -16,6 +22,12 @@
           <label><input type="checkbox" value="noticia" class="filter-checkbox"> Noticia</label>
           <label><input type="checkbox" value="anuncio" class="filter-checkbox"> Anuncio</label>
       </div>
+
+      <div class="filter-group">
+        <h4>Filtrar por autor</h4>
+        <label><input type="checkbox" id="only-my-posts"> Solo mis publicaciones</label>
+      </div>
+
     <% } else if (filterType === 'content') { %>
       <div class="filter-group">
           <h4>Filtrar por tipo de contenido</h4>

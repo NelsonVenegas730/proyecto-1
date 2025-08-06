@@ -1,5 +1,14 @@
 const supportTicketService = require('./ticketService');
 
+async function getAllTickets(req, res) {
+  try {
+    const tickets = await supportTicketService.getAllTickets();
+    res.json(tickets);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
 async function createTicket(req, res) {
   try {
     const data = req.body;
@@ -49,6 +58,7 @@ async function addMessage(req, res) {
 }
 
 module.exports = {
+  getAllTickets,
   createTicket,
   getTicketsByUser,
   getTicketById,

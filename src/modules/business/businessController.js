@@ -1,6 +1,5 @@
 const Business = require('./businessModel');
 const businessService = require('./businessService');
-const User = require('../user/userModel');
 
 async function getAllBusinesses(req, res) {
   try {
