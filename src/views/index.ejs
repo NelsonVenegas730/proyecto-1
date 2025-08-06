@@ -3,28 +3,37 @@
     <main>
         <!--HERO NOTICIAS SECTION-->
         <div class="hero content-container">
-            <div class="hero-text">
+           <div class="hero-text">
+            <% if (anuncio) { %>
                 <div class="noticia-container">
-                    <p class="fecha">Fecha: 20 de abril de 2025</p>
-                    <h2 class="subtitle noticia-title">Desamparados recibe los impactos de las fuertes lluvias</h2>
-                    <hr>
-                    <p class="noticia-description">
-                        Desamparados vuelve a ser el epicentro de las inundaciones, donde fuertes lluvias de hoy martes donde el cause de los ríos crecieron 1 metro.
-                    </p>
+                <p class="fecha">Fecha: <%= new Date(anuncio.date).toLocaleDateString('es-CR', { day: 'numeric', month: 'long', year: 'numeric' }) %></p>
+                <h2 class="subtitle noticia-title"><%= anuncio.title %></h2>
+                <hr>
+                <p class="noticia-description"><%= anuncio.description %></p>
                 </div>
-                <% if (!user) { %>
-                    <div class="cta-container">
-                        <p class="cta-hero-text">Para noticias como estas y más. Si quieres estar al tanto de la información más reciente de la comunidad -></p>
-                        <div class="cta-hero-buttons">
-                        <a href="/auth/inicio-sesion" class="cta-hero-button" type="button">Iniciar sesión</a>
-                        <a href="/auth/registrarse" class="cta-hero-button" type="button">Registrarse</a>
-                        </div>
-                    </div>
-                <% } %>
+            <% } else { %>
+                <div class="noticia-container">
+                <p>No hay noticias recientes disponibles.</p>
+                </div>
+            <% } %>
+
+            <% if (!user) { %>
+                <div class="cta-container">
+                <p class="cta-hero-text">
+                    Para noticias como estas y más. Si quieres estar al tanto de la información más reciente de la comunidad ->
+                </p>
+                <div class="cta-hero-buttons">
+                    <a href="/auth/inicio-sesion" class="cta-hero-button" type="button">Iniciar sesión</a>
+                    <a href="/auth/registrarse" class="cta-hero-button" type="button">Registrarse</a>
+                </div>
+                </div>
+            <% } %>
             </div>
-            <img
+
+            <img 
                 class="hero-content" 
-                src="https://alba-cr-repretel.cdn.mediatiquepress.com/wp-content/uploads/2023/06/Imagen-27_6_2023-20_05_10-1-700x385.jpg"
+                src="<%= anuncio.image ? '/uploads/' + anuncio.image : '/images/default.jpeg' %>" 
+                alt="Imagen de la noticia"
             />
         </div>
         <!--MAPA INTERACTIVO SECTION-->

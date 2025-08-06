@@ -70,15 +70,24 @@ app.use('/api/businesses', businessRoutes);
 
 const announcementRoutes = require('./modules/announcement/announcementRoute');
 const announcementController = require('./modules/announcement/announcementController');
+const announcementService = require('./modules/announcement/announcementService');
 app.use('/api/announcement', announcementRoutes);
 
 // 🏠 Página principal
-app.get('/', authMiddleware.redirectFromLanding(), (req, res) => {
-  res.render('index', {
-    title: 'Inicio',
-    style: '<link rel="stylesheet" href="/css/page-styles/inicio.css">',
-    user: req.session.user || null
-  });
+app.get('/', authMiddleware.redirectFromLanding(), async (req, res) => {
+  try {
+    const anuncio = await announcementService.getLatestApprovedAnnouncement();
+
+    res.render('index', {
+      title: 'Inicio',
+      style: '<link rel="stylesheet" href="/css/page-styles/inicio.css">',
+      user: req.session.user || null,
+      anuncio
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error al cargar la página de inicio');
+  }
 });
 
 // 🔐 Autenticación

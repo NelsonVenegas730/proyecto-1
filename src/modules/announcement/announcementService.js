@@ -10,7 +10,14 @@ async function createAnnouncement(data) {
   return await announcement.save();
 }
 
+async function getLatestApprovedAnnouncement() {
+  return await Announcement.findOne({ type: 'noticia', status: 'aprobado' })
+    .sort({ date: -1 })
+    .populate('user_id', 'name last_names');
+}
+
 module.exports = {
   getAllAnnouncements,
-  createAnnouncement
+  createAnnouncement,
+  getLatestApprovedAnnouncement
 }
