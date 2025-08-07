@@ -9,27 +9,30 @@
           href: '/form/form-tiquete' 
         }) %>
     <% } else { %>
-      <div class="tickets-container card">
+      <div class="tickets-container">
         <% tickets.forEach(ticket => { %>
           <div class="ticket-element card" 
               data-user-id="<%= ticket.user_id?._id || '' %>" 
               data-ticket-id="<%= ticket._id %>"
           >
             <% if (user && ticket.user_id && ticket.user_id._id == user._id) { %>
-              <button class="ticket-menu-btn" aria-label="Opciones">
-                <i class='bx bx-dots-vertical-rounded'></i>
-              </button>
+              
+                <div class="ticket-menu-wrapper">
+                    <button class="ticket-menu-btn" aria-label="Opciones">
+                        <i class='bx bx-dots-vertical-rounded'></i>
+                    </button>
 
-              <div class="ticket-menu-popup">
-                <button class="ticket-menu-option edit-btn"> 
-                  <i class="bx bx-pencil"></i>
-                  Editar
-                </button>
-                <button class="ticket-menu-option delete-btn">
-                  <i class="bx bx-trash"></i>
-                  Eliminar
-                </button>
-              </div>
+                    <div class="ticket-menu-popup">
+                        <button class="ticket-menu-option edit-btn"> 
+                            <i class="bx bx-pencil"></i>
+                            Editar
+                        </button>
+                        <button class="ticket-menu-option delete-btn">
+                            <i class="bx bx-trash"></i>
+                            Eliminar
+                        </button>
+                    </div>
+                </div>
             <% } %>
 
             <div class="ticket-info">

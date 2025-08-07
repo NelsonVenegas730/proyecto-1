@@ -44,6 +44,17 @@
 }
 
 /* OPTIONS POP UP */
+.ticket-element {
+  position: relative;
+}
+
+.ticket-menu-wrapper {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+}
+
 .ticket-menu-btn {
   background: none;
   border: none;
@@ -51,11 +62,16 @@
   cursor: pointer;
   position: relative;
   z-index: 10;
+  align-self: flex-end;
 }
 
 .ticket-menu-btn i {
   color: #666;
   transition: color 0.2s;
+}
+
+.ticket-menu-btn i {
+  pointer-events: none;
 }
 
 .ticket-menu-btn:hover i {
@@ -71,7 +87,6 @@
   border: 1px solid #ccc;
   border-radius: 6px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  padding: 0.5rem 0;
   z-index: 20;
   min-width: 140px;
 }
@@ -81,13 +96,14 @@
 }
 
 .ticket-menu-option {
+  color: #333;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   background: none;
   border: none;
   width: 100%;
-  padding: 0.5rem 1rem;
+  padding: 1rem;
   font-size: 0.9rem;
   cursor: pointer;
   transition: background 0.2s;
@@ -98,13 +114,22 @@
   color: #333;
 }
 
-.ticket-menu-option:hover i {
+.ticket-menu-option.edit-btn:hover {
+  background-color: rgb(199, 201, 255);
+}
+
+.ticket-menu-option.edit-btn,
+.ticket-menu-option.edit-btn i {
   color: var(--color-primary);
 }
 
+.ticket-menu-option.delete-btn:hover {
+  background-color: rgb(255, 199, 199);
+}
 
-.ticket-menu-option:hover {
-  background-color: #f0f0f0;
+.ticket-menu-option.delete-btn,
+.ticket-menu-option.delete-btn i {
+  color: rgb(197, 0, 0);
 }
 
 .ticket-element {
