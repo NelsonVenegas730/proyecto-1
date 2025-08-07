@@ -1,43 +1,43 @@
 const supportTicketService = require('./ticketService');
 
+
 async function getAllTickets(req, res) {
   try {
-    const tickets = await supportTicketService.getAllTickets();
-    res.json(tickets);
+    const supportTickets = await supportTicketService.getAllTickets();
+
+    res.render('ciudadano/sugerencias', {
+      title: 'Mis Tickets de Soporte',
+      style: '<link rel="stylesheet" href="/css/page-styles/sugerencias.css">',
+      tickets: supportTickets,
+      user: req.session.user || null
+    });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error(err);
+    res.status(500).send('Error al obtener los tickets');
   }
 }
 
 async function createTicket(req, res) {
   try {
-    const data = req.body;
-    if (!data.user_id || !data.date) {
-      return res.status(400).json({ error: 'user_id and date are required' });
+    const { title, description, urgency_level } = req.body;
+    const user_id = req.session.user?._id;
+    const sender_role = req.session.user?.role;
+
+    if (!user_id) return res.status(401).send('No autorizado');
+
+    if (!title || !description || !urgency_level) {
+      return res.status(400).json({ error: 'Faltan campos requeridos' });
     }
-    const ticket = await supportTicketService.createTicket(data);
-    res.status(201).json(ticket);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-}
 
-async function getTicketsByUser(req, res) {
-  try {
-    const { user_id } = req.params;
-    const tickets = await supportTicketService.getTicketsByUser(user_id);
-    res.json(tickets);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-}
+    const ticket = await supportTicketService.createTicket({
+      title,
+      description,
+      urgency_level,
+      user_id,
+      sender_role
+    });
 
-async function getTicketById(req, res) {
-  try {
-    const { id } = req.params;
-    const ticket = await supportTicketService.getTicketById(id);
-    if (!ticket) return res.status(404).json({ error: 'Ticket not found' });
-    res.json(ticket);
+    res.status(201).json({ success: true, ticket });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -46,21 +46,48 @@ async function getTicketById(req, res) {
 async function addMessage(req, res) {
   try {
     const { id } = req.params;
-    const message = req.body;
-    if (!message.sender_role || !message.message || !message.timestamp) {
-      return res.status(400).json({ error: 'Invalid message data' });
+    const { message } = req.body;
+    const user = req.session.user;
+
+    if (!user) return res.status(401).json({ error: 'No autorizado' });
+
+    if (!message || message.trim().length === 0) {
+      return res.status(400).json({ error: 'Mensaje vacío' });
     }
-    const updatedTicket = await supportTicketService.addMessage(id, message);
+
+    const newMessage = {
+      sender_role: user.role,
+      message: message.trim(),
+      timestamp: new Date(),
+      user_id: user._id,
+    };
+
+    const updatedTicket = await supportTicketService.addMessage(id, newMessage);
     res.json(updatedTicket);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 }
 
+async function deleteTicket(req, res) {
+  try {
+    const { ticketId } = req.params;
+
+    if (!ticketId) {
+      return res.status(400).json({ error: 'Falta el ID del ticket' });
+    }
+
+    const result = await supportTicketService.deleteTicket(ticketId);
+    res.json(result);
+  } catch (err) {
+    console.error('Error al eliminar ticket:', err.message);
+    res.status(500).json({ error: 'No se pudo eliminar el ticket' });
+  }
+}
+
 module.exports = {
   getAllTickets,
   createTicket,
-  getTicketsByUser,
-  getTicketById,
-  addMessage
+  addMessage,
+  deleteTicket
 };

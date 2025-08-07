@@ -34,7 +34,7 @@
   flex-wrap: wrap;
   gap: 30px;
   align-items: flex-end;
-  justify-content: start;
+  justify-content: flex-start;
   background: #f5f5f5;
   padding: 20px;
   border-radius: 10px;
@@ -81,6 +81,7 @@
   cursor: pointer;
   font-size: 14px;
   align-self: flex-end;
+  transition: background-color 0.3s ease;
 }
 
 #apply-filters:hover {
@@ -95,243 +96,40 @@
   padding: 20px 0;
 }
 
-/* TARJETA DE TIQUETE INDIVIDUAL */
-.ticket-element {
-  background-color: white;
-  border-radius: 8px;
+/* CREATE TICKET CTA */
+.create-ticket-cta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   transition: transform 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  padding: 15px;
+  height: 400px;
 }
 
-.ticket-element:hover {
-  transform: translateY(-5px);
-}
-
-.ticket-info {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.ticket-info h3 {
-  margin: 0;
-  font-size: 1.2rem;
-  color: black;
-}
-
-.ticket-info p {
-  margin: 0;
-  color: #444;
-  font-size: 0.95rem;
-}
-
-.fecha {
-  font-size: 0.85rem;
-  color: #777;
-}
-
-/* BADGES */
-.badge {
-  align-self: flex-start;
-  padding: 4px 10px;
-  font-size: 0.75rem;
-  border-radius: 999px;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: white;
-}
-
-.badge.abierto::before {
-  content: "🟢 ";
-}
-.badge.abierto {
-  background-color: #28a745;
-}
-
-.badge.en-proceso::before {
-  content: "🟡 ";
-}
-.badge.en-proceso {
-  background-color: #ffc107;
-  color: #000;
-}
-
-.badge.cerrado::before {
-  content: "🔴 ";
-}
-.badge.cerrado {
-  background-color: #dc3545;
-}
-
-/* AVATAR Y AUTOR */
-.autor {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.autor span {
-  font-size: 0.9rem;
-  color: #555;
-}
-
-.avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background-color: var(--color-primary);
-  color: white;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  flex-shrink: 0;
-}
-
-/* MOCK DE MENSAJES DENTRO DE LA TARJETA */
-.message-thread {
-  margin-top: 1rem;
-  max-height: 200px;
-  overflow-y: auto;
-  border: 1px solid #ccc;
-  padding: 0.75rem;
+.create-ticket-cta a {
   border-radius: 8px;
-  background: #fafafa;
-}
-
-.message {
-  margin-bottom: 0.75rem;
-}
-
-.message-content {
-  padding: 0.5rem 1rem;
-  border-radius: 12px;
-  max-width: 70%;
-  font-size: 0.9rem;
-  word-wrap: break-word;
-}
-
-.user-message .message-content {
-  background-color: #d9edf7;
-  color: #31708f;
-  margin-left: auto;
-  text-align: right;
-}
-
-.admin-message .message-content {
-  background-color: #f5f5f5;
-  color: #555;
-  margin-right: auto;
-  text-align: left;
-}
-
-.message-meta {
-  font-size: 0.75rem;
-  color: #777;
-  margin-top: 0.15rem;
-  display: block;
-}
-
-/* FORMULARIO DE RESPUESTA */
-.reply-form {
-  margin-top: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-}
-
-.reply-form textarea {
-  resize: vertical;
-  padding: 0.5rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-family: inherit;
-  font-size: 1rem;
-  color: black;
-  background: white;
-}
-
-.reply-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.5rem;
-}
-
-.btn-cancel,
-.btn-send {
-  padding: 0.4rem 1rem;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.btn-cancel {
-  background-color: #ddd;
-  color: #333;
-}
-
-.btn-cancel:hover {
-  background-color: #ccc;
-}
-
-.btn-send {
-  background-color: #007bff;
-  color: white;
-}
-
-.btn-send:hover {
-  background-color: #005dc1;
-}
-
-.btn-reply-toggle {
-  margin-top: 10px;
-  padding: 6px 12px;
-  background-color: #007bff;
-  border: none;
-  border-radius: 6px;
-  color: white;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.btn-reply-toggle:hover {
-  background-color: #005dc1;
-}
-
-.create-anuncio-evento-noticia-cta {
-  text-align: center;
-  width: 100%;
-  height: 100%;
-}
-
-.create-anuncio-evento-noticia-cta a {
-  display: flex;
-  align-items: center;
   justify-content: center;
-  flex-direction: column;
-  height: 100%;
+  align-items: center;
   gap: 8px;
   background-color: var(--color-primary);
   color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
   text-decoration: none;
+  padding: 10px 20px;
   font-size: 1rem;
+  width: 100%;
+  height: 100%;
+  transition: background-color 0.3s ease;
 }
 
-.create-anuncio-evento-noticia-cta a i {
+.create-ticket-cta a i {
   font-size: 2rem;
 }
 
-.create-anuncio-evento-noticia-cta a:hover {
+.create-ticket-cta a:hover {
   background-color: var(--color-primary-light);
 }
 
@@ -349,5 +147,15 @@
   #apply-filters {
     width: 100%;
     align-self: stretch;
+  }
+
+  .create-ticket-cta {
+    height: 400px;
+  }
+
+  .create-ticket-cta a {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
   }
 }

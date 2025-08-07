@@ -3,8 +3,7 @@ const router = express.Router();
 const supportTicketController = require('./ticketController');
 
 router.post('/', supportTicketController.createTicket);
-router.get('/user/:user_id', supportTicketController.getTicketsByUser);
-router.get('/:id', supportTicketController.getTicketById);
 router.post('/:id/message', supportTicketController.addMessage);
+router.delete('/:ticketId', supportTicketController.deleteTicket);
 
 module.exports = router;

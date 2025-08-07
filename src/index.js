@@ -73,6 +73,10 @@ const announcementController = require('./modules/announcement/announcementContr
 const announcementService = require('./modules/announcement/announcementService');
 app.use('/api/announcement', announcementRoutes);
 
+const supportTicketRoutes = require('./modules/support_ticket/ticketRoute');
+const supportTicketController = require('./modules/support_ticket/ticketController');
+app.use('/api/support-tickets', supportTicketRoutes);
+
 // 🏠 Página principal
 app.get('/', authMiddleware.redirectFromLanding(), async (req, res) => {
   try {
@@ -176,12 +180,7 @@ app.get('/horario-buses', authMiddleware.authorizeRoleAccess(['ciudadano']), (re
 
 app.get('/noticias-anuncios-eventos', authMiddleware.authorizeRoleAccess(['ciudadano']), announcementController.getAllAnnouncements);
 
-app.get('/sugerencias', authMiddleware.authorizeRoleAccess(['ciudadano']), (req, res) => {
-  res.render('ciudadano/sugerencias', {
-    title: 'Quejas y Sugerencias',
-    style: '<link rel="stylesheet" href="/css/page-styles/sugerencias.css">'
-  });
-});
+app.get('/sugerencias', authMiddleware.authorizeRoleAccess(['ciudadano']), supportTicketController.getAllTickets);
 
 // 💼 Emprendedor
 app.get('/emprendedor/mi-emprendimiento/:id', authMiddleware.authorizeRoleAccess(['emprendedor']), businessController.getBusinessByUser);

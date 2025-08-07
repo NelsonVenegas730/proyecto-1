@@ -6,28 +6,23 @@
         <form id="formulario-tiquete" enctype="multipart/form-data">
             <div class="field-container">
                 <label for="asunto">Asunto</label>
-                <input type="text" id="asunto" placeholder="Escribe el asunto del tiquete" required maxlength="100" />
+                <input type="text" id="asunto" name="title" placeholder="Escribe el asunto del tiquete" required maxlength="100" />
                 <small class="input-requirements" id="asunto-requisitos">Máximo 100 caracteres. Solo texto y números.</small>
             </div>
 
             <div class="field-container">
                 <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" placeholder="Describe el problema o solicitud" rows="5" required></textarea>
+                <textarea id="descripcion" name="description" placeholder="Describe el problema o solicitud" rows="5" required></textarea>
                 <small class="input-requirements" id="descripcion-requisitos">Debe tener al menos 20 caracteres.</small>
             </div>
 
             <div class="field-container">
-                <label for="fecha">Fecha</label>
-                <input type="date" id="fecha" required />
-            </div>
-
-            <div class="field-container">
                 <label for="urgencia">Urgencia</label>
-                <select id="urgencia" required>
+                <select name="urgency_level" id="urgencia" required>
                     <option value="" disabled selected>Selecciona la urgencia</option>
-                    <option value="baja">Baja</option>
-                    <option value="media">Media</option>
-                    <option value="alta">Alta</option>
+                    <option value="baja">🟢 Baja</option>
+                    <option value="media">🟡 Media</option>
+                    <option value="alta">🔴 Alta</option>
                 </select>
                 <small class="input-requirements" id="urgencia-requisitos">Selecciona el nivel de urgencia.</small>
             </div>
@@ -35,5 +30,8 @@
             <button type="submit">Enviar tiquete</button>
         </form>
     </main>
+    <div id="mensaje-exito" class="mensaje-exito oculto">¡Tiquete de soporte enviado con éxito!, un administrador atenderá tu tiquete pronto.</div>
+    <div id="mensaje-error" class="mensaje-error oculto"></div>
+    <script src="/js/validateSupportTickets.js"></script>
 </body>
 </html>
