@@ -3,36 +3,45 @@
     <main>
         <!--HERO NOTICIAS SECTION-->
         <div class="hero content-container">
-           <div class="hero-text">
-            <% if (anuncio) { %>
+            <div class="hero-text">
+                <% if (anuncio) { %>
                 <div class="noticia-container">
-                <p class="fecha">Fecha: <%= new Date(anuncio.date).toLocaleDateString('es-CR', { day: 'numeric', month: 'long', year: 'numeric' }) %></p>
-                <h2 class="subtitle noticia-title"><%= anuncio.title %></h2>
-                <hr>
-                <p class="noticia-description"><%= anuncio.description %></p>
+                    <p class="fecha">Fecha: <%= new Date(anuncio.date).toLocaleDateString('es-CR', { day: 'numeric', month: 'long', year: 'numeric' }) %></p>
+                    <h2 class="subtitle noticia-title"><%= anuncio.title %></h2>
+                    <hr>
+                    <p class="noticia-description"><%= anuncio.description %></p>
                 </div>
-            <% } else { %>
-                <div class="noticia-container">
-                <p>No hay noticias recientes disponibles.</p>
+                <% if (!user) { %>
+                    <div class="cta-container">
+                    <p class="cta-hero-text">
+                        Para noticias como estas y más. Si quieres estar al tanto de la información más reciente de la comunidad ->
+                    </p>
+                    <div class="cta-hero-buttons">
+                        <a href="/auth/inicio-sesion" class="cta-hero-button" type="button">Iniciar sesión</a>
+                        <a href="/auth/registrarse" class="cta-hero-button" type="button">Registrarse</a>
+                    </div>
+                    </div>
+                <% } %>
+                <% } else { %>
+                <div class="noticia-container no-news">
+                    <p>"¡Atento! Muy pronto tendremos noticias nuevas y súper interesantes para vos. ¡No te las pierdas!"</p>
+                    <% if (!user) { %>
+                    <div class="cta-container">
+                        <p class="cta-hero-text">
+                        ¿Querés ser el primero en enterarte? Registrate y no te pierdas nada.
+                        </p>
+                        <div class="cta-hero-buttons">
+                        <a href="/auth/registrarse" class="cta-hero-button" type="button">Registrarse</a>
+                        </div>
+                    </div>
+                    <% } %>
                 </div>
-            <% } %>
-
-            <% if (!user) { %>
-                <div class="cta-container">
-                <p class="cta-hero-text">
-                    Para noticias como estas y más. Si quieres estar al tanto de la información más reciente de la comunidad ->
-                </p>
-                <div class="cta-hero-buttons">
-                    <a href="/auth/inicio-sesion" class="cta-hero-button" type="button">Iniciar sesión</a>
-                    <a href="/auth/registrarse" class="cta-hero-button" type="button">Registrarse</a>
-                </div>
-                </div>
-            <% } %>
+                <% } %>
             </div>
 
             <img 
                 class="hero-content" 
-                src="<%= anuncio.image ? '/uploads/' + anuncio.image : '/images/default.jpeg' %>" 
+                src="<%= anuncio?.image ? '/uploads/' + anuncio.image : '/images/default.jpeg' %>" 
                 alt="Imagen de la noticia"
             />
         </div>

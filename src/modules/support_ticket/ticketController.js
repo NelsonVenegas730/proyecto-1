@@ -86,6 +86,25 @@ async function addMessage(req, res) {
   }
 }
 
+async function updateTicket(req, res) {
+  const ticketId = req.params.id;
+  const { title, description } = req.body;
+
+  try {
+    if (!title || !description) {
+      return res.status(400).json({ error: 'Título y descripción son obligatorios' });
+    }
+
+    const updatedTicket = await supportTicketService.updateTicket(ticketId, { title, description });
+    res.json(updatedTicket);
+  } catch (error) {
+    if (error.message === 'Ticket no encontrado') {
+      return res.status(404).json({ error: error.message });
+    }
+    res.status(500).json({ error: 'Error al actualizar el tiquete' });
+  }
+}
+
 async function deleteTicket(req, res) {
   try {
     const { ticketId } = req.params;
@@ -107,5 +126,6 @@ module.exports = {
   getAllTicketsAdmin,
   createTicket,
   addMessage,
+  updateTicket,
   deleteTicket
 };

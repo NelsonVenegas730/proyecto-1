@@ -85,7 +85,7 @@
     </ul>
   <% } %>
 
-  <% if (user && user.role != 'emprendedor' && user.role != 'administrador') { %>
+  <% if (!user || user && user.role != 'emprendedor' && user.role != 'administrador') { %>
     <ul class="sidebar-links-container" id="sidebar-links-general">
       <li class="sidebar-link">
         <a href="/">
@@ -97,7 +97,7 @@
   <% } %>
 
 
-  <% if (user && user.role === 'ciudadano') { %>
+  <% if (!user || user && user.role != 'emprendedor' && user.role != 'administrador') { %>
     <ul class="sidebar-links-container" id="sidebar-links-ciudadano">
       <li class="sidebar-link">
         <a href="/noticias-anuncios-eventos">

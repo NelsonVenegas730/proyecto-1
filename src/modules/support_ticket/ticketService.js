@@ -51,7 +51,29 @@ async function addMessage(ticketId, message) {
     .populate('user_id', 'name last_names email')
     .populate('messages.user_id', 'name last_names');
 
-    console.log(populatedTicket);
+  return populatedTicket;
+}
+
+async function updateTicket(ticketId, data) {
+  const { title, description } = data;
+
+  if (!title || !description) {
+    throw new Error('El título y la descripción son obligatorios');
+  }
+
+  const ticket = await SupportTicket.findById(ticketId);
+  if (!ticket) {
+    throw new Error('Ticket no encontrado');
+  }
+
+  ticket.title = title;
+  ticket.description = description;
+
+  await ticket.save();
+
+  const populatedTicket = await SupportTicket.findById(ticketId)
+    .populate('user_id', 'name last_names email')
+    .populate('messages.user_id', 'name last_names');
 
   return populatedTicket;
 }
@@ -68,5 +90,6 @@ module.exports = {
   getAllTickets,
   createTicket,
   addMessage,
+  updateTicket,
   deleteTicket
 };
