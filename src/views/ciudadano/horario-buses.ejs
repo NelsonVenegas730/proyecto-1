@@ -7,37 +7,26 @@
     
         <section class="bus-schedule">
             <h2>Horarios de buses disponibles</h2>
-            <div class="bus-grid">
-                <div class="grid-header">Destino</div>
-                <div class="grid-header">Horario</div>
-                <div class="grid-header">Dirección</div>
-                <div class="grid-header">Precio</div>
-                <div class="grid-header">Espera</div>
+            <% if (busSchedulesFormatted.length == 0) { %>
+                <%- include('../partials/content-not-found', { title: 'No se encontraron horarios de buses', helpText: 'Si crees que esto es un error, escribe un ', tooltip: 'tiquete de soporte', href: '/form/form-tiquete' }) %>
+            <% } else { %>
+                <div class="bus-grid">
+                    <div class="grid-header">Destino</div>
+                    <div class="grid-header">Horario</div>
+                    <div class="grid-header">Dirección</div>
+                    <div class="grid-header">Precio</div>
+                    <div class="grid-header">Espera</div>
 
-                <div class="grid-item" data-label="Destino">San José</div>
-                <div class="grid-item" data-label="Horario">6:00 AM</div>
-                <div class="grid-item" data-label="Dirección">Av. Central</div>
-                <div class="grid-item" data-label="Precio">₡650</div>
-                <div class="grid-item" data-label="Espera">10 min</div>
-
-                <div class="grid-item" data-label="Destino">Cartago</div>
-                <div class="grid-item" data-label="Horario">6:30 AM</div>
-                <div class="grid-item" data-label="Dirección">Parada UCR</div>
-                <div class="grid-item" data-label="Precio">₡850</div>
-                <div class="grid-item" data-label="Espera">15 min</div>
-
-                <div class="grid-item" data-label="Destino">Heredia</div>
-                <div class="grid-item" data-label="Horario">7:00 AM</div>
-                <div class="grid-item" data-label="Dirección">Terminal Atlántico</div>
-                <div class="grid-item" data-label="Precio">₡750</div>
-                <div class="grid-item" data-label="Espera">20 min</div>
-
-                <div class="grid-item" data-label="Destino">Desamparados</div>
-                <div class="grid-item" data-label="Horario">7:15 AM</div>
-                <div class="grid-item" data-label="Dirección">Parque Central</div>
-                <div class="grid-item" data-label="Precio">₡500</div>
-                <div class="grid-item" data-label="Espera">5 min</div>
-            </div>
+                    <% busSchedulesFormatted.forEach(a => { %>
+                        <div class="grid-item" data-label="Destino"><%= busSchedulesFormatted.destination %></div>
+                        <div class="grid-item" data-label="Horario"><%= busSchedulesFormatted.arrival_time %></div>
+                        <div class="grid-item" data-label="Dirección"><%= busSchedulesFormatted.address %></div>
+                        <div class="grid-item" data-label="Precio">₡<%= busSchedulesFormatted.price %></div>
+                        <div class="grid-item" data-label="Espera"><%= busSchedulesFormatted.wait_time_minutes %> min</div>
+                    <% }) %>
+                        
+                </div>
+            <% } %>
         </section>
     </main>
 </body>

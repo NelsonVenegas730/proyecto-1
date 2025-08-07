@@ -1,5 +1,4 @@
 const Announcement = require('./announcementModel');
-const mongoose = require('mongoose');
 
 async function getAllAnnouncements() {
   return await Announcement.find();

@@ -77,6 +77,10 @@ const supportTicketRoutes = require('./modules/support_ticket/ticketRoute');
 const supportTicketController = require('./modules/support_ticket/ticketController');
 app.use('/api/support-tickets', supportTicketRoutes);
 
+const busScheduleRoutes = require('./modules/bus_schedule/busRoute');
+const busScheduleController = require('./modules/bus_schedule/busController');
+app.use('/api/bus-schedules', busScheduleRoutes);
+
 // 🏠 Página principal
 app.get('/', authMiddleware.redirectFromLanding(), async (req, res) => {
   try {
@@ -143,13 +147,7 @@ app.get('/admin/aprobaciones', authMiddleware.authorizeRoleAccess(['administrado
   });
 });
 
-app.get('/admin/tiquetes', authMiddleware.authorizeRoleAccess(['administrador']), (req, res) => {
-  res.render('administrador/admin-tiquetes', {
-    title: 'Gestionar Tiquetes de Soporte',
-    style: '<link rel="stylesheet" href="/css/page-styles/admin-tiquetes.css">',
-    layout: 'layouts/layout-admin'
-  });
-});
+app.get('/admin/tiquetes', authMiddleware.authorizeRoleAccess(['administrador']), supportTicketController.getAllTicketsAdmin)
 
 app.get('/admin/usuarios', authMiddleware.authorizeRoleAccess(['administrador']), (req, res) => {
   res.render('administrador/admin-usuarios', {
@@ -171,12 +169,7 @@ app.get('/admin/panel-administrador', authMiddleware.authorizeRoleAccess(['admin
 app.get('/emprendimiento/:id', authMiddleware.authorizeRoleAccess(['ciudadano']), businessController.getBusinessById);
 app.get('/emprendimientos', authMiddleware.authorizeRoleAccess(['ciudadano']), businessController.getAllBusinesses);
 
-app.get('/horario-buses', authMiddleware.authorizeRoleAccess(['ciudadano']), (req, res) => {
-  res.render('ciudadano/horario-buses', {
-    title: 'Horarios de Buses',
-    style: '<link rel="stylesheet" href="/css/page-styles/horario-buses.css">'
-  });
-});
+app.get('/horario-buses', authMiddleware.authorizeRoleAccess(['ciudadano']), busScheduleController.getAllBusSchedules);
 
 app.get('/noticias-anuncios-eventos', authMiddleware.authorizeRoleAccess(['ciudadano']), announcementController.getAllAnnouncements);
 

@@ -1,37 +1,41 @@
 <body>
   <main>
-    <div class="emprendimientos-container">
-      <% 
-        const aprobados = emprendimientos.filter(e => e.status === 'aprobado');
-        if (aprobados.length === 0) { 
-      %>
-        <p>No se encontraron emprendimientos</p>
-      <% 
-        } else { 
-          aprobados.forEach(e => { 
-      %>
-          <a href="/emprendimiento/<%= e._id %>" class="emprendimiento-element card">
-            <img src="<%= e.image || '/default-image.jpg' %>" alt="Imagen de <%= e.name %>" />
-            <div class="emprendimiento-info">
-              <h3><%= e.name %></h3>
-              <p><%= e.description %></p>
-              <div class="dueño">
-                <div class="avatar">
-                  <%= e.user_id
-                      ? ((e.user_id.name?.charAt(0) || '') + (e.user_id.last_names?.charAt(0) || '')).toUpperCase()
-                      : '??' %>
-                </div>
-                <span>
-                  <%= e.user_id
-                      ? ((e.user_id.name || '') + ' ' + (e.user_id.last_names || '')).trim() || 'Sin dueño'
-                      : 'Sin dueño' %>
-                </span>
+    <% 
+      const aprobados = emprendimientos.filter(e => e.status === 'aprobado');
+      if (aprobados.length === 0) { 
+    %>
+      <%- include('../partials/content-not-found', { 
+          title: 'No se encontraron emprendimientos aprobados', 
+          helpText: 'Si crees que esto es un error, escribe un ', 
+          tooltip: 'tiquete de soporte', 
+          href: '/form/form-tiquete' 
+        }) %>
+    <% 
+      } else { 
+        aprobados.forEach(e => { 
+    %>
+        <a href="/emprendimiento/<%= e._id %>" class="emprendimiento-element card">
+          <img src="<%= e.image || '/default-image.jpg' %>" alt="Imagen de <%= e.name %>" />
+          <div class="emprendimiento-info">
+            <h3><%= e.name %></h3>
+            <p><%= e.description %></p>
+            <div class="dueño">
+              <div class="avatar">
+                <%= e.user_id
+                    ? ((e.user_id.name?.charAt(0) || '') + (e.user_id.last_names?.charAt(0) || '')).toUpperCase()
+                    : '??' %>
               </div>
-              <span class="fecha">
-                Fecha de creación: <%= new Date(e.date).toLocaleDateString('es-CR', { day: 'numeric', month: 'long', year: 'numeric' }) %>
+              <span>
+                <%= e.user_id
+                    ? ((e.user_id.name || '') + ' ' + (e.user_id.last_names || '')).trim() || 'Sin dueño'
+                    : 'Sin dueño' %>
               </span>
             </div>
-          </a>
+            <span class="fecha">
+              Fecha de creación: <%= new Date(e.date).toLocaleDateString('es-CR', { day: 'numeric', month: 'long', year: 'numeric' }) %>
+            </span>
+          </div>
+        </a>
       <% 
           }) 
         } 

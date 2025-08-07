@@ -1,93 +1,3 @@
-/* BOTÓN DE FILTRO */
-.filter-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: fit-content;
-  padding: 10px;
-  margin: 5px 0;
-  background-color: var(--color-primary);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 2rem;
-  transition: all 0.3s ease;
-}
-
-.filter-button:hover {
-  background-color: var(--color-primary-light);
-}
-
-/* CONTENEDOR DE FILTROS */
-.options-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin: 20px 0;
-}
-
-/* GRUPO DE CONTROLES DE FILTRO */
-.filter-controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  align-items: flex-end;
-  justify-content: flex-start;
-  background: #f5f5f5;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.filter-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-width: 160px;
-}
-
-.filter-group h4 {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 600;
-  color: #333;
-}
-
-.filter-group label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  color: #333;
-}
-
-.filter-group input[type="date"] {
-  padding: 6px 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-family: inherit;
-  font-size: 14px;
-  color: black;
-}
-
-/* BOTÓN DE APLICAR FILTROS */
-#apply-filters {
-  background-color: #1877f2;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  align-self: flex-end;
-  transition: background-color 0.3s ease;
-}
-
-#apply-filters:hover {
-  background-color: #0f5ac2;
-}
-
 /* GRILLA DE TIQUETES */
 .tickets-container {
   display: grid;
@@ -133,21 +43,76 @@
   background-color: var(--color-primary-light);
 }
 
+/* OPTIONS POP UP */
+.ticket-menu-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+}
+
+.ticket-menu-btn i {
+  color: #666;
+  transition: color 0.2s;
+}
+
+.ticket-menu-btn:hover i {
+  color: var(--color-primary);
+}
+
+.ticket-menu-popup {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 0.5rem 0;
+  z-index: 20;
+  min-width: 140px;
+}
+
+.ticket-menu-popup.show {
+  display: block;
+}
+
+.ticket-menu-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.ticket-menu-option i {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.ticket-menu-option:hover i {
+  color: var(--color-primary);
+}
+
+
+.ticket-menu-option:hover {
+  background-color: #f0f0f0;
+}
+
+.ticket-element {
+  position: relative;
+}
+
 /* RESPONSIVE */
 @media (max-width: 600px) {
-  .filter-controls {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .filter-group {
-    width: 100%;
-  }
-
-  #apply-filters {
-    width: 100%;
-    align-self: stretch;
-  }
 
   .create-ticket-cta {
     height: 400px;

@@ -1,14 +1,20 @@
 <body>
   <main>
     <%- include('../partials/filter-controls', { filterType: 'type' }) %>
-    <div class="noticias-eventos-anuncios-container">
-      <%
-        const aprobados = anuncios.filter(a => a.status === 'aprobado');
-      %>
-
-      <% if (aprobados.length === 0) { %>
-        <p>No hay anuncios disponibles aún.</p>
-      <% } else { %>
+    <% 
+      const aprobados = anuncios.filter(a => a.status === 'aprobado');
+      if (aprobados.length === 0) { 
+    %>
+      <%- include('../partials/content-not-found', { 
+          title: 'No hay anuncios, eventos o noticias aprobados', 
+          helpText: 'Si crees que esto es un error, escribe un ', 
+          tooltip: 'tiquete de soporte', 
+          href: '/form/form-tiquete' 
+        }) %>
+    <% 
+      } else { 
+    %>
+      <div class="noticias-eventos-anuncios-container">
         <% aprobados.forEach(a => { %>
           <div class="noticia-evento-anuncio-element card" data-user-id="<%= a.user_id?._id || '' %>">
             <img src="<%= a.image %>" alt="Imagen de <%= a.title %>">
@@ -35,16 +41,16 @@
             </div>
           </div>
         <% }) %>
-      <% } %>
 
-      <div class="create-anuncio-evento-noticia-cta">
-        <a href="/form/form-anuncio-evento-noticia" class="cta-button">
-          <i class="bx bxs-plus-circle"></i>
-          Crear nuevo anuncio, evento o noticia
-        </a>
+        <div class="create-anuncio-evento-noticia-cta">
+          <a href="/form/form-anuncio-evento-noticia" class="cta-button">
+            <i class="bx bxs-plus-circle"></i>
+            Crear nuevo anuncio, evento o noticia
+          </a>
+        </div>
       </div>
-      
-    </div>
+    <% } %>
+
   </main>
   <script>
     window.currentUserId = "<%= userId %>";

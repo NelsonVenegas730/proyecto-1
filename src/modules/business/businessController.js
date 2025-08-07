@@ -15,7 +15,7 @@ async function getAllBusinesses(req, res) {
       status: b.status || 'sin status'
     }));
     res.render('ciudadano/emprendimientos', {
-      title: 'Emprendimientos',
+      title: 'Emprendimientos de la comunidad',
       style: '<link rel="stylesheet" href="/css/page-styles/emprendimientos.css">',
       emprendimientos: safeBusinesses
     });

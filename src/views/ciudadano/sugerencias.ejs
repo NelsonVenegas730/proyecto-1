@@ -1,96 +1,106 @@
 <body>
-    <main>
-        <%- include('../partials/filter-controls', { filterType: 'state' }) %>
+  <main>
+    <%- include('../partials/filter-controls', { filterType: 'state' }) %>
+    <% if (tickets.length === 0) { %>
+      <%- include('../partials/content-not-found', { 
+          title: 'No se encontraron tiquetes de soporte', 
+          helpText: 'Si crees que esto es un error, escribe un ', 
+          tooltip: 'tiquete de soporte', 
+          href: '/form/form-tiquete' 
+        }) %>
+    <% } else { %>
+      <div class="tickets-container card">
+        <% tickets.forEach(ticket => { %>
+          <div class="ticket-element card" 
+              data-user-id="<%= ticket.user_id?._id || '' %>" 
+              data-ticket-id="<%= ticket._id %>"
+          >
+            <% if (user && ticket.user_id && ticket.user_id._id == user._id) { %>
+              <button class="ticket-menu-btn" aria-label="Opciones">
+                <i class='bx bx-dots-vertical-rounded'></i>
+              </button>
 
-        <div class="tickets-container card">
+              <div class="ticket-menu-popup">
+                <button class="ticket-menu-option edit-btn"> 
+                  <i class="bx bx-pencil"></i>
+                  Editar
+                </button>
+                <button class="ticket-menu-option delete-btn">
+                  <i class="bx bx-trash"></i>
+                  Eliminar
+                </button>
+              </div>
+            <% } %>
 
-            <% tickets.forEach(ticket => { %>
-                <div class="ticket-element card" 
-                    data-user-id="<%= ticket.user_id?._id || '' %>" 
-                    data-ticket-id="<%= ticket._id %>"
-                >
-                    <% if (user && ticket.user_id && ticket.user_id._id == user._id) { %>
-                        <button class="ticket-menu-btn" aria-label="Opciones">
-                            <i class='bx bx-dots-vertical-rounded'></i>
-                        </button>
-
-                        <div class="ticket-menu-popup">
-                            <button class="ticket-menu-option edit-btn"> 
-                                <i class="bx bx-pencil"></i>
-                                Editar
-                            </button>
-                            <button class="ticket-menu-option delete-btn">
-                                <i class="bx bx-trash"></i>
-                                Eliminar
-                            </button>
-                        </div>
-                    <% } %>
-
-                    <div class="ticket-info">
-                    <span class="badge <%= ticket.status.replace(' ', '-') %>"><%= ticket.status.charAt(0).toUpperCase() + ticket.status.slice(1) %></span>
-                    <h3><%= ticket.title %></h3>
-                    <p><%= ticket.description %></p>
-                    <span class="fecha">Fecha de creación: <%= new Date(ticket.date).toLocaleDateString('es-CR', { day: 'numeric', month: 'long', year: 'numeric' }) %></span>
-                    
-                    <div class="autor">
-                        <div class="avatar">
-                        <%= ticket.user_id ? (ticket.user_id.name[0] + ticket.user_id.last_names[0]) : '?' %>
-                        </div>
-                        <span>Reportado por: <%= ticket.user_id.name + ' ' + ticket.user_id.last_names %></span>
-                    </div>
-
-                    <% if (ticket.messages.length > 0) { %>
-                        <div class="message-thread">
-                            <% ticket.messages.forEach(msg => { %>
-                            <div class="message <%= msg.sender_role?.toLowerCase() === 'administrador' ? 'admin-message' : 'user-message' %>">
-                                    <div class="message-content"><%- msg.message %></div>
-                                    <span class="message-meta">
-                                        <%= msg.sender_role?.toLowerCase() === 'administrador'
-                                        ? 'Admin'
-                                        : ((msg.user_id?.name || '') + ' ' + (msg.user_id?.last_names || '')).trim() || 'Usuario' 
-                                        %>
-                                        - <%= new Date(msg.timestamp).toLocaleDateString('es-CR', { day: 'numeric', month: 'long', year: 'numeric' }) %>
-                                    </span>
-                                </div>
-                            <% }) %>
-                        </div>
-                    <% } %>
-
-                    <% if (user && ticket.user_id && ticket.user_id._id == user._id) { %>
-                        <button type="button" class="btn-reply-toggle">Enviar mensaje</button>
-                    <% } %>
-
-                    <form class="reply-form" style="display:none;">
-                        <textarea name="message" placeholder="Escribe tu mensaje aquí..." rows="3" required></textarea>
-                        <div class="reply-buttons">
-                        <button type="button" class="btn-cancel">Cancelar</button>
-                        <button type="submit" class="btn-send">Enviar</button>
-                        </div>
-                    </form>
-                    </div>
+            <div class="ticket-info">
+              <span class="badge <%= ticket.status.replace(' ', '-') %>"><%= ticket.status.charAt(0).toUpperCase() + ticket.status.slice(1) %></span>
+              <h3><%= ticket.title %></h3>
+              <p><%= ticket.description %></p>
+              <span class="fecha">Fecha de creación: <%= new Date(ticket.date).toLocaleDateString('es-CR', { day: 'numeric', month: 'long', year: 'numeric' }) %></span>
+              
+              <div class="autor">
+                <div class="avatar">
+                  <%= ticket.user_id ? (ticket.user_id.name[0] + ticket.user_id.last_names[0]) : '?' %>
                 </div>
-            <% }) %>
-            <div class="create-ticket-cta">
-                <a href="/form/form-tiquete" class="cta-button">
-                    <i class="bx bxs-plus-circle"></i>
-                    Crear un nuevo tiquete de soporte
-                </a>
+                <span>Reportado por: <%= ticket.user_id.name + ' ' + ticket.user_id.last_names %></span>
+              </div>
+
+              <% if (ticket.messages.length > 0) { %>
+                <div class="message-thread">
+                  <% ticket.messages.forEach(msg => { %>
+                    <div class="message <%= msg.sender_role?.toLowerCase() === 'administrador' ? 'admin-message' : 'user-message' %>">
+                      <div class="message-content"><%- msg.message %></div>
+                      <span class="message-meta">
+                        <%= msg.sender_role?.toLowerCase() === 'administrador'
+                        ? 'Admin'
+                        : ((msg.user_id?.name || '') + ' ' + (msg.user_id?.last_names || '')).trim() || 'Usuario' 
+                        %>
+                        - <%= new Date(msg.timestamp).toLocaleDateString('es-CR', { day: 'numeric', month: 'long', year: 'numeric' }) %>
+                      </span>
+                    </div>
+                  <% }) %>
+                </div>
+              <% } %>
+
+              <% if (user && ticket.user_id && ticket.user_id._id == user._id) { %>
+                <button type="button" class="btn-reply-toggle">Enviar mensaje</button>
+              <% } %>
+
+              <form class="reply-form" style="display:none;">
+                <textarea name="message" placeholder="Escribe tu mensaje aquí..." rows="3" required></textarea>
+                <div class="reply-buttons">
+                  <button type="button" class="btn-cancel">Cancelar</button>
+                  <button type="submit" class="btn-send">Enviar</button>
+                </div>
+              </form>
             </div>
+          </div>
+        <% }) %>
+
+        <div class="create-ticket-cta">
+          <a href="/form/form-tiquete" class="cta-button">
+            <i class="bx bxs-plus-circle"></i>
+            Crear un nuevo tiquete de soporte
+          </a>
         </div>
-    </main>
-    <div id="custom-confirm" class="custom-alert hidden">
-        <div class="alert-content">
-            <p id="confirm-message"></p>
-            <div class="confirm-buttons">
-            <button id="confirm-no">No</button>
-            <button id="confirm-yes">Sí</button>
-            </div>
-        </div>
+      </div>
+    <% } %>
+  </main>
+
+  <div id="custom-confirm" class="custom-alert hidden">
+    <div class="alert-content">
+      <p id="confirm-message"></p>
+      <div class="confirm-buttons">
+        <button id="confirm-no">No</button>
+        <button id="confirm-yes">Sí</button>
+      </div>
     </div>
-    <script>
-        window.currentUserId = "<%= user ? user._id.toString() : '' %>";
-    </script>
-    <script src="/js/filterContent.js"></script>
-    <script src="/js/validateTicketMessage.js"></script>
-    <script src="/js/ticketOptionsPopUp.js"></script>
+  </div>
+
+  <script>
+    window.currentUserId = "<%= user ? user._id.toString() : '' %>";
+  </script>
+  <script src="/js/filterContent.js"></script>
+  <script src="/js/validateTicketMessage.js"></script>
+  <script src="/js/ticketOptionsPopUp.js"></script>
 </body>

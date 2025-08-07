@@ -6,8 +6,25 @@ async function getAllTickets(req, res) {
     const supportTickets = await supportTicketService.getAllTickets();
 
     res.render('ciudadano/sugerencias', {
-      title: 'Mis Tickets de Soporte',
+      title: 'Quejas y sugerencias',
       style: '<link rel="stylesheet" href="/css/page-styles/sugerencias.css">',
+      tickets: supportTickets,
+      user: req.session.user || null
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error al obtener los tickets');
+  }
+}
+
+async function getAllTicketsAdmin(req, res) {
+  try {
+    const supportTickets = await supportTicketService.getAllTickets();
+
+    res.render('administrador/admin-tiquetes', {
+      title: 'Gestionar Tiquetes de Soporte',
+      style: '<link rel="stylesheet" href="/css/page-styles/admin-tiquetes.css">',
+      layout: 'layouts/layout-admin',
       tickets: supportTickets,
       user: req.session.user || null
     });
@@ -87,6 +104,7 @@ async function deleteTicket(req, res) {
 
 module.exports = {
   getAllTickets,
+  getAllTicketsAdmin,
   createTicket,
   addMessage,
   deleteTicket
