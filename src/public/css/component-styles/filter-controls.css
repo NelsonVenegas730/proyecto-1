@@ -86,3 +86,9 @@
 #revert-filters:hover {
   background-color: #0f5ac2;
 }
+
+@media (max-width: 800px) {
+  #revert-filters {
+    align-self: flex-start;
+  }
+}
