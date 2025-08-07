@@ -1,13 +1,24 @@
 <div>
-    <main class="error-container">
-        <h1 class="error-code">?</h1>
-        <h2 class="error-title"><%= title %></h2>
-        <p class="error-description"><%= typeof description !== 'undefined' ? description : '' %></p>
-        <% if (helpText || tooltip) { %>
-            <p class="error-help">
-                <%= helpText || '' %>
-                <a class="go-back-link" href="<%= href || '#' %>"><%= tooltip || '' %></a>
-            </p>
+  <main class="error-container">
+    <h1 class="error-code">?</h1>
+    <h2 class="error-title"><%= title %></h2>
+    <p class="error-description"><%= typeof description !== 'undefined' ? description : '' %></p>
+
+    <% if (helpText || tooltip) { %>
+      <p class="error-help">
+        <% 
+          const helpTexts = Array.isArray(helpText) ? helpText : [helpText];
+          const tooltips = Array.isArray(tooltip) ? tooltip : [tooltip];
+          const hrefs = Array.isArray(href) ? href : [href];
+
+          for (let i = 0; i < Math.max(helpTexts.length, tooltips.length); i++) {
+        %>
+          <%= helpTexts[i] || '' %>
+          <a class="go-back-link" href="<%= hrefs[i] || '#' %>"><%= tooltips[i] || '' %></a>
+          <br>
+          <br>
         <% } %>
-    </main>
+      </p>
+    <% } %>
+  </main>
 </div>

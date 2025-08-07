@@ -64,6 +64,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 // 📂 Rutas
+const userRoutes = require('./modules/user/userRoute');
+app.use('/auth', userRoutes);
+
+const passwordResetTokenRoutes = require('./modules/password_reset_token/passwordResetTokenRoute');
+app.use('/auth/password-reset', passwordResetTokenRoutes);
+
 const businessRoutes = require('./modules/business/businessRoute');
 const businessController = require('./modules/business/businessController');
 app.use('/api/businesses', businessRoutes);
@@ -106,8 +112,6 @@ app.get('/', authMiddleware.redirectFromLanding(), async (req, res) => {
 });
 
 // 🔐 Autenticación
-const userRoutes = require('./modules/user/userRoute');
-app.use('/auth', userRoutes);
 
 app.get('/auth/inicio-sesion', (req, res) => {
   res.render('autenticacion/inicio-sesion', {

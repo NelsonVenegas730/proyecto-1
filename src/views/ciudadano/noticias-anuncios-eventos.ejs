@@ -7,9 +7,18 @@
     %>
       <%- include('../partials/content-not-found', { 
           title: 'No hay anuncios, eventos o noticias aprobados', 
-          helpText: 'Si crees que esto es un error, escribe un ', 
-          tooltip: 'tiquete de soporte', 
-          href: '/form/form-tiquete' 
+          helpText: [
+            'Si crees que esto es un error, escribe un ',
+            '¿Quieres agregar un nuevo anuncio, evento o noticia?'
+          ], 
+          tooltip: [
+            'tiquete de soporte',
+            'Agregar nuevo anuncio, evento o noticia'
+          ], 
+          href: [
+            '/form/form-tiquete',
+            '/form/form-anuncio-evento-noticia'
+          ]
         }) %>
     <% 
       } else { 

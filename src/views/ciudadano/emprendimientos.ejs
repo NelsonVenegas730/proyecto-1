@@ -6,9 +6,12 @@
     %>
       <%- include('../partials/content-not-found', { 
           title: 'No se encontraron emprendimientos aprobados', 
-          helpText: 'Si crees que esto es un error, escribe un ', 
+          helpText: [
+            'Si crees que esto es un error, escribe un ',
+            '*Si quieres crear un nuevo emprendimiento, debes cerrar sesión de tu usuario de ciudadano y registrarte como emprendedor, ahí podrás hacerlo desde el formulario de emprendimientos.'
+          ], 
           tooltip: 'tiquete de soporte', 
-          href: '/form/form-tiquete' 
+          href: '/form/form-tiquete'
         }) %>
     <% 
       } else { 

@@ -4,9 +4,18 @@
     <% if (tickets.length === 0) { %>
       <%- include('../partials/content-not-found', { 
           title: 'No se encontraron tiquetes de soporte', 
-          helpText: 'Si crees que esto es un error, escribe un ', 
-          tooltip: 'tiquete de soporte', 
-          href: '/form/form-tiquete' 
+          helpText: [
+            'Si crees que esto es un error, escribe un ',
+            '¿Quieres escribir un nuevo tiquete de soporte?'
+          ], 
+          tooltip: [
+            'tiquete de soporte',
+            'tiquete de soporte'
+          ],
+          href: [
+            '/form/form-tiquete',
+            '/form/form-tiquete'
+          ] 
         }) %>
     <% } else { %>
       <div class="tickets-container">
