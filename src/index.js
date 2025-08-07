@@ -130,9 +130,20 @@ app.get('/auth/registrarse', (req, res) => {
 app.get('/auth/recuperar-password', (req, res) => {
   res.render('autenticacion/recuperar-password', {
     title: 'Recuperar Contraseña',
-    layout: 'layouts/layout-auth'
+    layout: 'layouts/layout-auth',
+    message: '',
+    error: ''
   });
 });
+
+app.get('/auth/cambiar-password', (req, res) => {
+  const token = req.query.token
+  res.render('autenticacion/cambiar-password', {
+    title: 'Modificar Contraseña',
+    layout: 'layouts/layout-auth',
+    token
+  })
+})
 
 app.get('/auth/registrar-emprendimiento', (req, res) => {
   res.render('autenticacion/registrar-emprendimiento', {

@@ -7,4 +7,6 @@ const schema = new mongoose.Schema({
   used: { type: Boolean, default: false }
 })
 
+schema.index({ expires_at: 1 }, { expireAfterSeconds: 0 })
+
 module.exports = mongoose.model('password_reset_tokens', schema)

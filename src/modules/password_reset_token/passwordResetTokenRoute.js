@@ -4,6 +4,6 @@ const authController = require('./passwordResetTokenController')
 
 router.post('/recover-password', authController.enviarCorreoRecuperacion)
 router.get('/reset-password', authController.renderFormularioReset)
-router.post('/reset-password', authController.guardarNuevaContrasena)
+router.post('/reset-password', authController.guardarNuevaPassword)
 
 module.exports = router
