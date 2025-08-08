@@ -69,9 +69,15 @@
                     </small>
                 </div>
                 
-                <button type="button" id="btn-editar-cuenta">Editar información sensible de la cuenta</button>
                 
-                <div class="account-info-fields disabled" id="account-info">
+                <button type="submit">Guardar cambios</button>
+                <button type="button" id="cancel-changes">Cancelar cambios</button>
+                
+                <button type="button" id="btn-editar-cuenta">Editar información sensible de la cuenta</button>
+            </form>
+
+            <div class="account-info-fields disabled" id="account-info">
+                <form id="formulario-cuenta">
                     <div class="field-container">
                         <label for="correo">Correo electrónico</label>
                         <input
@@ -80,13 +86,14 @@
                             name="email"
                             value="<%= user.email %>"
                             disabled
+                            requiered
                             placeholder="ejemplo@correo.com"
                         />
                         <small class="input-requirements" id="correo-requisitos">
                             Debe tener formato válido (ej. nombre@dominio.com).
                         </small>
                     </div>
-
+        
                     <div class="field-container">
                         <label for="password">Nueva contraseña</label>
                         <input
@@ -101,26 +108,26 @@
                             Debe tener minúsculas, mayúsculas y números (8-14 caracteres).
                         </small>
                     </div>
-
+        
                     <div class="field-container">
-                    <label for="confirm-password">Confirmar contraseña</label>
-                    <input
-                        type="password"
-                        id="confirm-password"
-                        name="confirm_password"
-                        placeholder="Repite la contraseña"
-                        minlength="8"
-                        disabled
-                    />
-                    <small class="input-requirements" id="confirm-password-requisitos">
-                        Las contraseñas deben coincidir.
-                    </small>
+                        <label for="confirm-password">Confirmar contraseña</label>
+                        <input
+                            type="password"
+                            id="confirm-password"
+                            name="confirm_password"
+                            placeholder="Repite la contraseña"
+                            minlength="8"
+                            disabled
+                        />
+                        <small class="input-requirements" id="confirm-password-requisitos">
+                            Las contraseñas deben coincidir.
+                        </small>
                     </div>
-                </div>
-
-                <button type="submit">Guardar cambios</button>
-                <button type="button" id="cancel-changes">Cancelar cambios</button>
-            </form>
+                    
+                    <button type="submit">Guardar cambios</button>
+                    <button type="button" id="cancel-changes">Cancelar cambios</button>
+                </form>
+            </div>
         </div>
     </main>
     <div id="mensaje-exito" class="mensaje-exito oculto">¡Información enviada con éxito!</div>

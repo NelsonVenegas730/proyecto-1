@@ -1,3 +1,9 @@
+.account-info-fields {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
 .profile-wrapper {
   min-height: 100vh;
   padding: 40px 20px;
@@ -107,6 +113,18 @@
   margin: 0 auto;
 }
 
+#formulario-cuenta {
+  background: rgb(255, 255, 255);
+  padding: 40px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 0 auto;
+}
+
 .field-container {
   margin-bottom: 20px;
 }
@@ -151,7 +169,7 @@
 
 .disabled {
   color: #777;
-  opacity: 0.3;
+  display: none;
   cursor: not-allowed;
   pointer-events: none; /* para permitir click */
   user-select: none; /* para evitar selección de texto */

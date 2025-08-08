@@ -1,5 +1,5 @@
 const formularioPerfil = document.getElementById("formulario-perfil");
-const formularioSeguridad = document.getElementById("formulario-seguridad");
+const formularioSeguridad = document.getElementById("formulario-cuenta");
 
 const usuario = document.getElementById("usuario");
 const nombre = document.getElementById("nombre");
@@ -63,9 +63,11 @@ const validarPasswordMatch = () => {
     return coincide;
 };
 
-const cancelChangesBtn = document.getElementById("cancel-changes");
+const cancelChangesBtn = document.querySelectorAll("#cancel-changes");
 if (cancelChangesBtn) {
-    cancelChangesBtn.addEventListener("click", () => location.reload());
+    cancelChangesBtn.forEach(btn => {
+        btn.addEventListener("click", () => location.reload());
+    });
 }
 if (usuario) usuario.addEventListener("input", () => validarCampo(usuario, expresiones.usuario, requisitosUsuario));
 if (nombre) nombre.addEventListener("input", () => validarCampo(nombre, expresiones.soloTexto, requisitosNombre));

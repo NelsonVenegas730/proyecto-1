@@ -74,7 +74,6 @@ async function updateUser(userId, data) {
 }
 
 async function updateUserSensitive(userId, data) {
-  console.log(data);
   const { email, password } = data
 
   const user = await User.findById(userId)
