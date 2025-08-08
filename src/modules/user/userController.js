@@ -94,7 +94,6 @@ async function logout(req, res) {
 
 
 async function updateUserData(req, res) {
-  console.log(req.body);
   try {
     const userId = req.session.user?._id;
     if (!userId) return res.status(401).json({ error: 'No autorizado' });
@@ -111,6 +110,22 @@ async function updateUserData(req, res) {
     res.status(200).json({ message: 'Datos actualizados correctamente', user: updatedUser });
   } catch (error) {
     res.status(400).json({ error: error.message });
+  }
+}
+
+async function updateSensitive(req, res) {
+  try {
+    const { email, password } = req.body;
+    const result = await userService.updateUserSensitive(
+      req.session.user._id,
+      { email, password }
+    );
+
+    if (email) req.session.user.email = email;
+
+    res.json(result);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
 }
 
@@ -150,6 +165,7 @@ module.exports = {
   login, 
   logout, 
   updateUserData,
+  updateSensitive,
   updateUserAvatar,
   removeAvatar
 };

@@ -8,6 +8,7 @@ router.post('/sign-up', userController.signUp);
 router.post('/login', userController.login);
 router.post('/logout', userController.logout);
 router.put('/update-profile', userController.updateUserData);
+router.put('/update-sensitive', userController.updateSensitive);
 router.put('/update-avatar', upload.single('avatar'), userController.updateUserAvatar);
 router.delete('/remove-avatar', userController.removeAvatar);
 

@@ -72,7 +72,12 @@ if (nombre) nombre.addEventListener("input", () => validarCampo(nombre, expresio
 if (apellidos) apellidos.addEventListener("input", () => validarCampo(apellidos, expresiones.soloTexto, requisitosApellidos));
 
 if (correo) correo.addEventListener("input", () => validarCampo(correo, expresiones.correo, requisitosCorreo));
-if (password) password.addEventListener("input", () => validarCampo(password, expresiones.password, requisitosPassword));
+if (password) {
+  password.addEventListener("input", () => {
+    validarCampo(password, expresiones.password, requisitosPassword);
+    validarPasswordMatch();
+  });
+}
 if (confirmPassword) confirmPassword.addEventListener("input", validarPasswordMatch);
 
 if (btnEditarCuenta && accountInfo) {
@@ -95,11 +100,6 @@ if (formularioPerfil) {
 
         if (usuarioValido && nombreValido && apellidosValido) {
             try {
-              console.log({
-                usuario: usuario.value,
-                name: nombre.value,
-                last_names: apellidos.value
-              });
                 const res = await fetch("/auth/update-profile", {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
@@ -141,26 +141,52 @@ if (formularioPerfil) {
 }
 
 if (formularioSeguridad) {
-    formularioSeguridad.addEventListener("submit", (e) => {
-        e.preventDefault();
+  formularioSeguridad.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-        const correoValido = correo ? validarCampo(correo, expresiones.correo, requisitosCorreo) : true;
-        const passwordValido = password ? validarCampo(password, expresiones.password, requisitosPassword) : true;
-        const confirmValido = validarPasswordMatch();
+    const correoValido = correo ? validarCampo(correo, expresiones.correo, requisitosCorreo) : true;
+    const passwordValido = password ? validarCampo(password, expresiones.password, requisitosPassword) : true;
+    const confirmValido = validarPasswordMatch();
 
-        if (correoValido && passwordValido && confirmValido) {
-            mensajeExito.classList.remove("oculto");
-            setTimeout(() => {
-                mensajeExito.classList.add("oculto");
-                formularioSeguridad.submit();
-            }, 2000);
-        } else {
-            mensajeError.classList.remove("oculto");
-            setTimeout(() => {
-                mensajeError.classList.add("oculto");
-            }, 3000);
-        }
-    });
+    if (!correoValido || !passwordValido || !confirmValido) {
+      mensajeError.textContent = "Corrige los campos marcados antes de guardar";
+      mensajeError.classList.remove("oculto");
+      setTimeout(() => {
+        mensajeError.classList.add("oculto");
+      }, 3000);
+      return;
+    }
+
+    try {
+      const res = await fetch("/auth/update-sensitive", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: correo.value.trim(),
+          password: password.value.trim()
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        mensajeExito.textContent = data.message || "Información sensible actualizada";
+        mensajeExito.classList.remove("oculto");
+        setTimeout(() => {
+          mensajeExito.classList.add("oculto");
+          location.reload();
+        }, 2000);
+      } else {
+        throw new Error(data.error || "Error al actualizar información");
+      }
+    } catch (err) {
+      mensajeError.textContent = err.message;
+      mensajeError.classList.remove("oculto");
+      setTimeout(() => {
+        mensajeError.classList.add("oculto");
+      }, 3000);
+    }
+  });
 }
 
 const inputAvatar = document.getElementById('image');

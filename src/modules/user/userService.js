@@ -73,6 +73,29 @@ async function updateUser(userId, data) {
   return updatedUser;
 }
 
+async function updateUserSensitive(userId, data) {
+  console.log(data);
+  const { email, password } = data
+
+  const user = await User.findById(userId)
+  if (!user) throw new Error('Usuario no encontrado')
+
+  if (email) {
+    const emailExists = await User.findOne({ email, _id: { $ne: userId } })
+    if (emailExists) throw new Error('El correo ya está en uso')
+    user.email = email.trim()
+  }
+
+  if (password) {
+    const encryptedPassword = await bcrypt.hash(password, 10)
+    user.password = encryptedPassword
+  }
+
+  await user.save()
+
+  return { message: 'Información sensible actualizada correctamente' }
+}
+
 async function updateAvatar(userId, file) {
   if (!file) throw new Error('Archivo no encontrado');
   const avatarPath = `/uploads/${file.filename}`;
@@ -110,6 +133,7 @@ module.exports = {
   verifyCredentials,
   destroySession,
   updateUser,
+  updateUserSensitive,
   updateAvatar,
   removeAvatar
 };
