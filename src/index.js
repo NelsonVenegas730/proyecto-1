@@ -193,7 +193,7 @@ app.get('/emprendimientos', authMiddleware.authorizeRoleAccess(['ciudadano']), b
 
 app.get('/horario-buses', authMiddleware.authorizeRoleAccess(['ciudadano']), busScheduleController.getAllBusSchedules);
 
-app.get('/noticias-anuncios-eventos', authMiddleware.authorizeRoleAccess(['ciudadano']), announcementController.getAllAnnouncements);
+app.get('/noticias-anuncios-eventos', authMiddleware.authorizeRoleAccess(['ciudadano']), announcementController.getAllAnnouncements,);
 
 app.get('/sugerencias', authMiddleware.authorizeRoleAccess(['ciudadano']), supportTicketController.getAllTickets);
 
@@ -204,7 +204,8 @@ app.get('/emprendedor/mi-emprendimiento/:id', authMiddleware.authorizeRoleAccess
 app.get('/form/form-anuncio-evento-noticia', authMiddleware.authorizeRoleAccess(['ciudadano', 'administrador']), (req, res) => {
   res.render('formularios/form-anuncio-evento-noticia', {
     title: 'Crear nuevo Anuncio / Evento / Noticia',
-    layout: 'layouts/layout-form'
+    layout: 'layouts/layout-form',
+    user: req.session.user || null
   });
 });
 

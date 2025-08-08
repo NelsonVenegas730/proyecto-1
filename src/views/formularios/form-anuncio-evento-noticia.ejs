@@ -1,5 +1,6 @@
 <body>
     <main>
+        <div id="user-info" data-user-role="<%= user ? user.role : '' %>" style="display:none;"></div>
         <section class="indication">
             <p>Aquí puedes crear un nuevo anuncio, evento o noticia.</p>
         </section>
@@ -40,6 +41,8 @@
             <button type="submit">Publicar</button>
         </form>
     </main>
+    <div id="mensaje-exito" class="mensaje-exito oculto">¡Anuncio creado con éxito!</div>
+    <div id="mensaje-error" class="mensaje-error oculto"></div>
     <script src="/js/previewSelectedImage.js"></script>
     <script src="/js/validateAnnouncement.js"></script>
 </body>

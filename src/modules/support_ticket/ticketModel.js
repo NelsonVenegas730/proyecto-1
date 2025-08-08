@@ -1,4 +1,3 @@
-const { status } = require('express/lib/response');
 const { Schema, model } = require('mongoose');
 
 const messageSchema = new Schema({
