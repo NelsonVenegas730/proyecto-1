@@ -19,7 +19,6 @@ async function register(data) {
     email,
     password: encryptedPassword,
     role: isEmprendedor === 'on' ? 'emprendedor' : 'ciudadano',
-    status: isEmprendedor === 'on' ? 'pendiente' : 'activo'
   });
 
   return await nuevoUsuario.save();

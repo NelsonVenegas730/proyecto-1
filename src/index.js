@@ -161,10 +161,10 @@ app.get('/auth/perfil', noCache, authMiddleware.authorizeRoleAccess(['ciudadano'
 });
 
 // 🛠️ Administrador
-app.get('/admin/aprobaciones', authMiddleware.authorizeRoleAccess(['administrador']), (req, res) => {
-  res.render('administrador/admin-aprobaciones', {
-    title: 'Gestionar Contenido',
-    style: '<link rel="stylesheet" href="/css/page-styles/admin-aprobaciones.css">',
+app.get('/admin/gestion-contenido', authMiddleware.authorizeRoleAccess(['administrador']), (req, res) => {
+  res.render('administrador/admin-gestion-contenido', {
+    title: 'Gestionar y Moderar contenido del sitio',
+    style: '<link rel="stylesheet" href="/css/page-styles/admin-gestion-contenido.css">',
     layout: 'layouts/layout-admin'
   });
 });
