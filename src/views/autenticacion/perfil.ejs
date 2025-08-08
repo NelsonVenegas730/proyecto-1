@@ -11,14 +11,18 @@
 
                     <div class="user-avatar-preview" id="avatar-preview-form">
                         <% if (user.avatarUrl && user.avatarUrl.length > 2) { %>
-                            <img id="preview-img" src="<%= user.avatarUrl %>" alt="Preview" />
+                            <img id="preview-img" src="<%= user.avatarUrl %>" alt="" />
                         <% } else { %>
-                            <span class="initials"><%= user.avatarUrl %></span>
-                            <img id="preview-img" src="" alt="Preview" style="display:none;" />
+                            <span class="initials"><%= user.avatarUrl || user.initials %></span>
+                            <img id="preview-img" src="" alt="" style="display:none;" />
                         <% } %>
                     </div>
 
-                    <input type="file" id="imagen" accept="image/*" />
+                    <input type="file" id="image" name="image" accept="image/*" />
+                    <div class="image-btns">
+                        <button type="button" id="btn-upload-avatar">Actualizar Avatar</button>
+                        <button type="button" id="btn-remove-avatar">Eliminar Avatar</button>
+                    </div>
                 </div>
 
                 <div class="field-container">
@@ -29,74 +33,73 @@
                     name="usuario"
                     value="<%= user.username %>"
                     placeholder="Nombre de usuario"
-                    maxlength="50"
+                    minlength="3"
+                    maxlength="20"
                     />
-                    <small class="input-requirements" id="usuario-requisitos">
-                    Solo letras, números, guiones y guiones bajos (3-20 caracteres).
-                    </small>
+                    <small class="input-requirements" id="usuario-requisitos">Solo letras, números, guiones y guiones bajos, sin espacios. (3-20 caracteres)</small>
                 </div>
-
-                <button type="button" id="btn-editar-cuenta">Editar información sensible de la cuenta</button>
-
-                <div class="account-info-fields disabled" id="account-info">
-                    <div class="field-container">
+                
+                <div class="field-container">
                     <label for="nombre">Nombre</label>
                     <input
-                        type="text"
-                        id="nombre"
-                        name="nombre"
-                        value="<%= user.name || '' %>"
-                        placeholder="Tu nombre"
-                        maxlength="100"
+                    type="text"
+                    id="nombre"
+                    name="name"
+                    value="<%= user.name || '' %>"
+                    placeholder="Tu nombre"
+                    maxlength="100"
                     />
                     <small class="input-requirements" id="nombre-requisitos">
                         Solo letras y espacios, sin números ni símbolos.
                     </small>
-                    </div>
-
-                    <div class="field-container">
+                </div>
+                
+                <div class="field-container">
                     <label for="apellidos">Apellidos</label>
                     <input
-                        type="text"
-                        id="apellidos"
-                        name="apellidos"
-                        value="<%= user.last_names || '' %>"
-                        placeholder="Tus apellidos"
-                        maxlength="100"
+                    type="text"
+                    id="apellidos"
+                    name="last_names"
+                    value="<%= user.last_names || '' %>"
+                    placeholder="Tus apellidos"
+                    maxlength="100"
                     />
                     <small class="input-requirements" id="apellidos-requisitos">
                         Solo letras y espacios, sin números ni símbolos.
                     </small>
+                </div>
+                
+                <button type="button" id="btn-editar-cuenta">Editar información sensible de la cuenta</button>
+                
+                <div class="account-info-fields disabled" id="account-info">
+                    <div class="field-container">
+                        <label for="correo">Correo electrónico</label>
+                        <input
+                            type="email"
+                            id="correo"
+                            name="email"
+                            value="<%= user.email %>"
+                            disabled
+                            placeholder="ejemplo@correo.com"
+                        />
+                        <small class="input-requirements" id="correo-requisitos">
+                            Debe tener formato válido (ej. nombre@dominio.com).
+                        </small>
                     </div>
 
                     <div class="field-container">
-                    <label for="correo">Correo electrónico</label>
-                    <input
-                        type="email"
-                        id="correo"
-                        name="correo"
-                        value="<%= user.email %>"
-                        disabled
-                        placeholder="ejemplo@correo.com"
-                    />
-                    <small class="input-requirements" id="correo-requisitos">
-                        Debe tener formato válido (ej. nombre@dominio.com).
-                    </small>
-                    </div>
-
-                    <div class="field-container">
-                    <label for="password">Nueva contraseña</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="Contraseña nueva"
-                        minlength="8"
-                        disabled
-                    />
-                    <small class="input-requirements" id="password-requisitos">
-                        Debe tener minúsculas, mayúsculas y números (12+ caracteres).
-                    </small>
+                        <label for="password">Nueva contraseña</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Contraseña nueva"
+                            minlength="8"
+                            disabled
+                        />
+                        <small class="input-requirements" id="password-requisitos">
+                            Debe tener minúsculas, mayúsculas y números (8-14 caracteres).
+                        </small>
                     </div>
 
                     <div class="field-container">
@@ -122,7 +125,6 @@
     </main>
     <div id="mensaje-exito" class="mensaje-exito oculto">¡Información enviada con éxito!</div>
     <div id="mensaje-error" class="mensaje-error oculto">Error, por favor completa todos los campos correctamente.</div>
-    <script src="/js/previewSelectedImage.js"></script>
     <script src="/js/validateProfile.js"></script>
     <script src="/js/logout.js"></script>
 </body>

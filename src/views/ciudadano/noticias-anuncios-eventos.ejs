@@ -36,9 +36,13 @@
               </span>
               <div class="autor">
                 <div class="avatar">
-                  <%= a.user_id
-                    ? ((a.user_id.name?.charAt(0) || '') + (a.user_id.last_names?.charAt(0) || '')).toUpperCase()
-                    : '??' %>
+                  <% if (a.user_id && a.user_id.avatar && a.user_id.avatar.length > 2) { %>
+                    <img src="<%= a.user_id.avatar %>" alt="Avatar" />
+                  <% } else if (a.user_id) { %>
+                    <%= ((a.user_id.name?.charAt(0) || '') + (a.user_id.last_names?.charAt(0) || '')).toUpperCase() %>
+                  <% } else { %>
+                    ??
+                  <% } %>
                 </div>
                 <span>
                   Publicado por:

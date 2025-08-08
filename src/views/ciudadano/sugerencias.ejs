@@ -64,10 +64,16 @@
                 <span class="fecha">Fecha de creación: <%= new Date(ticket.date).toLocaleDateString('es-CR', { day: 'numeric', month: 'long', year: 'numeric' }) %></span>
               
                 <div class="autor">
-                    <div class="avatar">
-                    <%= ticket.user_id ? (ticket.user_id.name[0] + ticket.user_id.last_names[0]) : '?' %>
-                    </div>
-                    <span>Reportado por: <%= ticket.user_id.name + ' ' + ticket.user_id.last_names %></span>
+                  <div class="avatar">
+                    <% if (ticket.user_id && ticket.user_id.avatar && ticket.user_id.avatar.length > 2) { %>
+                      <img src="<%= ticket.user_id.avatar %>" alt="Avatar" />
+                    <% } else if (ticket.user_id) { %>
+                      <%= (ticket.user_id.name?.charAt(0) || '') + (ticket.user_id.last_names?.charAt(0) || '') %>
+                    <% } else { %>
+                      ?
+                    <% } %>
+                  </div>
+                  <span>Reportado por: <%= ticket.user_id ? (ticket.user_id.name + ' ' + ticket.user_id.last_names) : 'Desconocido' %></span>
                 </div>
 
                 <% if (ticket.messages.length > 0) { %>

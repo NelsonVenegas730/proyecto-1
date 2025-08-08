@@ -2,7 +2,7 @@ const SupportTicket = require('./ticketModel');
 
 async function getAllTickets() {
   let tickets = await SupportTicket.find()
-    .populate('user_id', 'name last_names email');
+    .populate('user_id', 'name last_names email avatar');
 
   tickets = await SupportTicket.populate(tickets, {
     path: 'messages.user_id',

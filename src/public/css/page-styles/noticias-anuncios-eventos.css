@@ -221,6 +221,14 @@
   flex-shrink: 0;
 }
 
+.avatar img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
 .create-anuncio-evento-noticia-cta {
   text-align: center;
   width: 100%;

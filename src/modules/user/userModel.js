@@ -6,7 +6,7 @@ const usuarioSchema = new mongoose.Schema({
   last_names: { type: String, default: '' },
   email: { type: String, unique: true },
   password: { type: String },
-  role: { type: String, enum: ['ciudadano', 'emprendedor', 'admin'], default: 'ciudadano' },
+  role: { type: String, enum: ['ciudadano', 'emprendedor', 'administrador'], default: 'ciudadano' },
   avatar: { type: String, default: '' }
 });
 

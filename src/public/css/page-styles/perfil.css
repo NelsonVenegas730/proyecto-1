@@ -53,7 +53,6 @@
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
-  display: none;
   z-index: 2;
 }
 
@@ -301,4 +300,57 @@ button[type="submit"]:hover {
   background-color: #ff9999;
   cursor: not-allowed;
   opacity: 0.6;
+}
+
+#btn-upload-avatar {
+  display: none; /* oculto por defecto */
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  margin-top: 8px;
+}
+
+/* hover, active, focus igual que antes */
+#btn-upload-avatar:hover {
+  background-color: #0056b3;
+}
+
+#btn-upload-avatar:active {
+  background-color: #003d80;
+}
+
+#btn-upload-avatar:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+#btn-remove-avatar {
+  padding: 8px 16px;
+  background-color: #919191;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  margin-top: 8px;
+}
+
+/* hover, active, focus igual que antes */
+#btn-remove-avatar:hover {
+  background-color: #b0b0b0;
+}
+
+#btn-remove-avatar:active {
+  background-color: #838383;
+}
+
+#btn-remove-avatar:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
 }

@@ -3,7 +3,7 @@ const announcementService = require('./announcementService');
 
 async function getAllAnnouncements(req, res) {
   try {
-    const announcements = await Announcement.find().populate('user_id', 'name last_names');
+    const announcements = await Announcement.find().populate('user_id', 'name last_names, avatar');
     const safeAnnouncements = announcements.map(a => ({
       ...a._doc,
       title: a.title || 'Sin título',

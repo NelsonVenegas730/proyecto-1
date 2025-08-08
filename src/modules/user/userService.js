@@ -1,5 +1,13 @@
 const bcrypt = require('bcrypt');
 const User = require('./userModel');
+const path = require('path');
+const fs = require('fs');
+
+function getInitials(name, last_names) {
+  const nameInitial = name.trim().charAt(0).toUpperCase() || '';
+  const lastNameInitial = last_names.trim().charAt(0).toUpperCase() || '';
+  return nameInitial + lastNameInitial;
+}
 
 async function register(data) {
   const { username, name, last_names, email, password, isEmprendedor } = data;
@@ -40,14 +48,68 @@ async function destroySession(req) {
   });
 }
 
-async function recoverPassword(email) {
-  const user = await User.findOne({ email });
-  return user; // acá luego se puede agregar lógica para enviar token, email, etc.
+async function updateUser(userId, data) {
+  const { username, name, last_names } = data;
+  if (!name || !last_names) throw new Error('Nombre y apellidos son obligatorios');
+
+  const user = await User.findById(userId);
+  if (!user) throw new Error('Usuario no encontrado');
+
+  const initials = getInitials(name, last_names);
+
+  const isAvatarImage = user.avatar && (user.avatar.startsWith('/uploads/') || user.avatar.startsWith('http'));
+
+  const updatedUser = await User.findByIdAndUpdate(
+    userId,
+    {
+      username: username.trim(),
+      name,
+      last_names,
+      avatar: isAvatarImage ? user.avatar : initials
+    },
+    { new: true }
+  );
+
+  return updatedUser;
+}
+
+async function updateAvatar(userId, file) {
+  if (!file) throw new Error('Archivo no encontrado');
+  const avatarPath = `/uploads/${file.filename}`;
+
+  const user = await User.findById(userId);
+  if (!user) throw new Error('Usuario no encontrado');
+  if (user.avatar && user.avatar.startsWith('/uploads/')) {
+    const fullPath = path.join(__dirname, '..', user.avatar);
+    if (fs.existsSync(fullPath)) fs.unlinkSync(fullPath);
+  }
+  user.avatar = avatarPath;
+  await user.save();
+  return avatarPath;
+}
+
+
+async function removeAvatar(userId) {
+  const user = await User.findById(userId);
+  if (!user) throw new Error('Usuario no encontrado');
+
+  if (user.avatar && user.avatar.startsWith('/uploads/')) {
+    const fullPath = path.join(__dirname, '..', user.avatar);
+    if (fs.existsSync(fullPath)) fs.unlinkSync(fullPath);
+  }
+
+  const initials = getInitials(user.name, user.last_names);
+  user.avatar = initials;
+  await user.save();
+
+  return initials;
 }
 
 module.exports = {
   register,
   verifyCredentials,
   destroySession,
-  recoverPassword
+  updateUser,
+  updateAvatar,
+  removeAvatar
 };

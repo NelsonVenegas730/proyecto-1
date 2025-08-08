@@ -92,16 +92,64 @@ async function logout(req, res) {
   }
 }
 
-async function recoverPassword(req, res) {
-  try {
-    const { correo } = req.body;
-    const user = await userService.recoverPassword(correo);
 
-    res.redirect('/auth/inicio-sesion');
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Error en recuperación de contraseña');
+async function updateUserData(req, res) {
+  console.log(req.body);
+  try {
+    const userId = req.session.user?._id;
+    if (!userId) return res.status(401).json({ error: 'No autorizado' });
+
+    const { username, name, last_names } = req.body;
+    const updatedUser = await userService.updateUser(userId, { username, name, last_names });
+
+    req.session.user.username = updatedUser.username;
+    req.session.user.name = updatedUser.name;
+    req.session.user.last_names = updatedUser.last_names;
+    req.session.user.avatarUrl = updatedUser.avatar;
+    req.session.initials = getInitials(updatedUser.name, updatedUser.last_names);
+
+    res.status(200).json({ message: 'Datos actualizados correctamente', user: updatedUser });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 }
 
-module.exports = { signUp, login, logout, recoverPassword };
+async function updateUserAvatar(req, res) {
+  try {
+    const userId = req.session.user._id;
+    const file = req.file;
+
+    if (!file) return res.status(400).json({ error: 'Archivo no recibido' });
+
+    const avatarUrl = await userService.updateAvatar(userId, file);
+
+    req.session.user.avatarUrl = avatarUrl;
+
+    res.json({ message: 'Avatar actualizado correctamente', avatarUrl });
+  } catch (err) {
+    res.status(500).json({ error: err.message || 'Error al actualizar avatar' });
+  }
+}
+
+async function removeAvatar(req, res) {
+  try {
+    const userId = req.session.user._id;
+    const initials = await userService.removeAvatar(userId);
+
+    req.session.user.avatarUrl = initials;
+
+    res.json({ message: 'Avatar eliminado', avatarUrl: initials });
+  } catch (error) {
+    console.error('Error en removeAvatar:', error);
+    res.status(500).json({ error: 'Error al eliminar avatar' });
+  }
+}
+
+module.exports = { 
+  signUp, 
+  login, 
+  logout, 
+  updateUserData,
+  updateUserAvatar,
+  removeAvatar
+};
