@@ -63,6 +63,7 @@
 
 .sidebar-header {
   display: flex;
+  width: 100%;
   flex-direction: column;
 }
 
@@ -140,7 +141,8 @@
   padding-bottom: 10px;
   opacity: 0;
   max-height: 0;
-  overflow: hidden;
+  width: 100% !important;
+  overflow: visible;
   transition: all 0.3s ease;
 }
 
@@ -148,8 +150,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  max-width: 100%;
-  overflow: hidden;
+  width: 100% !important;
 }
 
 .user-avatar {
@@ -164,6 +165,8 @@
   border-radius: 50%;
   color: white;
   text-transform: uppercase;
+  z-index: 999;
+  transition: all ease-in-out 0.2s;
 }
 
 .user-avatar img {
@@ -171,6 +174,18 @@
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
+}
+
+.user-avatar:hover {
+  border: 3px solid transparent;
+  background-image: 
+    linear-gradient(135deg, var(--color-primary), var(--color-primary-light), var(--color-secondary));
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  transform: scale(1.05);
+  border: 1px;
+  width: 70px;
+  height: 70px;
 }
 
 .username {
@@ -187,7 +202,86 @@
 .user-info {
   display: flex;
   flex-direction: column;
-  min-width: 0;
+  align-items: flex-start;
+}
+
+.rol {
+  text-align: left;
+  width: 100%;
+}
+
+.user-profile-dropdown {
+  position: relative;
+  width: 100% !important;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.user-profile-dropdown-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  padding: 10px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--color-secondary);
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.user-profile-dropdown-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-arrow {
+  font-size: 1.3rem;
+  user-select: none;
+  margin-left: 10px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  right: 0;
+  background-color: var(--color-bg-secondary);
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 1000;
+  transition: opacity 0.3s ease;
+}
+
+.dropdown-menu.oculto {
+  display: none;
+}
+
+.dropdown-menu button.account-switch-btn {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 10px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-secondary);
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-menu button.account-switch-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.disabled-link {
+  pointer-events: none;
+  opacity: 1;
+  cursor: default;
 }
 
 /* HOVER SOLO EN ESCRITORIO */

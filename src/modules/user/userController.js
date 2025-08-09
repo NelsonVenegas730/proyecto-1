@@ -20,7 +20,8 @@ async function signUp(req, res) {
       last_names: user.last_names,
       role: user.role,
       avatarUrl: user.avatar || null,
-      initials
+      initials,
+      master_id: user.master_id
     };
 
     res.json({
@@ -60,7 +61,8 @@ async function login(req, res) {
       last_names: user.last_names,
       role: user.role,
       avatarUrl: user.avatar || null,
-      initials
+      initials,
+      master_id: user.master_id
     };
 
     if (keepSesionActive === 'on') {
@@ -160,6 +162,30 @@ async function removeAvatar(req, res) {
   }
 }
 
+async function getAccounts(req, res) {
+  try {
+    const masterId = req.session.user.master_id;
+    if (!masterId) return res.status(400).json({ error: 'Master ID no encontrado en sesión' });
+
+    const accounts = await userService.getUserAccounts(masterId);
+    res.json(accounts);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
+async function changeAccount(req, res) {
+  try {
+    const { accountId } = req.body;
+    if (!accountId) return res.status(400).json({ error: 'accountId es requerido' });
+
+    const updatedUser = await userService.switchUserAccount(req.session, accountId);
+    res.json({ message: 'Cuenta cambiada', user: updatedUser });
+  } catch (err) {
+    res.status(403).json({ error: err.message });
+  }
+}
+
 module.exports = { 
   signUp, 
   login, 
@@ -167,5 +193,7 @@ module.exports = {
   updateUserData,
   updateSensitive,
   updateUserAvatar,
-  removeAvatar
+  removeAvatar,
+  getAccounts,
+  changeAccount
 };

@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const User = require('./userModel');
 const path = require('path');
@@ -14,12 +15,22 @@ async function register(data) {
 
   const encryptedPassword = await bcrypt.hash(password, 10);
 
+  // Buscar usuario con mismo email para master_id
+  const existingUser = await User.findOne({ email });
+  let masterId;
+  if (existingUser && existingUser.master_id) {
+    masterId = existingUser.master_id;
+  } else {
+    masterId = new mongoose.Types.ObjectId();
+  }
+
   const iniciales = (
     (name?.[0] || '') + 
     (last_names?.split(' ')[0]?.[0] || '')
   ).toUpperCase();
 
   const nuevoUsuario = new User({
+    master_id: masterId,
     avatar: iniciales,
     username,
     name,
@@ -33,9 +44,12 @@ async function register(data) {
 }
 
 async function verifyCredentials(correo, password) {
-  const user = await User.findOne({ email: correo });
-  const match = user ? await bcrypt.compare(password, user.password) : false;
-  return { user, match };
+  const users = await User.find({ email: correo })
+  for (const user of users) {
+    const match = await bcrypt.compare(password, user.password)
+    if (match) return { user, match: true }
+  }
+  return { user: null, match: false }
 }
 
 async function destroySession(req) {
@@ -79,9 +93,15 @@ async function updateUserSensitive(userId, data) {
   const user = await User.findById(userId)
   if (!user) throw new Error('Usuario no encontrado')
 
+  if (email && password) {
+    const existingUser = await User.findOne({ email })
+    if (existingUser) {
+      const samePassword = await bcrypt.compare(password, existingUser.password)
+      if (samePassword) throw new Error('El correo y la contraseña ya existen en otro usuario')
+    }
+  }
+
   if (email) {
-    const emailExists = await User.findOne({ email, _id: { $ne: userId } })
-    if (emailExists) throw new Error('El correo ya está en uso')
     user.email = email.trim()
   }
 
@@ -127,6 +147,38 @@ async function removeAvatar(userId) {
   return initials;
 }
 
+async function getUserAccounts(masterId) {
+  const accounts = await User.find({ master_id: masterId }).lean();
+  accounts.forEach(acc => {
+    acc.initials = getInitials(acc.name, acc.last_names);
+  });
+  return accounts;
+}
+
+async function switchUserAccount(session, newAccountId) {
+  const user = await User.findById(newAccountId);
+
+  if (!user) throw new Error('Cuenta no encontrada');
+
+  if (user.master_id.toString() !== session.user.master_id.toString()) {
+    throw new Error('No autorizado para cambiar a esta cuenta');
+  }
+
+  session.user = {
+    _id: user._id,
+    username: user.username,
+    email: user.email,
+    role: user.role,
+    avatarUrl: user.avatar,
+    master_id: user.master_id,
+    name: user.name,
+    last_names: user.last_names,
+    initials: getInitials(user.name, user.last_names)
+  };
+
+  return user;
+}
+
 module.exports = {
   register,
   verifyCredentials,
@@ -134,5 +186,7 @@ module.exports = {
   updateUser,
   updateUserSensitive,
   updateAvatar,
-  removeAvatar
+  removeAvatar,
+  getUserAccounts,
+  switchUserAccount
 };

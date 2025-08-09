@@ -1,3 +1,23 @@
+const userService = require('../modules/user/userService');
+
+async function attachUserData(req, res, next) {
+  if (req.session?.user?.master_id) {
+    try {
+      const userAccounts = await userService.getUserAccounts(req.session.user.master_id);
+      res.locals.userAccounts = userAccounts;
+    } catch {
+      res.locals.userAccounts = [];
+    }
+  } else {
+    res.locals.userAccounts = [];
+  }
+
+  res.locals.user = req.session.user || null;
+  res.locals.activeAccountId = req.session?.user?._id || null;
+
+  next();
+}
+
 function redirectIfAuthenticated() {
   return (req, res, next) => {
     const user = req.session.user;
@@ -59,4 +79,4 @@ function authorizeRoleAccess(rolesValidos = []) {
   };
 }
 
-module.exports = { redirectIfAuthenticated, redirectFromLanding, authorizeRoleAccess };
+module.exports = { redirectIfAuthenticated, redirectFromLanding, authorizeRoleAccess, attachUserData };

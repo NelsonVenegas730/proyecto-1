@@ -16,27 +16,61 @@
     </div>
 
     <div class="auth-container">
-        <% if (user) { %>
+      <% if (user && userAccounts && userAccounts.length > 0) { %>
+        <div class="user-profile-dropdown">
+          <button id="dropdown-toggle" class="user-profile-dropdown-toggle" type="button">
+            <% 
+              const activeAccount = userAccounts.find(acc => acc._id.toString() === user._id.toString()) || userAccounts[0];
+            %>
             <div class="user-profile">
-                <a href="/auth/perfil" class="user-avatar" id="avatar">
-                    <% if (user.avatarUrl && user.avatarUrl.length > 2) { %>
-                        <img src="<%= user.avatarUrl %>" alt="Avatar usuario" />
+              <a href="/auth/perfil" class="user-avatar">
+                <% if (user.avatarUrl && user.avatarUrl.length > 2) { %>
+                  <img src="<%= user.avatarUrl %>" alt="Avatar usuario" />
+                <% } else { %>
+                  <%= user.avatarUrl || user.initials %>
+                <% } %>
+              </a>
+              <div class="user-info">
+                <p class="username" data-fullname="<%= activeAccount.username %>"><%= activeAccount.username %></p>
+                <p class="rol"><%= activeAccount.role.charAt(0).toUpperCase() + activeAccount.role.slice(1) %></p>
+              </div>
+            </div>
+            <% if (userAccounts.length > 1) { %>
+              <i class="bx bx-caret-down dropdown-arrow"></i>
+            <% } %>
+          </button>
+
+          <div id="dropdown-menu" class="dropdown-menu oculto">
+            <% userAccounts
+                .filter(acc => acc._id.toString() !== user._id.toString())
+                .forEach(acc => { %>
+              <button class="account-switch-btn" data-id="<%= acc._id %>" type="button">
+                <div class="user-profile">
+                  <a 
+                    class="user-avatar <%= acc._id.toString() !== activeAccountId.toString() ? 'disabled-link' : '' %>"
+                    <%= acc._id.toString() === activeAccountId.toString() ? 'href="/auth/perfil"' : '' %>
+                  >
+                    <% if (acc.avatar && acc.avatar.length > 2) { %>
+                      <img src="<%= acc.avatar %>" alt="Avatar usuario" />
                     <% } else { %>
-                        <%= user.avatarUrl || user.initials %>
+                      <%= acc.avatar || acc.initials %>
                     <% } %>
-                </a>
-            <div class="user-info">
-                <p class="username" id="username" data-fullname="<%= user.username %>"><%= user.username %></p>
-                <p class="rol"><%= user.role.charAt(0).toUpperCase() + user.role.slice(1) %></p>
-            </div>
-            </div>
-        <% } else { %>
-            <div class="auth-buttons">
-            <a href="/auth/inicio-sesion" class="auth-btn" type="button">Iniciar sesión</a>
-            <a href="/auth/registrarse" class="auth-btn" type="button">Registrarse</a>
-            </div>
-        <% } %>
+                  </a>
+                  <div class="user-info">
+                    <p class="username" data-fullname="<%= acc.username %>"><%= acc.username %></p>
+                    <p class="rol"><%= acc.role.charAt(0).toUpperCase() + acc.role.slice(1) %></p>
+                  </div>
+                </div>
+              </button>
+            <% }) %>
+          </div>
         </div>
+      <% } else { %>
+        <div class="auth-buttons">
+          <a href="/auth/inicio-sesion" class="auth-btn" type="button">Iniciar sesión</a>
+          <a href="/auth/registrarse" class="auth-btn" type="button">Registrarse</a>
+        </div>
+      <% } %>
     </div>
 
     <% if (user && user.role === 'administrador') { %>
@@ -126,3 +160,4 @@
     </ul>
 <% } %>
 </nav>
+<script src="/js/userAccountFetchAndSwitch.js"></script>

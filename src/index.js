@@ -47,10 +47,7 @@ connectDB()
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 const authMiddleware = require('./middleware/authMiddleware');
-app.use((req, res, next) => {
-  res.locals.user = req.session.user || null;
-  next();
-});
+app.use(authMiddleware.attachUserData);
 
 // 🎨 Configuración de vistas
 app.set('views', path.join(__dirname, 'views'));
@@ -95,7 +92,7 @@ function noCache(req, res, next) {
 }
 
 // 🏠 Página principal
-app.get('/', authMiddleware.redirectFromLanding(), async (req, res) => {
+app.get('/', authMiddleware.attachUserData, authMiddleware.redirectFromLanding(), async (req, res) => {
   try {
     const anuncio = await announcementService.getLatestApprovedAnnouncement();
 
@@ -152,7 +149,7 @@ app.get('/auth/registrar-emprendimiento', (req, res) => {
   });
 });
 
-app.get('/auth/perfil', noCache, authMiddleware.authorizeRoleAccess(['ciudadano', 'emprendedor', 'administrador']), (req, res) => {
+app.get('/auth/perfil', noCache, authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['ciudadano', 'emprendedor', 'administrador']), (req, res) => {
   res.render('autenticacion/perfil', {
     title: 'Perfil',
     style: '<link rel="stylesheet" href="/css/page-styles/perfil.css">',
@@ -161,7 +158,7 @@ app.get('/auth/perfil', noCache, authMiddleware.authorizeRoleAccess(['ciudadano'
 });
 
 // 🛠️ Administrador
-app.get('/admin/gestion-contenido', authMiddleware.authorizeRoleAccess(['administrador']), (req, res) => {
+app.get('/admin/gestion-contenido', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['administrador']), (req, res) => {
   res.render('administrador/admin-gestion-contenido', {
     title: 'Gestionar y Moderar contenido del sitio',
     style: '<link rel="stylesheet" href="/css/page-styles/admin-gestion-contenido.css">',
@@ -169,9 +166,9 @@ app.get('/admin/gestion-contenido', authMiddleware.authorizeRoleAccess(['adminis
   });
 });
 
-app.get('/admin/tiquetes', authMiddleware.authorizeRoleAccess(['administrador']), supportTicketController.getAllTicketsAdmin)
+app.get('/admin/tiquetes', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['administrador']), supportTicketController.getAllTicketsAdmin)
 
-app.get('/admin/usuarios', authMiddleware.authorizeRoleAccess(['administrador']), (req, res) => {
+app.get('/admin/usuarios', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['administrador']), (req, res) => {
   res.render('administrador/admin-usuarios', {
     title: 'Gestionar Usuarios',
     style: '<link rel="stylesheet" href="/css/page-styles/admin-usuarios.css">',
@@ -179,7 +176,7 @@ app.get('/admin/usuarios', authMiddleware.authorizeRoleAccess(['administrador'])
   });
 });
 
-app.get('/admin/panel-administrador', authMiddleware.authorizeRoleAccess(['administrador']), (req, res) => {
+app.get('/admin/panel-administrador', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['administrador']), (req, res) => {
   res.render('administrador/panel-administrador', {
     title: 'Panel de Administrador',
     style: '<link rel="stylesheet" href="/css/page-styles/admin-panel.css">',
@@ -188,20 +185,20 @@ app.get('/admin/panel-administrador', authMiddleware.authorizeRoleAccess(['admin
 });
 
 // 👥 Ciudadano
-app.get('/emprendimiento/:id', authMiddleware.authorizeRoleAccess(['ciudadano']), businessController.getBusinessById);
-app.get('/emprendimientos', authMiddleware.authorizeRoleAccess(['ciudadano']), businessController.getAllBusinesses);
+app.get('/emprendimiento/:id', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['ciudadano']), businessController.getBusinessById);
+app.get('/emprendimientos', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['ciudadano']), businessController.getAllBusinesses);
 
-app.get('/horario-buses', authMiddleware.authorizeRoleAccess(['ciudadano']), busScheduleController.getAllBusSchedules);
+app.get('/horario-buses', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['ciudadano']), busScheduleController.getAllBusSchedules);
 
-app.get('/noticias-anuncios-eventos', authMiddleware.authorizeRoleAccess(['ciudadano']), announcementController.getAllAnnouncements,);
+app.get('/noticias-anuncios-eventos', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['ciudadano']), announcementController.getAllAnnouncements);
 
-app.get('/sugerencias', authMiddleware.authorizeRoleAccess(['ciudadano']), supportTicketController.getAllTickets);
+app.get('/sugerencias', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['ciudadano']), supportTicketController.getAllTickets);
 
 // 💼 Emprendedor
 app.get('/emprendedor/mi-emprendimiento/:id', authMiddleware.authorizeRoleAccess(['emprendedor']), businessController.getBusinessByUser);
 
 // 📝 Formularios
-app.get('/form/form-anuncio-evento-noticia', authMiddleware.authorizeRoleAccess(['ciudadano', 'administrador']), (req, res) => {
+app.get('/form/form-anuncio-evento-noticia', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['ciudadano', 'administrador']), (req, res) => {
   res.render('formularios/form-anuncio-evento-noticia', {
     title: 'Crear nuevo Anuncio / Evento / Noticia',
     layout: 'layouts/layout-form',
@@ -209,7 +206,7 @@ app.get('/form/form-anuncio-evento-noticia', authMiddleware.authorizeRoleAccess(
   });
 });
 
-app.get('/form/form-tiquete', authMiddleware.authorizeRoleAccess(['ciudadano', 'administrador']), (req, res) => {
+app.get('/form/form-tiquete', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['ciudadano', 'administrador']), (req, res) => {
   res.render('formularios/form-tiquete', {
     title: 'Nuevo Tiquete de Soporte',
     layout: 'layouts/layout-form'
