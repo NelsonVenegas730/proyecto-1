@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const emprendimientosHeading = document.querySelector('.emprendimientos-heading');
   const emprendimientosContainer = document.querySelector('.emprendimientos-pendientes');
+  const busSchedulesHeading = document.querySelector('.bus-schedule-heading');
+  const busSchedulesContainer = document.querySelector('.bus-schedules');
 
   const noticiasHeading = document.querySelector('.noticias-heading');
   const noticiasContainer = document.querySelector('.noticias-pendientes');
@@ -18,12 +20,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const mostrarEmprendimientos = mostrarAmbos || seleccionados.includes('emprendimientos');
     const mostrarNoticias = mostrarAmbos || seleccionados.includes('noticias');
+    const mostrarHorariosBuses = mostrarAmbos || seleccionados.includes('horariosBuses');
 
     emprendimientosHeading.style.display = mostrarEmprendimientos ? 'block' : 'none';
     emprendimientosContainer.style.display = mostrarEmprendimientos ? 'flex' : 'none';
 
     noticiasHeading.style.display = mostrarNoticias ? 'block' : 'none';
     noticiasContainer.style.display = mostrarNoticias ? 'flex' : 'none';
+
+    busSchedulesHeading.style.display = mostrarHorariosBuses ? 'block' : 'none';
+    busSchedulesContainer.style.display = mostrarHorariosBuses ? 'grid' : 'none';
   }
 
   contentCheckboxes.forEach(cb => cb.addEventListener('change', aplicarFiltroContenido));

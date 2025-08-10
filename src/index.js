@@ -62,6 +62,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 // 📂 Rutas
+const adminRoutes = require('./modules/administrator/adminRoute');
+const adminController = require('./modules/administrator/adminController');
+app.use('/admin', adminRoutes);
+
 const userRoutes = require('./modules/user/userRoute');
 const userController = require('./modules/user/userController');
 app.use('/auth', userRoutes);
@@ -153,13 +157,7 @@ app.get('/auth/perfil', authMiddleware.attachUserData, authMiddleware.authorizeR
 });
 
 // 🛠️ Administrador
-app.get('/admin/gestion-contenido', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['administrador']), (req, res) => {
-  res.render('administrador/admin-gestion-contenido', {
-    title: 'Gestionar y Moderar contenido del sitio',
-    style: '<link rel="stylesheet" href="/css/page-styles/admin-gestion-contenido.css">',
-    layout: 'layouts/layout-admin'
-  });
-});
+app.get('/admin/gestion-contenido', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['administrador']), adminController.getManagementContent);
 
 app.get('/admin/tiquetes', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['administrador']), supportTicketController.getAllTicketsAdmin)
 

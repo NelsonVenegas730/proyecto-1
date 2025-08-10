@@ -203,3 +203,65 @@
     background-color: #1a8c00;
     transform: scale(1.03);
 }
+
+/*BUS SCHEDULES FORM*/
+
+.bus-schedule-form {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.bus-schedule-input {
+  padding: 0.6rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: black;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+.bus-schedule-input:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+.bus-schedule-submit {
+  grid-column: 5 / 6;
+  padding: 0.6rem 1rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.bus-schedule-submit:hover {
+  background: #005f9e; /* o un color más oscuro de var(--color-primary) */
+}
+
+@media (max-width: 1000px) {
+  .bus-schedule-form {
+    grid-template-columns: 1fr;
+  }
+
+  .bus-schedule-submit {
+    grid-column: auto;
+    width: 100%;
+  }
+}
+
+.not-found {
+    text-align: center;
+    color: #b1b1b1;
+    margin-top: 1rem;
+}
