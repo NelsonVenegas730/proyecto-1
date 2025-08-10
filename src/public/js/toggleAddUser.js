@@ -3,6 +3,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const addRow = document.getElementById('add-user-row')
   if (!toggleBtn || !addRow) return
 
+  const mensajeExito = document.getElementById('mensaje-exito')
+  const mensajeError = document.getElementById('mensaje-error')
+
+  const mostrarMensaje = (element, callback) => {
+    element.classList.remove('oculto')
+    setTimeout(() => {
+      element.classList.add('oculto')
+      if (callback) callback()
+    }, 3000)
+  }
+
   const setText = visible => {
     toggleBtn.textContent = visible ? 'Cancelar' : 'Agregar nuevo usuario +'
     toggleBtn.setAttribute('aria-expanded', String(visible))
@@ -85,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const roleValido = inputs.role.value !== ''
 
     if (!validoUsername || !validoName || !validoLastNames || !validoEmail || !validoPassword || !validoConfirmPassword || !roleValido) {
-      alert('Completa y corrige los campos obligatorios correctamente.')
+      mostrarMensaje(mensajeError)
       return
     }
 
@@ -107,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!res.ok) throw new Error('Error al crear usuario')
 
-      alert('Usuario creado con éxito')
+      mostrarMensaje(mensajeExito, () => location.reload())
 
       Object.values(inputs).forEach(input => {
         if (input.tagName === 'SELECT') {
@@ -121,7 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
         req.classList.remove('ok', 'error')
       })
     } catch (error) {
-      alert(error.message)
+      mensajeError.textContent = error.message || 'Error al crear usuario'
+      mostrarMensaje(mensajeError)
     }
   })
 })
