@@ -48,6 +48,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 const authMiddleware = require('./middleware/authMiddleware');
 app.use(authMiddleware.attachUserData);
+app.use(authMiddleware.noCache);
 
 // 🎨 Configuración de vistas
 app.set('views', path.join(__dirname, 'views'));
@@ -83,13 +84,6 @@ app.use('/api/support-tickets', supportTicketRoutes);
 const busScheduleRoutes = require('./modules/bus_schedule/busRoute');
 const busScheduleController = require('./modules/bus_schedule/busController');
 app.use('/api/bus-schedules', busScheduleRoutes);
-
-function noCache(req, res, next) {
-  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
-  res.set('Pragma', 'no-cache');
-  res.set('Expires', '0');
-  next();
-}
 
 // 🏠 Página principal
 app.get('/', authMiddleware.attachUserData, authMiddleware.redirectFromLanding(), async (req, res) => {
@@ -149,7 +143,7 @@ app.get('/auth/registrar-emprendimiento', (req, res) => {
   });
 });
 
-app.get('/auth/perfil', noCache, authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['ciudadano', 'emprendedor', 'administrador']), (req, res) => {
+app.get('/auth/perfil', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['ciudadano', 'emprendedor', 'administrador']), (req, res) => {
   res.render('autenticacion/perfil', {
     title: 'Perfil',
     style: '<link rel="stylesheet" href="/css/page-styles/perfil.css">',

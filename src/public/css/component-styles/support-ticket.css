@@ -1,4 +1,3 @@
-/* La tarjeta en sí */
 .ticket-element {
   background-color: white;
   border-radius: 8px;
@@ -15,7 +14,6 @@
   transform: translateY(-5px);
 }
 
-/* Info interna de la tarjeta */
 .ticket-info {
   display: flex;
   flex-direction: column;
@@ -26,16 +24,15 @@
   margin: 0;
   font-size: 1.2rem;
   color: black;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .ticket-info p {
   margin: 0;
   color: #444;
   font-size: 0.95rem;
-}
-
-.ticket-info h3,
-.ticket-info p {
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
@@ -46,45 +43,55 @@
   color: #777;
 }
 
-/* Badges de estado */
-.badge {
-  align-self: flex-start;
-  padding: 4px 10px;
-  font-size: 0.75rem;
-  border-radius: 999px;
+.ticket-status-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
   font-weight: 600;
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: white;
+  padding: 6px 30px 6px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+  width: max-content;
+  max-width: 200px;
+  height: 40px;
+  outline: none;
+  box-shadow: 0 0 0 1px transparent;
+  transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
+  position: relative;
+  transition: all ease-in-out 0.3s;
 }
 
-.badge.abierto::before {
-  content: "🟢";
-  font-size: 0.9rem;
+.ticket-status-select:hover {
+  filter: brightness(1.1);
+  height: 45px;
+  transition: all ease-in-out 0.3s;
 }
-.badge.abierto {
+
+.ticket-status-select option {
+  font-weight: 700;
+}
+
+.ticket-status-select.abierto {
   background-color: #28a745;
+  color: white;
 }
 
-.badge.en-proceso::before {
-  content: "🟡";
-  font-size: 0.9rem;
-}
-
-.badge.en-proceso {
+.ticket-status-select.en-proceso {
   background-color: #ffc107;
-  color: #000;
+  color: black;
 }
 
-.badge.cerrado::before {
-  content: "🔴";
-  font-size: 0.9rem;
-}
-.badge.cerrado {
+.ticket-status-select.cerrado {
   background-color: #dc3545;
+  color: white;
 }
 
 /* Autor y avatar */
@@ -205,12 +212,12 @@
   border: none;
   cursor: pointer;
   font-weight: 600;
+  transition: background-color 0.2s ease;
 }
 
 .btn-cancel {
   background-color: #ddd;
   color: #333;
-  transition: background-color 0.2s ease;
 }
 
 .btn-cancel:hover {
@@ -220,7 +227,6 @@
 .btn-send {
   background-color: #007bff;
   color: white;
-  transition: background-color 0.2s ease;
 }
 
 .btn-send:hover {

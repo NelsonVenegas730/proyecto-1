@@ -121,11 +121,27 @@ async function deleteTicket(req, res) {
   }
 }
 
+async function updateStatusController(req, res) {
+  try {
+    const { ticketId } = req.params;
+    const { status } = req.body;
+
+    if (!status) return res.status(400).json({ error: 'El status es obligatorio' });
+
+    const updatedTicket = await supportTicketService.updateTicketStatus(ticketId, status);
+
+    res.json(updatedTicket);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
 module.exports = {
   getAllTickets,
   getAllTicketsAdmin,
   createTicket,
   addMessage,
   updateTicket,
-  deleteTicket
+  deleteTicket,
+  updateStatusController
 };

@@ -86,10 +86,25 @@ async function deleteTicket(ticketId) {
   return { message: 'Ticket eliminado con éxito' };
 }
 
+async function updateTicketStatus(ticketId, status) {
+  if (!status) throw new Error('El status es obligatorio');
+
+  const ticket = await SupportTicket.findById(ticketId);
+  if (!ticket) throw new Error('Ticket no encontrado');
+
+  ticket.status = status;
+  await ticket.save();
+
+  return await SupportTicket.findById(ticketId)
+    .populate('user_id', 'name last_names email')
+    .populate('messages.user_id', 'name last_names');
+}
+
 module.exports = {
   getAllTickets,
   createTicket,
   addMessage,
   updateTicket,
-  deleteTicket
+  deleteTicket,
+  updateTicketStatus
 };

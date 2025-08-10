@@ -1,5 +1,12 @@
 const userService = require('../modules/user/userService');
 
+function noCache(req, res, next) {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
+  next();
+}
+
 async function attachUserData(req, res, next) {
   if (req.session?.user?.master_id) {
     try {
@@ -76,7 +83,11 @@ function authorizeRoleAccess(rolesValidos = []) {
     }
 
     next();
+
+    if (!res.headersSent && !req.session.user) {
+      return res.redirect('/auth/inicio-sesion');
+    }
   };
 }
 
-module.exports = { redirectIfAuthenticated, redirectFromLanding, authorizeRoleAccess, attachUserData };
+module.exports = { redirectIfAuthenticated, redirectFromLanding, authorizeRoleAccess, attachUserData, noCache };

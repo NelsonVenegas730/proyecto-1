@@ -27,46 +27,64 @@
                     <% } %>
 
                     <div class="ticket-info">
-                    <span class="badge <%= ticket.status.replace(' ', '-') %>"><%= ticket.status.charAt(0).toUpperCase() + ticket.status.slice(1) %></span>
-                    <h3><%= ticket.title %></h3>
-                    <p><%= ticket.description %></p>
-                    <span class="fecha">Fecha de creación: <%= new Date(ticket.date).toLocaleDateString('es-CR', { day: 'numeric', month: 'long', year: 'numeric' }) %></span>
+                        <div class="ticket-status-select-wrapper">
+                            <select id="status" name="status" class="ticket-status-select <%= ticket.status.replace(' ', '-').toLowerCase() %>">
+                                <option value="abierto" <%= ticket.status === 'abierto' ? 'selected' : '' %>>
+                                🟢
+                                <%= 'abierto'.charAt(0).toUpperCase() + 'abierto'.slice(1) %>
+                                </option>
+                                <option value="en proceso" <%= ticket.status === 'en proceso' ? 'selected' : '' %>>
+                                🟡
+                                <%= 'en proceso'.charAt(0).toUpperCase() + 'en proceso'.slice(1) %>
+                                </option>
+                                <option value="cerrado" <%= ticket.status === 'cerrado' ? 'selected' : '' %>>
+                                🔴
+                                <%= 'cerrado'.charAt(0).toUpperCase() + 'cerrado'.slice(1) %>
+                                </option>
+                            </select>
+                        </div>
+                        <span class="badge <%= ticket.status.replace(' ', '-') %>" style="display:none;">
+                            <%= ticket.status.charAt(0).toUpperCase() + ticket.status.slice(1) %>
+                        </span>
+                        <h3><%= ticket.title %></h3>
+                        <p><%= ticket.description %></p>
+                        <span class="fecha">Fecha de creación: <%= new Date(ticket.date).toLocaleDateString('es-CR', { day: 'numeric', month: 'long', year: 'numeric' }) %></span>
                     
-                    <div class="autor">
-                        <div class="avatar">
-                        <%= ticket.user_id ? (ticket.user_id.name[0] + ticket.user_id.last_names[0]) : '?' %>
+                        <div class="autor">
+                            <div class="avatar">
+                            <%= ticket.user_id ? (ticket.user_id.name[0] + ticket.user_id.last_names[0]) : '?' %>
+                            </div>
+                            <span>Reportado por: <%= ticket.user_id.name + ' ' + ticket.user_id.last_names %></span>
                         </div>
-                        <span>Reportado por: <%= ticket.user_id.name + ' ' + ticket.user_id.last_names %></span>
-                    </div>
 
-                    <% if (ticket.messages.length > 0) { %>
-                        <div class="message-thread">
-                            <% ticket.messages.forEach(msg => { %>
-                            <div class="message <%= msg.sender_role?.toLowerCase() === 'administrador' ? 'admin-message' : 'user-message' %>">
-                                    <div class="message-content"><%- msg.message %></div>
-                                    <span class="message-meta">
-                                        <%= msg.sender_role?.toLowerCase() === 'administrador'
-                                        ? 'Admin'
-                                        : ((msg.user_id?.name || '') + ' ' + (msg.user_id?.last_names || '')).trim() || 'Usuario' 
-                                        %>
-                                        - <%= new Date(msg.timestamp).toLocaleDateString('es-CR', { day: 'numeric', month: 'long', year: 'numeric' }) %>
-                                    </span>
-                                </div>
-                            <% }) %>
-                        </div>
-                    <% } %>
+                        <% if (ticket.messages.length > 0) { %>
+                            <div class="message-thread">
+                                <% ticket.messages.forEach(msg => { %>
+                                <div class="message <%= msg.sender_role?.toLowerCase() === 'administrador' ? 'admin-message' : 'user-message' %>">
+                                        <div class="message-content"><%- msg.message %></div>
+                                        <span class="message-meta">
+                                            <%= msg.sender_role?.toLowerCase() === 'administrador'
+                                            ? 'Admin'
+                                            : ((msg.user_id?.name || '') + ' ' + (msg.user_id?.last_names || '')).trim() || 'Usuario' 
+                                            %>
+                                            - <%= new Date(msg.timestamp).toLocaleDateString('es-CR', { day: 'numeric', month: 'long', year: 'numeric' }) %>
+                                        </span>
+                                    </div>
+                                <% }) %>
+                            </div>
+                        <% } %>
 
-                    <% if (user && ticket.user_id && ticket.user_id._id == user._id) { %>
-                        <button type="button" class="btn-reply-toggle">Enviar mensaje</button>
-                    <% } %>
+                        <% if (user.role == "administrador") { %>
+                            <button type="button" class="btn-reply-toggle">Enviar mensaje</button>
+                        <% } %>
 
-                    <form class="reply-form" style="display:none;">
-                        <textarea name="message" placeholder="Escribe tu mensaje aquí..." rows="3" required></textarea>
-                        <div class="reply-buttons">
-                        <button type="button" class="btn-cancel">Cancelar</button>
-                        <button type="submit" class="btn-send">Enviar</button>
-                        </div>
-                    </form>
+                        <form class="reply-form" style="display:none;">
+                            <textarea name="message" placeholder="Escribe tu mensaje aquí..." rows="3" required></textarea>
+                            <div class="reply-buttons">
+                            <button type="button" class="btn-cancel">Cancelar</button>
+                            <button type="submit" class="btn-send">Enviar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             <% }) %>
@@ -75,8 +93,8 @@
     <script>
         window.currentUserId = "<%= user ? user._id.toString() : '' %>";
     </script>
+    <script src="/js/validateTicketState.js"></script>
     <script src="/js/filterContent.js"></script>
     <script src="/js/validateTicketMessage.js"></script>
-    <script src="/js/ticketOptionsPopUp.js"></script>
     <script src="/js/no-cache.js"></script>
 </body>

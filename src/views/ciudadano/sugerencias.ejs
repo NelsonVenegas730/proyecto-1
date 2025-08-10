@@ -45,8 +45,25 @@
             <% } %>
 
             <div class="ticket-info">
-                <span class="badge <%= ticket.status.replace(' ', '-') %>"><%= ticket.status.charAt(0).toUpperCase() + ticket.status.slice(1) %></span>
-                
+              <div class="ticket-status-select-wrapper">
+                  <select id="status" name="status" class="ticket-status-select <%= ticket.status.replace(' ', '-').toLowerCase() %>">
+                      <option value="abierto" <%= ticket.status === 'abierto' ? 'selected' : '' %>>
+                      🟢
+                      <%= 'abierto'.charAt(0).toUpperCase() + 'abierto'.slice(1) %>
+                      </option>
+                      <option value="en proceso" <%= ticket.status === 'en proceso' ? 'selected' : '' %>>
+                      🟡
+                      <%= 'en proceso'.charAt(0).toUpperCase() + 'en proceso'.slice(1) %>
+                      </option>
+                      <option value="cerrado" <%= ticket.status === 'cerrado' ? 'selected' : '' %>>
+                      🔴
+                      <%= 'cerrado'.charAt(0).toUpperCase() + 'cerrado'.slice(1) %>
+                      </option>
+                  </select>
+              </div>
+              <span class="badge <%= ticket.status.replace(' ', '-') %>" style="display:none;">
+                  <%= ticket.status.charAt(0).toUpperCase() + ticket.status.slice(1) %>
+              </span>
                 <% if (user && ticket.user_id && ticket.user_id._id == user._id) { %>
                     <h3 class="view-mode"><%= ticket.title %></h3>
                     <p class="view-mode"><%= ticket.description %></p>
@@ -131,6 +148,7 @@
   <script>
     window.currentUserId = "<%= user ? user._id.toString() : '' %>";
   </script>
+  <script src="/js/validateTicketState.js"></script>
   <script src="/js/filterContent.js"></script>
   <script src="/js/validateTicketMessage.js"></script>
   <script src="/js/ticketOptionsPopUp.js"></script>
