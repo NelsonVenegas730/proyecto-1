@@ -4,6 +4,10 @@ const multer = require('multer');
 const upload = multer({ dest: 'uploads/' }); // guardás en uploads con nombre generado automático
 const userController = require('./userController');
 
+// Funciones de User de Administrador
+router.get('/', userController.getAllUsersController);
+router.post('/admin/add-user', userController.registerManualController);
+
 // Autenticación básica
 router.post('/sign-up', userController.signUp);
 router.post('/login', userController.login);

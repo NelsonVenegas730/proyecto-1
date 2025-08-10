@@ -1,16 +1,30 @@
 const userService = require('./userService');
+const utils = require('../../utils/getInitials');
 
-function getInitials(name, last_names) {
-  const n = name ? name.split(' ').map(w => w[0]).join('') : '';
-  const a = last_names ? last_names.split(' ').map(w => w[0]).join('') : '';
-  return (n + a).toUpperCase();
+async function getAllUsersController(req, res, next) {
+  try {
+    const users = await userService.getAllUsers();
+    const usersWithInitials = users.map(user => ({
+      ...user,
+      initials: utils.getInitials(user.name, user.last_names),
+    }));
+
+    res.render('administrador/admin-usuarios', {
+      title: 'Gestionar Usuarios',
+      style: '<link rel="stylesheet" href="/css/page-styles/admin-usuarios.css">',
+      layout: 'layouts/layout-admin',
+      users: usersWithInitials
+    });
+  } catch (error) {
+    next(error);
+  }
 }
 
 async function signUp(req, res) {
   try {
     const user = await userService.register(req.body);
 
-    const initials = getInitials(user.name, user.last_names);
+    const initials = user.getInitials(user.name, user.last_names);
 
     req.session.user = {
       _id: user._id,
@@ -39,6 +53,30 @@ async function signUp(req, res) {
   }
 }
 
+async function registerManualController(req, res) {
+  try {
+    const { username, name, last_names, email, password, role } = req.body;
+
+    if (!username || !name || !last_names || !email || !password || !role) {
+      return res.status(400).json({ error: 'Faltan campos obligatorios' });
+    }
+
+    const newUser = await userService.registerManual({
+      username,
+      name,
+      last_names,
+      email,
+      password,
+      role,
+    });
+
+    res.status(201).json({ message: 'Usuario creado', user: newUser });
+  } catch (error) {
+    console.error('Error al crear usuario manual:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+}
+
 async function login(req, res) {
   try {
     const { correo, password, keepSesionActive } = req.body;
@@ -51,7 +89,7 @@ async function login(req, res) {
       });
     }
 
-    const initials = getInitials(user.name, user.last_names);
+    const initials = utils.getInitials(user.name, user.last_names);
 
     req.session.user = {
       _id: user._id,
@@ -107,7 +145,7 @@ async function updateUserData(req, res) {
     req.session.user.name = updatedUser.name;
     req.session.user.last_names = updatedUser.last_names;
     req.session.user.avatarUrl = updatedUser.avatar;
-    req.session.initials = getInitials(updatedUser.name, updatedUser.last_names);
+    req.session.initials = utils.getInitials(updatedUser.name, updatedUser.last_names);
 
     res.status(200).json({ message: 'Datos actualizados correctamente', user: updatedUser });
   } catch (error) {
@@ -186,8 +224,10 @@ async function changeAccount(req, res) {
   }
 }
 
-module.exports = { 
-  signUp, 
+module.exports = {
+  getAllUsersController,
+  signUp,
+  registerManualController,
   login, 
   logout, 
   updateUserData,

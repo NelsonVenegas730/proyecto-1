@@ -1,73 +1,81 @@
-
 <body>
-    <main>
-        <section class="user-management">
-            <div class="user-grid">
-                <div class="grid-header">Avatar</div>
-                <div class="grid-header">Usuario</div>
-                <div class="grid-header">Rol</div>
-                <div class="grid-header">Estado</div>
-                <div class="grid-header">Acciones</div>
-
-                <div class="grid-cell avatar-cell" data-label="Avatar"><div class="avatar">CB</div></div>
-                <div class="grid-cell" data-label="Usuario">Carlos_B</div>
-                <div class="grid-cell" data-label="Rol">Emprendedor</div>
-                <div class="grid-cell estado editable-estado" data-label="Estado">
-                    <select class="estado-select">
-                        <option value="pendiente">En proceso</option>
-                        <option value="aprobado">Aprobado</option>
-                        <option value="rechazado">Rechazado</option>
-                    </select>
-                </div>
-                <div class="grid-cell action-cell" data-label="Acciones">
-                <button class="ellipsis-btn">⋯</button>
-                <div class="action-popup">
+  <main>
+    <section class="user-management">
+      <div class="table-wrapper">
+        <table class="user-table">
+          <thead>
+            <tr>
+              <th>Avatar</th>
+              <th>Usuario</th>
+              <th>Correo</th>
+              <th>Rol</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.forEach(user => { %>
+              <tr>
+                <td data-label="Avatar">
+                  <% if (user.avatar && user.avatar.length > 2) { %>
+                    <img class="avatar-image" src="<%= user.avatar %>" alt="Avatar usuario" />
+                  <% } else { %>
+                    <div class="avatar"><%= user.initials || '?' %></div>
+                  <% } %>
+                </td>
+                <td data-label="Usuario"><%= user.username %></td>
+                <td data-label="Correo"><%= user.email %></td>
+                <td data-label="Rol"><%= user.role %></td>
+                <td data-label="Acciones">
+                  <button class="ellipsis-btn"><i class="bx bx-dots-horizontal-rounded"></i></button>
+                  <div class="action-popup">
                     <button class="delete-user-btn">Eliminar usuario</button>
-                </div>
-                </div>
-
-                <div class="grid-cell avatar-cell" data-label="Avatar"><div class="avatar">MA</div></div>
-                <div class="grid-cell" data-label="Usuario">Maria_Admin</div>
-                <div class="grid-cell" data-label="Rol">Administrador</div>
-                <div class="grid-cell" data-label="Estado">—</div>
-                <div class="grid-cell action-cell" data-label="Acciones">
-                <button class="ellipsis-btn">⋯</button>
-                <div class="action-popup">
-                    <button class="delete-user-btn">Eliminar usuario</button>
-                </div>
-                </div>
-
-                <div class="grid-cell avatar-cell" data-label="Avatar"><div class="avatar">JP</div></div>
-                <div class="grid-cell" data-label="Usuario">Juan_Perez</div>
-                <div class="grid-cell" data-label="Rol">Ciudadano</div>
-                <div class="grid-cell" data-label="Estado">—</div>
-                <div class="grid-cell action-cell" data-label="Acciones">
-                <button class="ellipsis-btn">⋯</button>
-                <div class="action-popup">
-                    <button class="delete-user-btn">Eliminar usuario</button>
-                </div>
-                </div>
-
-                <div class="grid-cell avatar-cell" data-label="Avatar"><div class="avatar">LG</div></div>
-                <div class="grid-cell" data-label="Usuario">Luisa_G</div>
-                <div class="grid-cell" data-label="Rol">Emprendedor</div>
-                <div class="grid-cell estado editable-estado" data-label="Estado">
-                    <select class="estado-select">
-                        <option value="pendiente">En proceso</option>
-                        <option value="aprobado">Aprobado</option>
-                        <option value="rechazado">Rechazado</option>
-                    </select>
-                </div>
-                <div class="grid-cell action-cell" data-label="Acciones">
-                <button class="ellipsis-btn">⋯</button>
-                <div class="action-popup">
-                    <button class="delete-user-btn">Eliminar usuario</button>
-                </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    <script src="../../JS/userActionsTogglePopUp.js"></script>
-    <script src="/js/no-cache.js"></script>
+                  </div>
+                </td>
+              </tr>
+            <% }) %>
+            <tr class="oculto" id="add-user-row">
+              <td data-label="Avatar">
+                <div class="avatar">?</div>
+              </td>
+              <td data-label="Usuario">
+                <input class="add-user-input" type="text" name="username" placeholder="Nombre de usuario">
+                <small class="input-requirements" id="usuario-requisitos">Solo letras, números, guiones y guiones bajos, sin espacios.</small>
+                <input class="add-user-input" type="text" name="name" placeholder="Nombre">
+                <small class="input-requirements" id="nombre-requisitos">Solo letras, sin números ni caracteres especiales.</small>
+                <input class="add-user-input" type="text" name="last_names" placeholder="Apellidos">
+                <small class="input-requirements" id="apellidos-requisitos">Solo letras, sin números ni caracteres especiales.</small>
+              </td>
+              <td data-label="Correo y Contraseña">
+                <input class="add-user-input" placeholder="Correo" type="text" name="email">
+                <small class="input-requirements" id="correo-requisitos">Debe tener formato válido (ej. nombre@dominio.com).</small>
+                <input class="add-user-input" placeholder="Contraseña" type="password" name="password">
+                <small class="input-requirements" id="password-requisitos">Debe tener minúsculas, mayúsculas y números (8-14 caracteres).</small>
+                <input class="add-user-input" type="password" id="confirm-password" placeholder="Confirme su contraseña" required />
+                <small class="input-requirements" id="confirm-password-requisitos">Las contraseñas deben coincidir.</small>
+              </td>
+              <td data-label="Rol">
+                <select class="add-user-input" required name="role">
+                  <option value="" disabled selected>Seleccione rol</option>
+                  <option value="administrador">Administrador</option>
+                  <option value="emprendedor">Emprendedor</option>
+                  <option value="usuario">Usuario</option>
+                </select>
+              </td>
+              <td data-label="Acciones">
+                <button id="create-user-button" class="add-user-btn">Agregar usuario</button>
+              </td>
+            </tr>
+            <tr class="last-row-button">
+              <td colspan="5">
+                <button id="toggle-add-button">Agregar nuevo usuario +</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script src="/js/toggleUserOptionsForAdmin.js"></script>
+  <script src="/js/toggleAddUser.js"></script>
+  <script src="/js/no-cache.js"></script>
 </body>
-</html>

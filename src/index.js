@@ -63,6 +63,7 @@ app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 // 📂 Rutas
 const userRoutes = require('./modules/user/userRoute');
+const userController = require('./modules/user/userController');
 app.use('/auth', userRoutes);
 
 const passwordResetTokenRoutes = require('./modules/password_reset_token/passwordResetTokenRoute');
@@ -162,13 +163,7 @@ app.get('/admin/gestion-contenido', authMiddleware.attachUserData, authMiddlewar
 
 app.get('/admin/tiquetes', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['administrador']), supportTicketController.getAllTicketsAdmin)
 
-app.get('/admin/usuarios', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['administrador']), (req, res) => {
-  res.render('administrador/admin-usuarios', {
-    title: 'Gestionar Usuarios',
-    style: '<link rel="stylesheet" href="/css/page-styles/admin-usuarios.css">',
-    layout: 'layouts/layout-admin'
-  });
-});
+app.get('/admin/usuarios', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['administrador']), userController.getAllUsersController);
 
 app.get('/admin/panel-administrador', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['administrador']), (req, res) => {
   res.render('administrador/panel-administrador', {

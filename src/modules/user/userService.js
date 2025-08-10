@@ -3,11 +3,10 @@ const bcrypt = require('bcrypt');
 const User = require('./userModel');
 const path = require('path');
 const fs = require('fs');
+const utils = require('../../utils/getInitials');
 
-function getInitials(name, last_names) {
-  const nameInitial = name.trim().charAt(0).toUpperCase() || '';
-  const lastNameInitial = last_names.trim().charAt(0).toUpperCase() || '';
-  return nameInitial + lastNameInitial;
+async function getAllUsers() {
+  return await User.find({}, '-password').lean();
 }
 
 async function register(data) {
@@ -43,6 +42,38 @@ async function register(data) {
   return await nuevoUsuario.save();
 }
 
+async function registerManual(data) {
+  const { username, name, last_names, email, password, role } = data;
+
+  const encryptedPassword = await bcrypt.hash(password, 10);
+
+  const existingUser = await User.findOne({ email });
+  let masterId;
+  if (existingUser && existingUser.master_id) {
+    masterId = existingUser.master_id;
+  } else {
+    masterId = new mongoose.Types.ObjectId();
+  }
+
+  const iniciales = (
+    (name?.[0] || '') + 
+    (last_names?.split(' ')[0]?.[0] || '')
+  ).toUpperCase();
+
+  const nuevoUsuario = new User({
+    master_id: masterId,
+    avatar: iniciales,
+    username,
+    name,
+    last_names,
+    email,
+    password: encryptedPassword,
+    role: role || 'ciudadano', // usar rol que venga o default
+  });
+
+  return await nuevoUsuario.save();
+}
+
 async function verifyCredentials(correo, password) {
   const users = await User.find({ email: correo })
   for (const user of users) {
@@ -69,7 +100,7 @@ async function updateUser(userId, data) {
   const user = await User.findById(userId);
   if (!user) throw new Error('Usuario no encontrado');
 
-  const initials = getInitials(name, last_names);
+  const initials = utils.getInitials(name, last_names);
 
   const isAvatarImage = user.avatar && (user.avatar.startsWith('/uploads/') || user.avatar.startsWith('http'));
 
@@ -140,7 +171,7 @@ async function removeAvatar(userId) {
     if (fs.existsSync(fullPath)) fs.unlinkSync(fullPath);
   }
 
-  const initials = getInitials(user.name, user.last_names);
+  const initials = utils.getInitials(user.name, user.last_names);
   user.avatar = initials;
   await user.save();
 
@@ -150,7 +181,7 @@ async function removeAvatar(userId) {
 async function getUserAccounts(masterId) {
   const accounts = await User.find({ master_id: masterId }).lean();
   accounts.forEach(acc => {
-    acc.initials = getInitials(acc.name, acc.last_names);
+    acc.initials = utils.getInitials(acc.name, acc.last_names);
   });
   return accounts;
 }
@@ -173,14 +204,16 @@ async function switchUserAccount(session, newAccountId) {
     master_id: user.master_id,
     name: user.name,
     last_names: user.last_names,
-    initials: getInitials(user.name, user.last_names)
+    initials: utils.getInitials(user.name, user.last_names)
   };
 
   return user;
 }
 
 module.exports = {
+  getAllUsers,
   register,
+  registerManual,
   verifyCredentials,
   destroySession,
   updateUser,
