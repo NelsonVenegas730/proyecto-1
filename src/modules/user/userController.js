@@ -224,6 +224,19 @@ async function changeAccount(req, res) {
   }
 }
 
+async function deleteUser(req, res) {
+  try {
+    const user_id = req.params.id;
+    if (!user_id) return res.status(400).json({ error: 'Falta el ID del usuario' });
+
+    await userService.deleteUserById(user_id);
+
+    res.json({ message: 'Usuario eliminado correctamente' });
+  } catch (error) {
+    res.status(500).json({ error: error.message || 'Error al eliminar usuario' });
+  }
+}
+
 module.exports = {
   getAllUsersController,
   signUp,
@@ -235,5 +248,6 @@ module.exports = {
   updateUserAvatar,
   removeAvatar,
   getAccounts,
-  changeAccount
+  changeAccount,
+  deleteUser
 };

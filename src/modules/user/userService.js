@@ -210,6 +210,15 @@ async function switchUserAccount(session, newAccountId) {
   return user;
 }
 
+async function deleteUserById(user_id) {
+  const user = await User.findById(user_id);
+  if (!user) throw new Error('Usuario no encontrado');
+
+  await User.deleteOne({ _id: user_id });
+
+  return { message: 'Usuario eliminado' };
+}
+
 module.exports = {
   getAllUsers,
   register,
@@ -221,5 +230,6 @@ module.exports = {
   updateAvatar,
   removeAvatar,
   getUserAccounts,
-  switchUserAccount
+  switchUserAccount,
+  deleteUserById
 };

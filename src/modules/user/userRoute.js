@@ -7,6 +7,7 @@ const userController = require('./userController');
 // Funciones de User de Administrador
 router.get('/', userController.getAllUsersController);
 router.post('/admin/add-user', userController.registerManualController);
+router.delete('/admin/delete-user/:id', userController.deleteUser);
 
 // Autenticación básica
 router.post('/sign-up', userController.signUp);

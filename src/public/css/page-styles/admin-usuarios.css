@@ -92,9 +92,15 @@ main {
   position: relative;
 }
 
+td[data-label="Acciones"] {
+  position: relative;
+}
+
 .action-popup {
   display: none;
   position: absolute;
+  top: 2.4rem; /* ajusta para que quede debajo del botón */
+  right: 5rem;
   background: white;
   border: 1px solid #ddd;
   padding: 0.5rem;
@@ -103,9 +109,21 @@ main {
   z-index: 10;
 }
 
-.ellipsis-btn:focus + .action-popup,
-.ellipsis-btn:hover + .action-popup {
-  display: block;
+.delete-user-btn {
+  background-color: #e63946;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 6px rgba(230, 57, 70, 0.7);
+}
+
+.delete-user-btn:hover {
+  background-color: #a62834;
+  box-shadow: 0 4px 12px rgba(166, 40, 52, 0.9);
 }
 
 .user-table tbody tr.last-row-button td {

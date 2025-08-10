@@ -14,7 +14,7 @@
           </thead>
           <tbody>
             <% users.forEach(user => { %>
-              <tr>
+              <tr data-user-id="<%= user._id %>">
                 <td data-label="Avatar">
                   <% if (user.avatar && user.avatar.length > 2) { %>
                     <img class="avatar-image" src="<%= user.avatar %>" alt="Avatar usuario" />
@@ -28,7 +28,7 @@
                 <td data-label="Acciones">
                   <button class="ellipsis-btn"><i class="bx bx-dots-horizontal-rounded"></i></button>
                   <div class="action-popup">
-                    <button class="delete-user-btn">Eliminar usuario</button>
+                    <button id="delete-user-button" class="delete-user-btn">Eliminar usuario</button>
                   </div>
                 </td>
               </tr>
@@ -75,9 +75,19 @@
       </div>
     </section>
   </main>
+  <div id="custom-confirm" class="custom-alert hidden">
+    <div class="alert-content">
+      <p id="confirm-message"></p>
+      <div class="confirm-buttons">
+        <button id="confirm-no">No</button>
+        <button id="confirm-yes">Sí</button>
+      </div>
+    </div>
+  </div>
   <div id="mensaje-exito" class="mensaje-exito oculto">Usuario registrado y creado con éxito</div>
   <div id="mensaje-error" class="mensaje-error oculto">Error, por favor completa todos los campos correctamente.</div>
   <script src="/js/toggleUserOptionsForAdmin.js"></script>
   <script src="/js/toggleAddUser.js"></script>
+  <script src="/js/adminDeleteUser.js"></script>
   <script src="/js/no-cache.js"></script>
 </body>
