@@ -179,7 +179,7 @@ app.get('/emprendimientos', authMiddleware.attachUserData, authMiddleware.author
 
 app.get('/horario-buses', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['ciudadano']), busScheduleController.getAllBusSchedules);
 
-app.get('/noticias-anuncios-eventos', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['ciudadano']), announcementController.getAllAnnouncements);
+app.get('/noticias-anuncios-eventos', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['ciudadano', 'emprendedor']), announcementController.getAllAnnouncements);
 
 app.get('/sugerencias', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['ciudadano']), supportTicketController.getAllTickets);
 
@@ -187,7 +187,7 @@ app.get('/sugerencias', authMiddleware.attachUserData, authMiddleware.authorizeR
 app.get('/emprendedor/mi-emprendimiento/:id', authMiddleware.authorizeRoleAccess(['emprendedor']), businessController.getBusinessByUser);
 
 // 📝 Formularios
-app.get('/form/form-anuncio-evento-noticia', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['ciudadano', 'administrador']), (req, res) => {
+app.get('/form/form-anuncio-evento-noticia', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['ciudadano', 'administrador', 'emprendedor']), (req, res) => {
   res.render('formularios/form-anuncio-evento-noticia', {
     title: 'Crear nuevo Anuncio / Evento / Noticia',
     layout: 'layouts/layout-form',
