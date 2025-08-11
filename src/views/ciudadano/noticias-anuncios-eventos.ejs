@@ -35,21 +35,39 @@
                 Fecha de creación: <%= new Date(a.date).toLocaleDateString('es-CR', { day: 'numeric', month: 'long', year: 'numeric' }) %>
               </span>
               <div class="autor">
-                <div class="avatar">
-                  <% if (a.user_id && a.user_id.avatar && a.user_id.avatar.length > 2) { %>
-                    <img src="<%= a.user_id.avatar %>" alt="Avatar" />
-                  <% } else if (a.user_id) { %>
-                    <%= ((a.user_id.name?.charAt(0) || '') + (a.user_id.last_names?.charAt(0) || '')).toUpperCase() %>
-                  <% } else { %>
-                    ??
-                  <% } %>
+                <div class="author-info">
+                  <div class="avatar">
+                    <% if (a.user_id && a.user_id.avatar && a.user_id.avatar.length > 2) { %>
+                      <img src="<%= a.user_id.avatar %>" alt="Avatar" />
+                    <% } else if (a.user_id) { %>
+                      <%= ((a.user_id.name?.charAt(0) || '') + (a.user_id.last_names?.charAt(0) || '')).toUpperCase() %>
+                    <% } else { %>
+                      ??
+                    <% } %>
+                  </div>
+                  <span>
+                    Publicado por:
+                    <%= a.user_id
+                      ? ((a.user_id.name || '') + ' ' + (a.user_id.last_names || '')).trim()
+                      : 'Desconocido' %>
+                  </span>
                 </div>
-                <span>
-                  Publicado por:
-                  <%= a.user_id
-                    ? ((a.user_id.name || '') + ' ' + (a.user_id.last_names || '')).trim()
-                    : 'Desconocido' %>
-                </span>
+                <div class="announcement-actions">
+                  <button class="announcement-menu-btn" aria-label="Opciones">
+                    <i class='bx bx-dots-vertical-rounded'></i>
+                  </button>
+
+                  <div class="announcement-menu-popup">
+                  <button class="announcement-menu-option edit-btn"> 
+                      <i class="bx bx-pencil"></i>
+                      Editar
+                  </button>
+                  <button class="announcement-menu-option delete-btn">
+                      <i class="bx bx-trash"></i>
+                      Eliminar
+                  </button>
+                </div>
+                </div>
               </div>
             </div>
           </div>

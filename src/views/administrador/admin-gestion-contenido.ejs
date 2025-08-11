@@ -2,18 +2,16 @@
   <main>
     <%- include('../partials/filter-controls', { filterType: 'content' }) %>
     <section class="aprobaciones-management">
-      <!-- PENDIENTES -->
       <% const pendientesBusinesses = businesses.filter(b => b.status === 'pendiente') %>
       <% const pendientesAnnouncements = announcements.filter(a => a.status === 'pendiente') %>
 
-      <!-- APROBADOS O RECHAZADOS -->
       <% const allAnnouncements = announcements.filter(a => a.status != 'pendiente') %>
       <% const allBusinesses = businesses.filter(b => b.status != 'pendiente') %>
 
-      <hr class="separator">
+      <hr class="separator pendientesEmprendimientos">
 
-      <h2 class="emprendimientos-heading">Emprendimientos pendientes de aprobación</h2>
-      <div class="emprendimientos-pendientes">
+      <h2 class="emprendimientos-heading pendientesEmprendimientos">Emprendimientos pendientes de aprobación</h2>
+      <div class="emprendimientos-pendientes pendientesEmprendimientos">
         <% if (pendientesBusinesses.length === 0) { %>
           <p class="not-found">No hay emprendimientos pendientes de aprobación</p>
         <% } else { %>
@@ -39,10 +37,10 @@
         <% } %>
       </div>
 
-      <hr class="separator">
+      <hr class="separator pendientesNoticias">
 
-      <h2 class="noticias-heading">Anuncios, Noticias y Eventos pendientes de aprobación</h2>
-      <div class="noticias-pendientes">
+      <h2 class="noticias-heading pendientesNoticias">Anuncios, Noticias y Eventos pendientes de aprobación</h2>
+      <div class="noticias-pendientes pendientesNoticias">
         <% if (pendientesAnnouncements.length === 0) { %>
           <div class="not-found">
             No hay anuncios, noticias o eventos pendientes de aprobación
@@ -75,12 +73,11 @@
         <% } %>
       </div>
 
-      <hr class="separator">
+      <hr class="separator horariosBuses">
 
-      <!-- NUEVA SECCIÓN HORARIOS DE BUSES -->
-      <h2 class="bus-schedule-heading" style="margin-top: 3rem; text-align:center;">Horarios de Buses</h2>
+      <h2 class="bus-schedule-heading horariosBuses" style="margin-top: 3rem; text-align:center;">Horarios de Buses</h2>
 
-      <div class="bus-schedules">
+      <div class="bus-schedules horariosBuses">
         <div>
           <div class="bus-grid">
             <div class="grid-header">Destino</div>
@@ -156,10 +153,10 @@
         </form>
       </div>
 
-      <hr class="separator">
+      <hr class="separator allEmprendimientos">
 
-      <h2 class="emprendimientos-heading">Emprendimientos</h2>
-      <div class="emprendimientos-pendientes">
+      <h2 class="emprendimientos-heading allEmprendimientos">Emprendimientos</h2>
+      <div class="emprendimientos-pendientes allEmprendimientos">
         <% if (allBusinesses.length === 0) { %>
           <p class="not-found">
             No hay emprendimientos aprobados o rechazados
@@ -185,10 +182,10 @@
         <% } %>
       </div>
 
-      <hr class="separator">
+      <hr class="separator allNoticias">
 
-      <h2 class="noticias-heading">Anuncios, Noticias y Eventos</h2>
-      <div class="noticias-pendientes">
+      <h2 class="noticias-heading allNoticias">Anuncios, Noticias y Eventos</h2>
+      <div class="noticias-pendientes allNoticias">
         <% if (allAnnouncements.length === 0) { %>
           <div class="not-found">
             No hay anuncios, noticias o eventos aprobados o rechazados
@@ -220,8 +217,6 @@
           <% }) %>
         <% } %>
       </div>
-
-      <hr class="separator">
 
     </section>
   </main>

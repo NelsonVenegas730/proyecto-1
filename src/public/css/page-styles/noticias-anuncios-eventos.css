@@ -1,3 +1,7 @@
+.announcment-actions {
+  align-self: flex-end;
+}
+
 /* BOTÓN DE FILTRO (SI AÚN SE USA) */
 .filter-button {
   display: flex;
@@ -138,6 +142,13 @@
   font-size: 0.95rem;
 }
 
+.author-info {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+}
+
 .fecha {
   font-size: 0.85rem;
   color: #777;
@@ -256,3 +267,70 @@
 .create-anuncio-evento-noticia-cta a:hover {
   background-color: var(--color-primary-light);
 }
+
+.announcement-menu-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+  align-self: flex-end;
+}
+.announcement-menu-btn i {
+  color: #666;
+  transition: color 0.2s;
+  pointer-events: none;
+}
+.announcement-menu-btn:hover i {
+  color: var(--color-primary);
+}
+
+.announcement-menu-popup {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  z-index: 20;
+  min-width: 140px;
+}
+.announcement-menu-popup.show {
+  display: block;
+}
+
+.announcement-menu-option {
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  width: 100%;
+  padding: 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.announcement-menu-option i {
+  font-size: 1.1rem;
+  color: #333;
+}
+.announcement-menu-option.edit-btn:hover {
+  background-color: rgb(199, 201, 255);
+}
+.announcement-menu-option.edit-btn,
+.announcement-menu-option.edit-btn i {
+  color: var(--color-primary);
+}
+.announcement-menu-option.delete-btn:hover {
+  background-color: rgb(255, 199, 199);
+}
+.announcement-menu-option.delete-btn,
+.announcement-menu-option.delete-btn i {
+  color: rgb(197, 0, 0);
+}
+
