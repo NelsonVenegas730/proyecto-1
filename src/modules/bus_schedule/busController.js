@@ -14,15 +14,19 @@ async function getAllBusSchedules(req, res) {
         return `${hour12}:${minute.toString().padStart(2, '0')} ${suffix}`
     }
 
-    const busSchedulesFormatted = busSchedules.map(schedule => ({
-      ...schedule,
-      arrival_time: formatTo12Hour(schedule.arrival_time)
-    }))
+    const safeBusSchedules = busSchedules.map(b => ({
+      ...b._doc,
+      destination: b.destination || 'Destino desconocido',
+      arrival_time: formatTo12Hour(b.arrival_time),
+      address: b.address || 'Dirección no disponible',
+      price: (typeof b.price === 'number') ? b.price : 0,
+      wait_time_minutes: (typeof b.wait_time_minutes === 'number') ? b.wait_time_minutes : 0
+    }));
 
     res.render('ciudadano/horario-buses', {
       title: 'Horarios de Buses',
       style: '<link rel="stylesheet" href="/css/page-styles/horario-buses.css">',
-      busSchedulesFormatted,
+      busSchedulesFormatted: safeBusSchedules,
       userId: req.session.user?._id
     });
   } catch (error) {

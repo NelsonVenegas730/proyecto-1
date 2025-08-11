@@ -18,11 +18,11 @@
                     <div class="grid-header">Espera</div>
 
                     <% busSchedulesFormatted.forEach(a => { %>
-                        <div class="grid-item" data-label="Destino"><%= busSchedulesFormatted.destination %></div>
-                        <div class="grid-item" data-label="Horario"><%= busSchedulesFormatted.arrival_time %></div>
-                        <div class="grid-item" data-label="Dirección"><%= busSchedulesFormatted.address %></div>
-                        <div class="grid-item" data-label="Precio">₡<%= busSchedulesFormatted.price %></div>
-                        <div class="grid-item" data-label="Espera"><%= busSchedulesFormatted.wait_time_minutes %> min</div>
+                        <div class="grid-item" data-label="Destino"><%= a.destination %></div>
+                        <div class="grid-item" data-label="Horario"><%= a.arrival_time %></div>
+                        <div class="grid-item" data-label="Dirección"><%= a.address %></div>
+                        <div class="grid-item" data-label="Precio">₡<%= a.price %></div>
+                        <div class="grid-item" data-label="Espera"><%= a.wait_time_minutes %> min</div>
                     <% }) %>
                         
                 </div>
