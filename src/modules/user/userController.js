@@ -24,7 +24,7 @@ async function signUp(req, res) {
   try {
     const user = await userService.register(req.body);
 
-    const initials = user.getInitials(user.name, user.last_names);
+    const initials = utils.getInitials(user.name, user.last_names);
 
     req.session.user = {
       _id: user._id,

@@ -46,20 +46,19 @@
 
             <div class="ticket-info">
               <div class="ticket-status-select-wrapper">
+                <% if (user && ticket.user_id && ticket.user_id._id.toString() === user._id.toString()) { %>
                   <select id="status" name="status" class="ticket-status-select <%= ticket.status.replace(' ', '-').toLowerCase() %>">
-                      <option value="abierto" <%= ticket.status === 'abierto' ? 'selected' : '' %>>
-                      🟢
-                      <%= 'abierto'.charAt(0).toUpperCase() + 'abierto'.slice(1) %>
-                      </option>
-                      <option value="en proceso" <%= ticket.status === 'en proceso' ? 'selected' : '' %>>
-                      🟡
-                      <%= 'en proceso'.charAt(0).toUpperCase() + 'en proceso'.slice(1) %>
-                      </option>
-                      <option value="cerrado" <%= ticket.status === 'cerrado' ? 'selected' : '' %>>
-                      🔴
-                      <%= 'cerrado'.charAt(0).toUpperCase() + 'cerrado'.slice(1) %>
-                      </option>
+                    <option value="abierto" <%= ticket.status === 'abierto' ? 'selected' : '' %>>🟢 Abierto</option>
+                    <option value="en proceso" <%= ticket.status === 'en proceso' ? 'selected' : '' %>>🟡 En proceso</option>
+                    <option value="cerrado" <%= ticket.status === 'cerrado' ? 'selected' : '' %>>🔴 Cerrado</option>
                   </select>
+                <% } else { %>
+                  <span class="ticket-status-text <%= ticket.status.replace(' ', '-').toLowerCase() %>">
+                    <% if (ticket.status === 'abierto') { %>🟢 ABIERTO<% } %>
+                    <% if (ticket.status === 'en proceso') { %>🟡 EN PROCESO<% } %>
+                    <% if (ticket.status === 'cerrado') { %>🔴 CERRADO<% } %>
+                  </span>
+                <% } %>
               </div>
               <span class="badge <%= ticket.status.replace(' ', '-') %>" style="display:none;">
                   <%= ticket.status.charAt(0).toUpperCase() + ticket.status.slice(1) %>

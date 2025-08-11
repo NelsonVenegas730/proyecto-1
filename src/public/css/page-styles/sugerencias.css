@@ -6,6 +6,36 @@
   padding: 20px 0;
 }
 
+.ticket-status-text.abierto {
+  background-color: #4caf50;
+  color: white;
+  border-radius: 40px;
+  padding: 0.7rem;
+  font-weight: bold;
+  font-size: 0.9rem;
+  display: inline-block;
+}
+
+.ticket-status-text.en-proceso {
+  background-color: #ffc107;
+  color: black;
+  border-radius: 40px;
+  padding: 0.7rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.ticket-status-text.cerrado {
+  background-color: #f44336;
+  color: white;
+  border-radius: 40px;
+  padding: 1rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  display: inline-block;
+}
+
 /* CREATE TICKET CTA */
 .create-ticket-cta {
   display: flex;

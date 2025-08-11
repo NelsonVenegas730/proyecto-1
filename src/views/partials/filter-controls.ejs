@@ -30,12 +30,20 @@
 
     <% } else if (filterType === 'content') { %>
       <div class="filter-group">
-          <h4>Filtrar por tipo de contenido</h4>
-          <label><input type="checkbox" class="filter-content-type" value="emprendimientos"> Emprendimientos</label>
-          <label><input type="checkbox" class="filter-content-type" value="noticias"> Noticias / Eventos / Anuncios</label>
-          <label><input type="checkbox" class="filter-content-type" value="horariosBuses"> Horarios de buses</label>
+        <h4>Filtrar por tipo de contenido</h4>
+        <label><input type="checkbox" class="filter-content-type" value="emprendimientos"> Emprendimientos</label>
+        <label><input type="checkbox" class="filter-content-type" value="noticias"> Noticias / Eventos / Anuncios</label>
+        <label><input type="checkbox" class="filter-content-type" value="horariosBuses"> Horarios de buses</label>
+      </div>
+
+      <div class="filter-group">
+        <h4>Filtrar por estado</h4>
+        <label><input type="checkbox" class="filter-status" value="pendiente"> Pendiente</label>
+        <label><input type="checkbox" class="filter-status" value="aprobado"> Aprobado</label>
+        <label><input type="checkbox" class="filter-status" value="rechazado"> Rechazado</label>
       </div>
     <% } %>
+
 
     <% if (filterType != 'content') { %>
       <div class="filter-group">
