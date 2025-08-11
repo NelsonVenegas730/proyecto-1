@@ -19,9 +19,19 @@ async function updateAnnouncementStatus(id, status) {
   return await Announcement.findByIdAndUpdate(id, { status }, { new: true });
 }
 
+async function updateAnnouncement(id, data) {
+  return await Announcement.findByIdAndUpdate(id, data, { new: true });
+}
+
+async function deleteAnnouncement(id) {
+  return await Announcement.findByIdAndDelete(id);
+}
+
 module.exports = {
   getAllAnnouncements,
   createAnnouncement,
   getLatestApprovedAnnouncement,
-  updateAnnouncementStatus
+  updateAnnouncementStatus,
+  updateAnnouncement,
+  deleteAnnouncement
 }

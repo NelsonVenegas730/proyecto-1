@@ -25,17 +25,27 @@
     %>
       <div class="noticias-eventos-anuncios-container">
         <% aprobados.forEach(a => { %>
-          <div class="noticia-evento-anuncio-element card" data-user-id="<%= a.user_id?._id || '' %>">
+          <div class="noticia-evento-anuncio-element card" data-id="<%= a._id %>" data-user-id="<%= a.user_id?._id || '' %>">
             <img src="<%= a.image %>" alt="Imagen de <%= a.title %>">
+            <input class="announcement-edit-input file-input oculto" type="file" name="image" accept="image/*">
+
             <div class="noticia-evento-anuncio-info">
               <span class="badge <%= a.type %>"><%= a.type %></span>
+              
               <h3><%= a.title %></h3>
+              <input class="announcement-edit-input oculto" name="title" type="text" value="<%= a.title %>" required>
+              
               <p><%= a.description %></p>
+              <textarea class="announcement-edit-input oculto" name="description" type="text" required><%= a.description %></textarea>
+
+              <button class="guardar-cambios-btn oculto">Guardar cambios</button>
+              <button class="cancelar-cambios-btn oculto">Cancelar cambios</button>
+              
               <span class="fecha">
                 Fecha de creación: <%= new Date(a.date).toLocaleDateString('es-CR', { day: 'numeric', month: 'long', year: 'numeric' }) %>
               </span>
               <div class="autor">
-                <div class="author-info">
+                <div class="autor-info">
                   <div class="avatar">
                     <% if (a.user_id && a.user_id.avatar && a.user_id.avatar.length > 2) { %>
                       <img src="<%= a.user_id.avatar %>" alt="Avatar" />
@@ -52,22 +62,21 @@
                       : 'Desconocido' %>
                   </span>
                 </div>
-                <div class="announcement-actions">
-                  <button class="announcement-menu-btn" aria-label="Opciones">
-                    <i class='bx bx-dots-vertical-rounded'></i>
-                  </button>
-
-                  <div class="announcement-menu-popup">
+               <% if (userId && a.user_id && userId.toString() === a.user_id._id.toString()) { %>
+                <button class="announcement-menu-btn" aria-label="Opciones">
+                  <i class='bx bx-dots-vertical-rounded'></i>
+                </button>
+                <div class="announcement-menu-popup">
                   <button class="announcement-menu-option edit-btn"> 
-                      <i class="bx bx-pencil"></i>
-                      Editar
+                    <i class="bx bx-pencil"></i>
+                    Editar
                   </button>
                   <button class="announcement-menu-option delete-btn">
-                      <i class="bx bx-trash"></i>
-                      Eliminar
+                    <i class="bx bx-trash"></i>
+                    Eliminar
                   </button>
                 </div>
-                </div>
+              <% } %>
               </div>
             </div>
           </div>
@@ -83,8 +92,12 @@
     <% } %>
 
   </main>
+  <div id="mensaje-exito" class="mensaje-exito oculto"></div>
+  <div id="mensaje-error" class="mensaje-error oculto"></div>
   <script>
     window.currentUserId = "<%= userId %>";
   </script>
   <script src="/js/filterContent.js"></script>
+  <script src="/js/announcementActionsMenu.js"></script>
+  <script src="/js/announcementActions.js"></script>
 </body>

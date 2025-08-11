@@ -71,8 +71,45 @@ async function updateStatus(req, res) {
   }
 }
 
+async function updateAnnouncement(req, res) {
+  try {
+    const { id } = req.params;
+    const data = req.body;
+
+    if (req.file) {
+      data.image = req.file.filename;
+    }
+
+    if (!data.title || !data.description) {
+      return res.status(400).json({ error: 'Título y descripción son obligatorios' });
+    }
+
+    console.log('Update data:', data);
+
+    const updated = await announcementService.updateAnnouncement(id, data);
+    if (!updated) return res.status(404).json({ error: 'Anuncio no encontrado' });
+
+    res.json(updated);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al actualizar anuncio' });
+  }
+}
+
+async function deleteAnnouncement(req, res) {
+  try {
+    const { id } = req.params;
+    await announcementService.deleteAnnouncement(id);
+    res.json({ message: 'Anuncio eliminado correctamente' });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al eliminar anuncio' });
+  }
+}
+
 module.exports = {
   getAllAnnouncements,
   createAnnouncement,
-  updateStatus
+  updateStatus,
+  updateAnnouncement,
+  deleteAnnouncement
 };

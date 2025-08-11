@@ -6,6 +6,7 @@ const announcementController = require('./announcementController');
 
 router.post('/', upload.single('image'), announcementController.createAnnouncement);
 router.get('/', announcementController.getAllAnnouncements);
-router.put('/:id/status', announcementController.updateStatus);
+router.put('/:id', upload.single('image'), announcementController.updateAnnouncement);
+router.delete('/:id', announcementController.deleteAnnouncement);
 
 module.exports = router;
