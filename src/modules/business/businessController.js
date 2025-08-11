@@ -131,10 +131,26 @@ async function updateBusiness(req, res) {
   }
 }
 
+async function updateBusinessStatus(req, res) {
+  try {
+    const id = req.params.id;
+    const { status } = req.body;
+    if (!status) return res.status(400).json({ message: 'Status es requerido' });
+
+    const updatedBusiness = await businessService.updateBusinessStatus(id, status);
+    if (!updatedBusiness) return res.status(404).json({ message: 'Negocio no encontrado' });
+
+    res.json(updatedBusiness);
+  } catch (error) {
+    res.status(500).json({ message: 'Error al actualizar el status', error });
+  }
+}
+
 module.exports = {
   getAllBusinesses,
   createBusiness,
   getBusinessByUser,
   getBusinessById,
-  updateBusiness
+  updateBusiness,
+  updateBusinessStatus
 };

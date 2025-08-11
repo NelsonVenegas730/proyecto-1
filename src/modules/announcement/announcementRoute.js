@@ -6,5 +6,6 @@ const announcementController = require('./announcementController');
 
 router.post('/', upload.single('image'), announcementController.createAnnouncement);
 router.get('/', announcementController.getAllAnnouncements);
+router.put('/:id/status', announcementController.updateStatus);
 
 module.exports = router;

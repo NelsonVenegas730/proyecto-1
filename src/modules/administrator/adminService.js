@@ -4,8 +4,8 @@ const BusSchedule = require('../../modules/bus_schedule/busModel');
 
 async function getAllContent() {
   const [businesses, announcements, busSchedules] = await Promise.all([
-    Business.find(),
-    Announcement.find(),
+    Business.find().populate('user_id', 'name last_names'),
+    Announcement.find().populate('user_id', 'name last_names'),
     BusSchedule.find()
   ]);
 

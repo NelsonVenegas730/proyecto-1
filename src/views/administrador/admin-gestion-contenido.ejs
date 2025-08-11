@@ -2,109 +2,241 @@
   <main>
     <%- include('../partials/filter-controls', { filterType: 'content' }) %>
     <section class="aprobaciones-management">
+      <!-- PENDIENTES -->
+      <% const pendientesBusinesses = businesses.filter(b => b.status === 'pendiente') %>
+      <% const pendientesAnnouncements = announcements.filter(a => a.status === 'pendiente') %>
+
+      <!-- APROBADOS O RECHAZADOS -->
+      <% const allAnnouncements = announcements.filter(a => a.status != 'pendiente') %>
+      <% const allBusinesses = businesses.filter(b => b.status != 'pendiente') %>
+
+      <hr class="separator">
+
       <h2 class="emprendimientos-heading">Emprendimientos pendientes de aprobación</h2>
       <div class="emprendimientos-pendientes">
-        <!-- tarjetas emprendimientos -->
-        <a href="/emprendimiento-slug" class="emprendimiento-card">
-          <img src="https://s1.significados.com/foto/shutterstock-513513718_bg.jpg?class=article" alt="Imagen emprendimiento" />
-          <div class="info">
-            <h4>El Buen Pan</h4>
-            <p>Dueña: María González</p>
-            <div class="emprendimiento-actions">
-              <button class="btn-rechazar">Rechazar</button>
-              <button class="btn-aprobar">Aprobar</button>
+        <% if (pendientesBusinesses.length === 0) { %>
+          <p class="not-found">No hay emprendimientos pendientes de aprobación</p>
+        <% } else { %>
+          <% pendientesBusinesses.forEach(business => { %>
+            <div class="emprendimiento-card" data-id="<%= business._id %>">
+              <span class="status-badge <%= business.status %>"> <%= business.status %></span>
+              <a href="/emprendimiento/<%= business._id %>" class="emprendimiento-link">
+                <img src="<%= business.image || '/img/default-business.jpg' %>" alt="Imagen emprendimiento"/>
+              </a>
+              <div class="info">
+                <h4><%= business.name %></h4>
+                <p>Dueño: <%= business.user_id.name %> <%= business.user_id.last_names %></p>
+                <div class="emprendimiento-actions">
+                  <select class="status-select" data-id="<%= business._id %>">
+                    <option value="aprobado" <%= business.status === 'aprobado' ? 'selected' : '' %>>🟢 Aprobado</option>
+                    <option value="pendiente" <%= business.status === 'pendiente' ? 'selected' : '' %>>🟡 Pendiente</option>
+                    <option value="rechazado" <%= business.status === 'rechazado' ? 'selected' : '' %>>🔴 Rechazado</option>
+                  </select>
+                </div>
+              </div>
             </div>
-          </div>
-        </a>
-        <a href="/emprendimiento-slug" class="emprendimiento-card">
-          <img src="https://s1.significados.com/foto/shutterstock-513513718_bg.jpg?class=article" alt="Imagen emprendimiento" />
-          <div class="info">
-            <h4>Tienda Verde</h4>
-            <p>Dueño: Carlos B.</p>
-            <div class="emprendimiento-actions">
-              <button class="btn-rechazar">Rechazar</button>
-              <button class="btn-aprobar">Aprobar</button>
-            </div>
-          </div>
-        </a>
+          <% }) %>
+        <% } %>
       </div>
+
+      <hr class="separator">
 
       <h2 class="noticias-heading">Anuncios, Noticias y Eventos pendientes de aprobación</h2>
       <div class="noticias-pendientes">
-        <!-- tarjetas noticias -->
-        <div class="noticia-card">
-          <img src="https://s1.significados.com/foto/shutterstock-513513718_bg.jpg?class=article" alt="Imagen noticia" />
-          <div class="info">
-            <div class="noticia-header">
-              <span class="badge badge-evento">Evento</span>
-              <h4>Bingo del Domingo</h4>
-            </div>
-            <p>Publicador: María González</p>
-            <p class="descripcion">Actividad comunal en la plaza central</p>
-            <div class="noticia-actions">
-              <button class="btn-rechazar">Rechazar</button>
-              <button class="btn-aprobar">Aprobar</button>
-            </div>
+        <% if (pendientesAnnouncements.length === 0) { %>
+          <div class="grid-item not-found span-all">
+            No hay anuncios, noticias o eventos pendientes de aprobación
           </div>
-        </div>
-
-        <div class="noticia-card">
-          <img src="https://s1.significados.com/foto/shutterstock-513513718_bg.jpg?class=article" alt="Imagen noticia" />
-          <div class="info">
-            <div class="noticia-header">
-              <span class="badge badge-noticia">Noticia</span>
-              <h4>Derrumbe en calle 4</h4>
+        <% } else { %>
+          <% pendientesAnnouncements.forEach(announcement => { %>
+            <div class="noticia-card" data-id="<%= announcement._id %>">
+              <span class="status-badge <%= announcement.status %>"> <%= announcement.status %></span>
+              <img src="<%= announcement.image || '/images/default.jpeg' %>" alt="Imagen noticia" />
+              <div class="info">
+                <div class="noticia-header">
+                  <span class="badge 
+                    <%= announcement.type === 'evento' ? 'badge-evento' : announcement.type === 'anuncio' ? 'badge-anuncio' : 'badge-noticia' %>">
+                    <%= announcement.type.charAt(0).toUpperCase() + announcement.type.slice(1) %>
+                  </span>
+                  <h4><%= announcement.title %></h4>
+                </div>
+                <p>Publicador: <%= announcement.user_id.name %> <%= announcement.user_id.last_names %></p>
+                <p class="descripcion"><%= announcement.description %></p>
+                <div class="noticia-actions">
+                  <select class="status-select" data-id="<%= announcement._id %>">
+                    <option value="aprobado" <%= announcement.status === 'aprobado' ? 'selected' : '' %>>🟢 Aprobado</option>
+                    <option value="pendiente" <%= announcement.status === 'pendiente' ? 'selected' : '' %>>🟡 Pendiente</option>
+                    <option value="rechazado" <%= announcement.status === 'rechazado' ? 'selected' : '' %>>🔴 Rechazado</option>
+                  </select>
+                </div>
+              </div>
             </div>
-            <p>Publicador: Carlos Ballistero</p>
-            <p class="descripcion">Reportado por vecinos en la mañana</p>
-            <div class="noticia-actions">
-              <button class="btn-rechazar">Rechazar</button>
-              <button class="btn-aprobar">Aprobar</button>
-            </div>
-          </div>
-        </div>
+          <% }) %>
+        <% } %>
       </div>
+
+      <hr class="separator">
 
       <!-- NUEVA SECCIÓN HORARIOS DE BUSES -->
       <h2 class="bus-schedule-heading" style="margin-top: 3rem; text-align:center;">Horarios de Buses</h2>
 
       <div class="bus-schedules">
-        <% if (busSchedules.length === 0) { %>
-        <p class="not-found">No hay horarios agregados aun</p>
-      <% } else { %>
-        <div class="bus-grid">
+        <div>
+          <div class="bus-grid">
             <div class="grid-header">Destino</div>
             <div class="grid-header">Horario</div>
             <div class="grid-header">Dirección</div>
             <div class="grid-header">Precio</div>
             <div class="grid-header">Espera</div>
+            <div class="grid-header">Acciones</div>
 
-            <% busSchedules.forEach(schedule => { %>
-                <div class="grid-item" data-label="Destino"><%= schedule.destination %></div>
-                <div class="grid-item" data-label="Horario"><%= schedule.arrival_time %></div>
-                <div class="grid-item" data-label="Dirección"><%= schedule.address %></div>
-                <div class="grid-item" data-label="Precio">₡<%= schedule.price %></div>
-                <div class="grid-item" data-label="Espera"><%= schedule.wait_time_minutes %> min</div>
-            <% }) %>
+            <% if (busSchedules.length === 0) { %>
+                <div class="grid-item not-found span-all">
+                    No hay horarios agregados aún
+                </div>
+            <% } else { %>
+                <% busSchedules.forEach(schedule => { %>
+                  
+                    <div class="grid-item" data-label="Destino" data-id="<%= schedule._id %>">
+                      <%= schedule.destination %>
+                      <input type="text" class="bus-schedule-input-edit oculto" placeholder="Destino" required>
+                    </div>
 
-            <!-- Fila para agregar nuevo horario -->
-            <div class="grid-item add-new" data-label="Destino" colspan="5" style="cursor:pointer; text-align:center; color: var(--color-primary); font-weight: bold;" onclick="location.href='/admin/bus-schedules/new'">
+                    <div class="grid-item" data-label="Horario" data-id="<%= schedule._id %>">
+                      <%= schedule.arrival_time %>
+                      <input type="time" class="bus-schedule-input-edit oculto" required>
+                    </div>
+
+                    <div class="grid-item" data-label="Dirección" data-id="<%= schedule._id %>">
+                      <%= schedule.address %>
+                      <input type="text" class="bus-schedule-input-edit oculto" placeholder="Dirección" required>
+                    </div>
+
+                    <div class="grid-item" data-label="Precio" data-id="<%= schedule._id %>">
+                      ₡<%= schedule.price %>
+                      <input type="number" class="bus-schedule-input-edit oculto" placeholder="Precio(₡)" required>
+                    </div>
+
+                    <div class="grid-item" data-label="Espera" data-id="<%= schedule._id %>">
+                      <%= schedule.wait_time_minutes %> min
+                      <input type="number" class="bus-schedule-input-edit oculto" placeholder="Espera(min)" required>
+                    </div>
+
+                    <div class="grid-item" data-label="Acciones" data-id="<%= schedule._id %>">
+                      <div>
+                        <button class="bus-schedule-action-button-edit">
+                          <i id="pencil-icon" class="bx bx-pencil"></i>
+                          <i id="x-icon" class="bx bx-x oculto"></i>
+                        </button>
+                        <button class="bus-schedule-action-button-delete">
+                          <i class="bx bx-trash"></i>
+                        </button>
+                        <button class="bus-schedule-action-button-confirm-edit oculto" data-id="<%= schedule._id %>">
+                          <i class="bx bx-check"></i>
+                        </button>
+                      </div>
+                    </div>
+                <% }) %>
+            <% } %>
+
+            <div id="add-new-bus-schedule" class="add-new">
                 + Agregar nuevo horario
             </div>
+          </div>
         </div>
-      <% } %>
-        <form class="bus-schedule-form">
+
+        <form class="bus-schedule-form oculto">
             <input class="bus-schedule-input" type="text" name="destination" placeholder="Destino" required />
             <input class="bus-schedule-input" type="time" name="arrival_time" placeholder="Horario" required />
             <input class="bus-schedule-input" type="text" name="address" placeholder="Dirección" required />
             <input class="bus-schedule-input" type="number" name="price" placeholder="Precio (₡)" min="0" step="0.01" required />
             <input class="bus-schedule-input" type="number" name="wait_time_minutes" placeholder="Espera (min)" min="0" required />
             <button type="submit" class="bus-schedule-submit">Agregar</button>
+            <button type="button" id="cancel-new-bus-schedule" class="bus-schedule-cancel">Cancelar</button>
         </form>
       </div>
 
+      <hr class="separator">
+
+      <h2 class="emprendimientos-heading">Emprendimientos</h2>
+      <div class="emprendimientos-pendientes">
+        <% if (allBusinesses.length === 0) { %>
+          <p class="not-found">
+            No hay emprendimientos aprobados o rechazados
+          </p>
+        <% } else { %>
+          <% allBusinesses.forEach(business => { %>
+            <a href="/emprendimiento/<%= business._id %>" class="emprendimiento-card" data-id="<%= business._id %>">
+              <span class="status-badge <%= business.status %>"> <%= business.status %></span>
+              <img src="<%= business.image || '/img/default-business.jpg' %>" alt="Imagen emprendimiento" />
+              <div class="info">
+                <h4><%= business.name %></h4>
+                <p>Dueño: <%= business.user_id.name %> <%= business.user_id.last_names %></p>
+                <div class="emprendimiento-actions">
+                  <select class="status-select" data-id="<%= business._id %>">
+                    <option value="aprobado" <%= business.status === 'aprobado' ? 'selected' : '' %>>🟢 Aprobado</option>
+                    <option value="pendiente" <%= business.status === 'pendiente' ? 'selected' : '' %>>🟡 Pendiente</option>
+                    <option value="rechazado" <%= business.status === 'rechazado' ? 'selected' : '' %>>🔴 Rechazado</option>
+                  </select>
+                </div>
+              </div>
+            </a>
+          <% }) %>
+        <% } %>
+      </div>
+
+      <hr class="separator">
+
+      <h2 class="noticias-heading">Anuncios, Noticias y Eventos</h2>
+      <div class="noticias-pendientes">
+        <% if (allAnnouncements.length === 0) { %>
+          <div class="not-found">
+            No hay anuncios, noticias o eventos aprobados o rechazados
+          </div>
+        <% } else { %>
+          <% allAnnouncements.forEach(announcement => { %>
+            <div class="noticia-card" data-id="<%= announcement._id %>">
+              <span class="status-badge <%= announcement.status %>"> <%= announcement.status %></span>
+              <img src="<%= announcement.image || '/images/default.jpeg' %>" alt="Imagen noticia" />
+              <div class="info">
+                <div class="noticia-header">
+                  <span class="badge 
+                    <%= announcement.type === 'evento' ? 'badge-evento' : announcement.type === 'anuncio' ? 'badge-anuncio' : 'badge-noticia' %>">
+                    <%= announcement.type.charAt(0).toUpperCase() + announcement.type.slice(1) %>
+                  </span>
+                  <h4><%= announcement.title %></h4>
+                </div>
+                <p>Publicador: <%= announcement.user_id.name %> <%= announcement.user_id.last_names %></p>
+                <p class="descripcion"><%= announcement.description %></p>
+                <div class="noticia-actions">
+                  <select class="status-select" data-id="<%= announcement._id %>">
+                    <option value="aprobado" <%= announcement.status === 'aprobado' ? 'selected' : '' %>>🟢 Aprobado</option>
+                    <option value="pendiente" <%= announcement.status === 'pendiente' ? 'selected' : '' %>>🟡 Pendiente</option>
+                    <option value="rechazado" <%= announcement.status === 'rechazado' ? 'selected' : '' %>>🔴 Rechazado</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        <% } %>
+      </div>
+
+      <hr class="separator">
+
     </section>
   </main>
+  <div id="custom-confirm" class="custom-alert hidden">
+    <div class="alert-content">
+      <p id="confirm-message"></p>
+      <div class="confirm-buttons">
+        <button id="confirm-no">No</button>
+        <button id="confirm-yes">Sí</button>
+      </div>
+    </div>
+  </div>
+  <script src="/js/toggleAddBusSchedule.js"></script>
+  <script src="/js/toggleBusScheduleActions.js"></script>
+  <script src="/js/changeContentStatus.js"></script>
   <script src="/js/filterContentAlt.js"></script>
   <script src="/js/no-cache.js"></script>
 </body>

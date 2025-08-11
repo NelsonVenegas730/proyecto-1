@@ -1,5 +1,17 @@
 const adminService = require('./adminService');
 
+function formatTo12Hour(time) {
+  if (!time) return 'Hora no disponible'
+  const [hourStr, minStr] = time.split(':')
+  if (!hourStr || !minStr) return 'Hora no disponible'
+  const hour = parseInt(hourStr)
+  const minute = parseInt(minStr)
+  if (isNaN(hour) || isNaN(minute)) return 'Hora no disponible'
+  const suffix = hour >= 12 ? 'PM' : 'AM'
+  const hour12 = hour % 12 || 12
+  return `${hour12}:${minute.toString().padStart(2, '0')} ${suffix}`
+}
+
 async function getManagementContent(req, res) {
   try {
     const { businesses, announcements, busSchedules } = await adminService.getAllContent();
@@ -28,7 +40,7 @@ async function getManagementContent(req, res) {
     const safeBusSchedules = busSchedules.map(b => ({
       ...b._doc,
       destination: b.destination || 'Destino desconocido',
-      arrival_time: b.arrival_time ? new Date(b.arrival_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : 'Hora no disponible',
+      arrival_time: formatTo12Hour(b.arrival_time),
       address: b.address || 'Dirección no disponible',
       price: (typeof b.price === 'number') ? b.price : 0,
       wait_time_minutes: (typeof b.wait_time_minutes === 'number') ? b.wait_time_minutes : 0

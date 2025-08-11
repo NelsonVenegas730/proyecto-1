@@ -172,7 +172,7 @@ app.get('/admin/panel-administrador', authMiddleware.attachUserData, authMiddlew
 });
 
 // 👥 Ciudadano
-app.get('/emprendimiento/:id', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['ciudadano']), businessController.getBusinessById);
+app.get('/emprendimiento/:id', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['ciudadano', 'administrador']), businessController.getBusinessById);
 app.get('/emprendimientos', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['ciudadano']), businessController.getAllBusinesses);
 
 app.get('/horario-buses', authMiddleware.attachUserData, authMiddleware.authorizeRoleAccess(['ciudadano']), busScheduleController.getAllBusSchedules);

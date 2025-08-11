@@ -9,5 +9,6 @@ router.get('/user/:user_id', businessController.getBusinessByUser);
 router.get('/:id', businessController.getBusinessById);
 router.put('/update', upload.single('image'), businessController.updateBusiness);
 router.get('/', businessController.getAllBusinesses);
+router.put('/:id/status', businessController.updateBusinessStatus);
 
 module.exports = router;

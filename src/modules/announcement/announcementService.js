@@ -15,8 +15,13 @@ async function getLatestApprovedAnnouncement() {
     .populate('user_id', 'name last_names');
 }
 
+async function updateAnnouncementStatus(id, status) {
+  return await Announcement.findByIdAndUpdate(id, { status }, { new: true });
+}
+
 module.exports = {
   getAllAnnouncements,
   createAnnouncement,
-  getLatestApprovedAnnouncement
+  getLatestApprovedAnnouncement,
+  updateAnnouncementStatus
 }

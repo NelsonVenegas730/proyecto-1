@@ -26,11 +26,16 @@ async function updateBusinessByUser(user_id, data) {
   return await Business.findOneAndUpdate({ user_id }, data, { new: true });
 }
 
+async function updateBusinessStatus(id, status) {
+  return await Business.findByIdAndUpdate(id, { status }, { new: true });
+}
+
 module.exports = {
   getAllBusinesses,
   createBusiness,
   getSingleBusinessByUser,
   getBusinessByUser,
   getBusinessById,
-  updateBusinessByUser
+  updateBusinessByUser,
+  updateBusinessStatus
 };

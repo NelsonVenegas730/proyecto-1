@@ -55,7 +55,24 @@ async function createAnnouncement(req, res) {
   }
 }
 
+async function updateStatus(req, res) {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  if (!status) return res.status(400).json({ error: 'Status es requerido' });
+
+  try {
+    const updated = await announcementService.updateAnnouncementStatus(id, status);
+    if (!updated) return res.status(404).json({ error: 'Anuncio no encontrado' });
+    res.json({ message: 'Status actualizado', announcement: updated });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error al actualizar status' });
+  }
+}
+
 module.exports = {
   getAllAnnouncements,
-  createAnnouncement
+  createAnnouncement,
+  updateStatus
 };
