@@ -84,8 +84,6 @@ async function updateAnnouncement(req, res) {
       return res.status(400).json({ error: 'Título y descripción son obligatorios' });
     }
 
-    console.log('Update data:', data);
-
     const updated = await announcementService.updateAnnouncement(id, data);
     if (!updated) return res.status(404).json({ error: 'Anuncio no encontrado' });
 
