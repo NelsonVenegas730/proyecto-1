@@ -15,7 +15,7 @@ const path = require('path');
 // 📦 Inicializar app y config
 const app = express();
 const port = 3000;
-const upload = multer({ dest: 'uploads/' }); // carpeta temporal para imágenes
+const upload = multer({ dest: 'uploads/' }); // carpeta para imágenes
 
 // 💾 Sesiones
 app.use(session({
