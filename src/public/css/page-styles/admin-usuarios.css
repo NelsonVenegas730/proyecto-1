@@ -130,7 +130,6 @@ td[data-label="Acciones"] {
   padding: 0;
   border: none;
   background-color: var(--color-primary);
-  border-radius: 0 0 12px 12px; /* bordes redondeados abajo */
 }
 
 .user-table tbody tr.last-row-button td button#toggle-add-button {
@@ -147,7 +146,7 @@ td[data-label="Acciones"] {
 }
 
 .user-table tbody tr.last-row-button td button#toggle-add-button:hover {
-  background-color: var(--color-primary-light);
+  background-color: rgb(28, 73, 149);
 }
 
 .add-user-input {
@@ -187,7 +186,7 @@ select option {
 }
 
 /* RESPONSIVE: móvil: tabla a bloques verticales */
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
   .user-table tbody tr .ellipsis-btn i{
     color: black !important;
     font-size: 2rem;

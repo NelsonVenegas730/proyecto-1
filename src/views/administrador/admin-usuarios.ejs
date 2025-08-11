@@ -7,6 +7,7 @@
             <tr>
               <th>Avatar</th>
               <th>Usuario</th>
+              <th>Nombre</th>
               <th>Correo</th>
               <th>Rol</th>
               <th>Acciones</th>
@@ -23,6 +24,7 @@
                   <% } %>
                 </td>
                 <td data-label="Usuario"><%= user.username %></td>
+                <td data-label="Nombre"><%= user.name %> <%= user.last_names %></td>
                 <td data-label="Correo"><%= user.email %></td>
                 <td data-label="Rol"><%= user.role %></td>
                 <td data-label="Acciones">
@@ -65,7 +67,7 @@
               </td>
             </tr>
             <tr class="last-row-button">
-              <td colspan="5">
+              <td colspan="6">
                 <button id="toggle-add-button">Agregar nuevo usuario +</button>
               </td>
             </tr>

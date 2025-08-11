@@ -59,4 +59,21 @@ async function getManagementContent(req, res) {
   }
 }
 
-module.exports = { getManagementContent };
+async function changeStatus(req, res) {
+  const { type, id, newStatus } = req.body
+
+  if (!type || !id || !newStatus) {
+    return res.status(400).json({ error: 'Faltan datos obligatorios' })
+  }
+
+  try {
+    const updated = await adminService.updateStatus(type, id, newStatus)
+    res.json({ success: true, updated })
+  } catch (error) {
+    console.error(error)  // <--- acá
+    res.status(500).json({ error: error.message || 'Error interno' })
+  }
+}
+
+
+module.exports = { getManagementContent, changeStatus };
